@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "795604860831",
+    "firebase_url": "https://pursuitvolley-65086.firebaseio.com",
+    "project_id": "pursuitvolley-65086",
+    "storage_bucket": "pursuitvolley-65086.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795604860831:android:78a790f104a086ce",
+        "android_client_info": {
+          "package_name": "com.beazle.pursuitvolley"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795604860831-g8tcs987e2r2fdnq95n66bu4bujeadff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCGQZlNS-WWW7uhhembgR2CQdACqdyRvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795604860831-g8tcs987e2r2fdnq95n66bu4bujeadff.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
