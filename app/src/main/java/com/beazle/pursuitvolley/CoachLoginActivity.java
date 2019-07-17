@@ -1,13 +1,13 @@
 package com.beazle.pursuitvolley;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -16,25 +16,11 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 // Importing Google GMS Auth API Libraries.
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class CoachLoginActivity extends AppCompatActivity {
 
@@ -43,6 +29,7 @@ public class CoachLoginActivity extends AppCompatActivity {
     public static final String googleSignInAccountId = "GoogleSignInAccount";
     // Request sing in code. Could be anything as you required.
     public static final int RequestSignInCode = 7;
+    private static final int RC_SIGN_IN = 9001;
     // Firebase Auth Object.
     public FirebaseAuth firebaseAuth;
     // Google API Client object.
@@ -51,11 +38,18 @@ public class CoachLoginActivity extends AppCompatActivity {
     com.google.android.gms.common.SignInButton signInButton;
 
     private GoogleSignInClient mGoogleSignInClient;
+    List<AuthUI.IdpConfig> providers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_login);
+
+        providers = Arrays.asList(
+                new AuthUI.IdpConfig.GoogleBuilder().build()
+        );
+
+
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -111,12 +105,12 @@ public class CoachLoginActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             // Signed in successfully, show authenticated UI.
-            updateUI(account);
+            // updateUI(account);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            updateUI(null);
+            // updateUI(null);
         }
     }
 

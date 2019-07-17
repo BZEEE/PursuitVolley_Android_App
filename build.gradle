@@ -7,9 +7,11 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:3.4.2'
 
         // GCP Firebase
+        // most recent version 4.3.0 or higher uses a deprecated API
+        // that will be out of use by the end of 2019
         classpath 'com.google.gms:google-services:4.2.0'
         
         // NOTE: Do not place your application dependencies here; they belong
