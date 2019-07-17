@@ -2,10 +2,12 @@ package com.beazle.pursuitvolley;
 
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -14,8 +16,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 // Importing Google GMS Auth API Libraries.
 
@@ -27,13 +34,9 @@ public class CoachLoginActivity extends AppCompatActivity {
     // TAG is for show some tag logs in LOG screen.
     public static final String TAG = "CoachLoginActivity";
     public static final String googleSignInAccountId = "GoogleSignInAccount";
-    // Request sing in code. Could be anything as you required.
-    public static final int RequestSignInCode = 7;
     private static final int RC_SIGN_IN = 9001;
     // Firebase Auth Object.
     public FirebaseAuth firebaseAuth;
-    // Google API Client object.
-    public GoogleApiClient googleApiClient;
     // Google Sign In button .
     com.google.android.gms.common.SignInButton signInButton;
 
@@ -49,7 +52,7 @@ public class CoachLoginActivity extends AppCompatActivity {
                 new AuthUI.IdpConfig.GoogleBuilder().build()
         );
 
-
+        firebaseAuth = FirebaseAuth.getInstance();
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -62,7 +65,7 @@ public class CoachLoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignIn();
+                SignInGoogle();
             }
         });
     }
@@ -75,8 +78,10 @@ public class CoachLoginActivity extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
             // user has already signed in, so launch the coach profile activity
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+
             signInButton.setVisibility(View.INVISIBLE);
-            GoToCoachProfileActivity(account);
+            UpdateUI(user);
         } else {
             // user has not yet signed in, so show the login button
             signInButton.setVisibility(View.VISIBLE);
@@ -96,7 +101,7 @@ public class CoachLoginActivity extends AppCompatActivity {
         }
     }
 
-    private void SignIn() {
+    private void SignInGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -105,7 +110,9 @@ public class CoachLoginActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             // Signed in successfully, show authenticated UI.
-            // updateUI(account);
+            if (account != null) {
+                FirebaseAuthWithGoogle(account);
+            }
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -114,11 +121,60 @@ public class CoachLoginActivity extends AppCompatActivity {
         }
     }
 
-    private void GoToCoachProfileActivity(GoogleSignInAccount account) {
-        Intent intent = new Intent();
-        // check if account object is serializable or parceble
-//        intent.putExtra(googleSignInAccountId ,account);
-        startActivity(intent);
+    private void FirebaseAuthWithGoogle(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider
+                .getCredential(account.getIdToken(), null);
+
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // successful authentication
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            UpdateUI(user);
+                        }
+                    }
+                });
+    }
+
+    private void UpdateUI(FirebaseUser user) {
+        if (user != null) {
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            String photo = String.valueOf(user.getPhotoUrl());
+
+            // Picasso.get.load(photo).into(image);
+        } else {
+            Toast.makeText(this, "user is null", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void Logout() {
+        FirebaseAuth.getInstance().signOut();
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // user succesfully signed out
+                            UpdateUI(null);
+                            SuccessfulLogout();
+                        } else {
+                            UnsuccessfulLogout();
+                        }
+                    }
+                });
+    }
+
+    // User mesages from callbacks
+
+    private void SuccessfulLogout() {
+        Toast.makeText(this, "successfully signed out", Toast.LENGTH_SHORT).show();
+    }
+
+    private void UnsuccessfulLogout() {
+        Toast.makeText(this, "failed to log out", Toast.LENGTH_SHORT).show();
     }
 
 }
