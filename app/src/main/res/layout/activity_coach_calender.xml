@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/aquaBlue"
+    tools:context=".CoachCalenderActivity">
+
+    <CalendarView
+        android:id="@+id/dateCalender"
+        android:unfocusedMonthDateColor="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <Button
+        android:id="@+id/continueToTimeSelectionButton"
+        android:layout_alignParentBottom="true"
+        android:text="@string/continue_to_time_selection_text"
+        android:textSize="28sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
