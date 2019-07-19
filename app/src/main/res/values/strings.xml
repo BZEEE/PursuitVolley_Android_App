@@ -22,6 +22,15 @@
     <string name="coachLocationHeader">Location: </string>
     <string name="coachBioHeader">Bio: </string>
 
+    <!--Coach Login Activity-->
+    <string name="coach_activation_code_text">enter activation code</string>
+    <string name="coach_email_address_text">enter email</string>
+    <string name="coach_password_text">enter password</string>
+    <string name="coach_sign_in_button_text">Sign In</string>
+    <string name="coach_sign_up_button_text">Sign Up</string>
+    <string name="coach_sign_in_clickable_text">Don\'t have an Account</string>
+    <string name="coach_sign_up_clickable_text">Already have an Account</string>
+
     <!--Sign Out Pop Up Menu-->
     <string name="sign_out_yes">yes</string>
     <string name="sign_out_no">no</string>

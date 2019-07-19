@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void GoToCoachPortal() {
-        startActivity(new Intent(this, CoachProfileActivity.class));
+        startActivity(new Intent(this, CoachLoginActivity.class));
     }
 
     private void GoToPlayerSignInPage() {
-        startActivity(new Intent(this, CoachProfileActivity.class));
+        startActivity(new Intent(this, PlayerLoginActivity.class));
     }
 }

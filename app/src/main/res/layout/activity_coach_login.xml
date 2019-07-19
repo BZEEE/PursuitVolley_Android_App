@@ -8,12 +8,74 @@
     android:background="@color/black"
     tools:context=".CoachLoginActivity">
 
-    <ImageView
-        android:id="@+id/coachLoginLogo"
+    <TextView
+        android:id="@+id/coachSignInSignUpTitle"
+        android:text="@string/coach_sign_in_button_text"
+        android:textSize="54sp"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:layout_above="@id/coachSignUpActivationCode"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <EditText
+        android:id="@+id/coachSignUpActivationCode"
+        android:background="@drawable/circle_background"
+        android:hint="@string/coach_activation_code_text"
+        android:textColor="@color/white"
+        android:textColorHint="@color/aquaBlue"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@id/coachEmailAddressEntryBox"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/coachEmailAddressEntryBox"
+        android:background="@drawable/circle_background"
+        android:hint="@string/coach_email_address_text"
+        android:textColorHint="@color/aquaBlue"
+        android:layout_above="@id/coachPasswordEntryBox"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/coachPasswordEntryBox"
+        android:background="@drawable/circle_background"
+        android:hint="@string/coach_password_text"
+        android:textColorHint="@color/aquaBlue"
+        android:textColor="@color/white"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/coachSignInSignUpButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/pv_logo"/>
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/coachPasswordEntryBox"
+        android:textSize="24sp"
+        android:text="@string/coach_sign_in_button_text"
+        android:background="@drawable/rounded_corners_blue_background"/>
+
+    <TextView
+        android:id="@+id/coachSignInSignUpClickableTextSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/coachSignInSignUpButton"
+        android:textSize="16sp"
+        android:gravity="right"
+        android:textColor="@color/white"
+        android:text="@string/coach_sign_in_clickable_text"/>
 
 
 </RelativeLayout>
