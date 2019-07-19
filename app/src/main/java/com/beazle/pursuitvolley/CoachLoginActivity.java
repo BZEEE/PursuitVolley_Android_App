@@ -25,8 +25,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class CoachLoginActivity extends AppCompatActivity {
+
+    private static final String TAG = "CoachLoginActivity";
 
     private FirebaseAuth mAuth;
     private String curent_user_id;
@@ -34,6 +37,8 @@ public class CoachLoginActivity extends AppCompatActivity {
     private TextView signInSignUpTextSwitch;
     private TextView signInSignUpTitle;
     private EditText activationCodeEditText;
+    private EditText emailEditText;
+    private EditText passwordEditText;
     private Button signInSignUpButton;
     private boolean signInState;
 
@@ -51,6 +56,8 @@ public class CoachLoginActivity extends AppCompatActivity {
         signInSignUpTitle = findViewById(R.id.coachSignInSignUpTitle);
         activationCodeEditText = findViewById(R.id.coachSignUpActivationCode);
         activationCodeEditText.setVisibility(View.INVISIBLE);
+        emailEditText = findViewById(R.id.coachEmailAddressEntryBox);
+        passwordEditText = findViewById(R.id.coachPasswordEntryBox);
 
         signInSignUpTextSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +81,16 @@ public class CoachLoginActivity extends AppCompatActivity {
         signInSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String activationCode = activationCodeEditText.getText().toString();
+                String email = emailEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
                 if (signInState) {
                     // user is signing in (Login)
-                    SignInCoach();
+                    SignInCoach(email, password);
                 } else {
                     // user is signing up (Registering)
-                    SignUpCoach();
+                    CheckActivationCode(activationCode, email, password);
                 }
             }
         });
@@ -97,12 +108,67 @@ public class CoachLoginActivity extends AppCompatActivity {
 
     }
 
-    private void SignInCoach() {
+    private void SignInCoach(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            // updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInUserWithEmail:failure", task.getException());
+                            Toast.makeText(CoachLoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            // updateUI(null);
+                        }
+                    }
+                });
 
     }
 
-    private void SignUpCoach() {
+    private void SignUpCoach(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            // updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(CoachLoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            // updateUI(null);
+                        }
+                    }
+                });
+    }
 
+    private void CheckActivationCode(final String activationCode, final String email, final String password) {
+        // get activation code from cloud firestore query
+//        DocumentReference docRef = db.collection("admin_codes").document("coach_activation_code");
+//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    DocumentSnapshot document = task.getResult();
+//                    if (code == activationCode) {
+//                        SignUpCoach(email, password);
+//                    } else {
+//                        Toast.makeText(CoachLoginActivity.this, "wrong activation code", Toast.LENGTH_SHORT).show();
+//                    }
+//                } else {
+//                    Log.d(TAG, "get failed with ", task.getException());
+//                }
+//            }
+//        });
     }
 
 
