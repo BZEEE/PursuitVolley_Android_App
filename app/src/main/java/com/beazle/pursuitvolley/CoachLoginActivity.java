@@ -36,7 +36,6 @@ public class CoachLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_coach_login);
 
         mAuth = FirebaseAuth.getInstance();
-
         curent_user_id = mAuth.getUid();
 
     }
@@ -44,9 +43,9 @@ public class CoachLoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        // user is already signed in, so go straight to coach profile
         if(curent_user_id == null){
-//            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, CoachProfileActivity.class));
             finish();
         }
 

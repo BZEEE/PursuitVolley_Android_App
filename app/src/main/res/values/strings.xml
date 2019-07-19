@@ -16,8 +16,13 @@
     <string name="coach_profile_nav_schedule_text">Schedule</string>
     <string name="coach_profile_nav_bio_text">Bio</string>
     <string name="coach_profile_nav_payment_settings_text">Payment Settings</string>
+    <string name="coach_profile_nav_sign_out_text">Sign Out</string>
     <string name="coachNameHeader">Name: </string>
     <string name="coachAgeHeader">Age: </string>
     <string name="coachLocationHeader">Location: </string>
     <string name="coachBioHeader">Bio: </string>
+
+    <!--Sign Out Pop Up Menu-->
+    <string name="sign_out_yes">yes</string>
+    <string name="sign_out_no">no</string>
 </resources>

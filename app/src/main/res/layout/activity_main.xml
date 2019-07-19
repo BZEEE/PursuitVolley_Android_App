@@ -18,7 +18,8 @@
         android:id="@+id/bookAnAppointmentButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="22sp"
+        android:textStyle="bold|italic"
         android:text="@string/book_an_appointment_button_text"
         android:background="@drawable/rounded_corners_blue_background"
         android:layout_above="@+id/coachPortalClickableText"
@@ -35,6 +36,7 @@
         android:textStyle="bold|italic"
         android:text="@string/coach_portal_text"
         android:textColor="@color/white"
+        android:background="@drawable/circle_background"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
