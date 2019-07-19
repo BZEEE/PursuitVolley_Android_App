@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_schedule"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/coach_profile_nav_schedule_text" />
+
+    <item
+        android:id="@+id/nav_bio"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/coach_profile_nav_bio_text" />
+
+    <item
+        android:id="@+id/nav_payment_settings"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/coach_profile_nav_payment_settings_text" />
+
+</menu>

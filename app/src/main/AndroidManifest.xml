@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.beazle.pursuitvolley">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CoachLoginActivity"></activity>
+        <activity android:name=".CoachProfileActivity" />
+        <activity android:name=".PlayerLoginActivity" />
+        <activity android:name=".CoachLoginActivity" />
         <activity android:name=".CoachTimeSelectionActivity" />
         <activity android:name=".CoachCalenderActivity" />
         <activity android:name=".MainActivity">

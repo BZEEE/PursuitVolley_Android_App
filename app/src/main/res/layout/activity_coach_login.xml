@@ -13,16 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:src="@drawable/PV_Logo"/>
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/googleSignInButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
-
-
+        android:src="@drawable/pv_logo"/>
 
 
 </RelativeLayout>

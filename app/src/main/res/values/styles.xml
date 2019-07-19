@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="PlayerLoginTheme" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+
 </resources>

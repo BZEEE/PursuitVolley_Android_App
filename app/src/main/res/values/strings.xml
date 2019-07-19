@@ -3,4 +3,21 @@
 
     <!--Coach Calender Activity-->
     <string name="continue_to_time_selection_text">Continue</string>
+
+    <!--Facebook ID-->
+    <string name="facebook_application_id" translatable="false">2495475950488247</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb2495475950488247</string>
+
+    <!--Main Activity-->
+    <string name="coach_portal_text">enter coach portal</string>
+    <string name="book_an_appointment_button_text">book and appointment</string>
+
+    <!--Coach Profile Activity-->
+    <string name="coach_profile_nav_schedule_text">Schedule</string>
+    <string name="coach_profile_nav_bio_text">Bio</string>
+    <string name="coach_profile_nav_payment_settings_text">Payment Settings</string>
+    <string name="coachNameHeader">Name: </string>
+    <string name="coachAgeHeader">Age: </string>
+    <string name="coachLocationHeader">Location: </string>
+    <string name="coachBioHeader">Bio: </string>
 </resources>
