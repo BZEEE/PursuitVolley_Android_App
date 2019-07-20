@@ -33,12 +33,14 @@ dependencies {
     def nav_version = "1.0.0-alpha02"
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
 
-    // GCP Firebase
+    // GCP Firebase Core
     implementation 'com.google.firebase:firebase-core:17.0.1'
     // GCP firebase-authentication
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
     implementation 'com.google.firebase:firebase-auth:18.1.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    // GCP firebase-firestore
+    implementation 'com.google.firebase:firebase-firestore:20.1.0'
 
     // Facebook login access
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'

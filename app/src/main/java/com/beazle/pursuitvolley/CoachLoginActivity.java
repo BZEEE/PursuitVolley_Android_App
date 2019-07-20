@@ -26,11 +26,15 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CoachLoginActivity extends AppCompatActivity {
 
     private static final String TAG = "CoachLoginActivity";
 
+    private FirebaseFirestore mFirestore;
     private FirebaseAuth mAuth;
     private String curent_user_id;
 
@@ -47,6 +51,7 @@ public class CoachLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_login);
 
+        mFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         curent_user_id = mAuth.getUid();
 
@@ -153,22 +158,28 @@ public class CoachLoginActivity extends AppCompatActivity {
 
     private void CheckActivationCode(final String activationCode, final String email, final String password) {
         // get activation code from cloud firestore query
-//        DocumentReference docRef = db.collection("admin_codes").document("coach_activation_code");
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (code == activationCode) {
-//                        SignUpCoach(email, password);
-//                    } else {
-//                        Toast.makeText(CoachLoginActivity.this, "wrong activation code", Toast.LENGTH_SHORT).show();
-//                    }
-//                } else {
-//                    Log.d(TAG, "get failed with ", task.getException());
-//                }
-//            }
-//        });
+        DocumentReference docRef = mFirestore.collection("admin_codes").document("coach_activation_code");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        // get activation from document data
+                        String codeFromFirebase = (String) document.getData().get("code");
+                        if (codeFromFirebase.equals(activationCode)) {
+                            SignUpCoach(email, password);
+                        } else {
+                            Toast.makeText(CoachLoginActivity.this, "wrong activation code", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d(TAG, "Admin codes document does not exist");
+                    }
+                } else {
+                    Log.d(TAG, "document get() failed with ", task.getException());
+                }
+            }
+        });
     }
 
 

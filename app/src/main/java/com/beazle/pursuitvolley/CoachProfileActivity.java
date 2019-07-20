@@ -108,7 +108,7 @@ public class CoachProfileActivity extends AppCompatActivity {
         // perform sign out operations
         // sign out user from firebase
         signOutDialog.dismiss();
-        // mAuth.signOut();
+        mAuth.signOut();
         startActivity(new Intent(this, CoachLoginActivity.class));
         // finish the activity
         finish();

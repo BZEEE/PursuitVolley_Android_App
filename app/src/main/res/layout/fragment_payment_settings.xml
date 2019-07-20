@@ -1,7 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/black"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/coachPaymentSettingsTitle"
+        android:text="@string/coach_payment_settings_title_text"
+        android:textSize="54sp"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:layout_above="@id/directDepositInfoTogglelayout"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/directDepositInfoTogglelayout"
+        android:orientation="horizontal"
+        android:layout_above="@+id/coachInstitutionNumberEditBox"
+        android:weightSum="2" >
+
+        <Button
+            android:id="@+id/enterNewDirectDepositInfoButtonToggle"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_corners_left_blue_background"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_direct_deposit_info_button_text"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/viewCurrentDirectDepositInfoButtonToggle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/view_current_direct_deposit_info_button_text"
+            android:background="@drawable/rounded_corners_right_grey_background"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/coachInstitutionNumberEditBox"
+        android:background="@drawable/circle_background"
+        android:hint="@string/coach_institution_number_text"
+        android:textColor="@color/white"
+        android:textColorHint="@color/aquaBlue"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@id/coachTransitNumberEditBox"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/coachTransitNumberEditBox"
+        android:background="@drawable/circle_background"
+        android:hint="@string/coach_transit_number_text"
+        android:textColorHint="@color/aquaBlue"
+        android:layout_above="@id/coachAccountNumberEntryBox"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/coachAccountNumberEntryBox"
+        android:background="@drawable/circle_background"
+        android:hint="@string/coach_account_number_text"
+        android:textColorHint="@color/aquaBlue"
+        android:textColor="@color/white"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/enterDirectDepositInfoButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/coachAccountNumberEntryBox"
+        android:textSize="24sp"
+        android:text="@string/coach_direct_deposit_button_text"
+        android:background="@drawable/rounded_corners_blue_background"/>
 
 </RelativeLayout>
