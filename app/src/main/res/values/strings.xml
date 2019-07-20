@@ -43,4 +43,7 @@
     <string name="coach_direct_deposit_button_text">enter</string>
     <string name="edit_direct_deposit_info_button_text">edit info</string>
     <string name="view_current_direct_deposit_info_button_text">current info</string>
+    <string name="coach_current_institution_number_text">institution_number </string>
+    <string name="coach_current_transit_number">transit number </string>
+    <string name="coach_current_account_number">account number</string>
 </resources>
