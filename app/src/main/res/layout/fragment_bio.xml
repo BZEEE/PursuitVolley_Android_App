@@ -20,12 +20,12 @@
                 android:layout_weight="1">
                 <TextView
                     android:id="@+id/coachNameText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="26sp"
-                    android:text="@string/coachNameHeader"
-                    android:layout_alignParentRight="true"/>
+                    android:gravity="center"
+                    android:text="@string/coachNameHeader" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -51,12 +51,12 @@
                 android:layout_weight="1">
                 <TextView
                     android:id="@+id/coachAgeText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="26sp"
-                    android:text="@string/coachAgeHeader"
-                    android:layout_alignParentRight="true"/>
+                    android:gravity="center"
+                    android:text="@string/coachAgeHeader" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -82,12 +82,12 @@
                 android:layout_weight="1">
                 <TextView
                     android:id="@+id/coachLocationText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="26sp"
-                    android:text="@string/coachLocationHeader"
-                    android:layout_alignParentRight="true"/>
+                    android:gravity="center"
+                    android:text="@string/coachLocationHeader" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -114,12 +114,12 @@
                 android:layout_weight="1">
                 <TextView
                     android:id="@+id/coachBioText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="26sp"
-                    android:text="@string/coachBioHeader"
-                    android:layout_alignParentRight="true" />
+                    android:gravity="center"
+                    android:text="@string/coachBioHeader" />
             </RelativeLayout>
 
             <RelativeLayout

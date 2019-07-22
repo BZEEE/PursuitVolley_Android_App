@@ -46,4 +46,12 @@
     <string name="coach_current_institution_number_text">institution_number </string>
     <string name="coach_current_transit_number">transit number </string>
     <string name="coach_current_account_number">account number</string>
+
+    <!--Coach Info Entry Activity-->
+    <string name="coach_info_entry_title_text">Personal Info</string>
+    <string name="coach_info_entry_name_text">enter your full name</string>
+    <string name="coach_info_entry_age_text">enter your age</string>
+    <string name="coach_info_entry_location_text">enter you location</string>
+    <string name="coach_info_entry_bio_text">briefly explain your volleyball career</string>
+    <string name="coach_info_entry_button_text">complete sign up</string>
 </resources>

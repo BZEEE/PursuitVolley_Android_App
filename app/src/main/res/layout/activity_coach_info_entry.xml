@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    tools:context=".CoachInfoEntry">
+
+    <TextView
+        android:id="@+id/coachInfoEntryTitle"
+        android:text="@string/coach_info_entry_title_text"
+        android:textSize="54sp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <EditText
+        android:id="@+id/coachInfoEntryNameEditBox"
+        android:background="@drawable/circle_background"
+        android:hint="@string/coach_info_entry_name_text"
+        android:textColor="@color/white"
+        android:textColorHint="@color/aquaBlue"
+        android:layout_marginBottom="15dp"
+        android:layout_below="@id/coachInfoEntryTitle"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/coachInfoEntryAgeEditBox"
+        android:background="@drawable/circle_background"
+        android:hint="@string/coach_info_entry_age_text"
+        android:textColorHint="@color/aquaBlue"
+        android:layout_below="@+id/coachInfoEntryNameEditBox"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/coachInfoEntryLocationEditBox"
+        android:background="@drawable/circle_background"
+        android:hint="@string/coach_info_entry_location_text"
+        android:textColorHint="@color/aquaBlue"
+        android:layout_below="@+id/coachInfoEntryAgeEditBox"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/coachInfoEntryBioEditBox"
+        android:background="@drawable/circle_background"
+        android:hint="@string/coach_info_entry_bio_text"
+        android:layout_below="@+id/coachInfoEntryLocationEditBox"
+        android:layout_marginBottom="15dp"
+        android:textColorHint="@color/aquaBlue"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/coachInfoEntryButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold|italic"
+        android:layout_below="@id/coachInfoEntryBioEditBox"
+        android:textSize="24sp"
+        android:text="@string/coach_info_entry_button_text"
+        android:background="@drawable/rounded_corners_blue_background"/>
+
+</RelativeLayout>

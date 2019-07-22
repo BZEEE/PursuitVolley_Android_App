@@ -30,6 +30,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CoachLoginActivity extends AppCompatActivity {
 
     private static final String TAG = "CoachLoginActivity";
@@ -144,7 +147,9 @@ public class CoachLoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            // updateUI(user);
+                            CreateCoachDocumentInFireStore(user);
+                            GoToCoachInfoEntryActivity();
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -180,6 +185,19 @@ public class CoachLoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void CreateCoachDocumentInFireStore(FirebaseUser user) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("fullname", "");
+        data.put("age", "");
+        data.put("location", "");
+        data.put("bio", "");
+        mFirestore.collection("coaches").document(user.getUid()).set(data);
+    }
+
+    private void GoToCoachInfoEntryActivity() {
+        startActivity(new Intent(this, CoachInfoEntry.class));
     }
 
 

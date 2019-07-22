@@ -46,8 +46,7 @@ public class PlayerLoginActivity extends AppCompatActivity {
 
         providers = Arrays.asList(
                 new AuthUI.IdpConfig.GoogleBuilder().build(),
-                new AuthUI.IdpConfig.FacebookBuilder().build(),
-                new AuthUI.IdpConfig.TwitterBuilder().build()
+                new AuthUI.IdpConfig.FacebookBuilder().build()
         );
 
         ShowSignInOptions();
