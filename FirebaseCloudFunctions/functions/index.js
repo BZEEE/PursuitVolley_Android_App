@@ -14,17 +14,23 @@ const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 
 
-// create a new Coach document in firestore after authenticating for the first time
-// exports.AddCoachToFirestoreAfterSigningUp = functions.auth.user().onCreate((user) => {
-//     console.log(user.data);
-//     userDoc = {'email' = user.data.email, 
-//                'displayName' = user.data.displayName}
-//     // admin.firestore().collection('users').doc(user.data.uid)
-//     // .set(userDoc).then(writeResult => {
-//     //     console.log('User Created result:', writeResult);
-//     //     return;
-//     // }).catch(err => {
-//     //    console.log(err);
-//     //    return;
-//     // });
-// });
+// initialize calender date collections in firestore, to keep track of booked hours
+exports.AddCoachCalenderDataToFirestoreAfterSigningUp = functions.auth.user().onCreate((user) => {
+    functions.firestore.collection("coaches").doc(user.data.uid).set({
+        fullname: "",
+        age: "",
+        location: "",
+        bio: ""
+    });
+    // console.log(user.data);
+    // userDoc = {'email' = user.data.email, 
+    //            'displayName' = user.data.displayName}
+    // admin.firestore().collection('users').doc(user.data.uid)
+    // .set(userDoc).then(writeResult => {
+    //     console.log('User Created result:', writeResult);
+    //     return;
+    // }).catch(err => {
+    //    console.log(err);
+    //    return;
+    // });
+});

@@ -117,4 +117,5 @@ public class CoachProfileActivity extends AppCompatActivity {
     private void DoNotSignOut() {
         signOutDialog.dismiss();
     }
+
 }

@@ -124,7 +124,7 @@ public class CoachLoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            GoToCoachProfileActivity();
                             // updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -146,8 +146,7 @@ public class CoachLoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            CreateCoachDocumentInFireStore(user);
+                            // coach document is initialized using cloud functions
                             GoToCoachInfoEntryActivity();
 
                         } else {
@@ -187,17 +186,12 @@ public class CoachLoginActivity extends AppCompatActivity {
         });
     }
 
-    private void CreateCoachDocumentInFireStore(FirebaseUser user) {
-        Map<String, Object> data = new HashMap<>();
-        data.put("fullname", "");
-        data.put("age", "");
-        data.put("location", "");
-        data.put("bio", "");
-        mFirestore.collection("coaches").document(user.getUid()).set(data);
-    }
-
     private void GoToCoachInfoEntryActivity() {
         startActivity(new Intent(this, CoachInfoEntry.class));
+    }
+
+    private void GoToCoachProfileActivity() {
+        startActivity(new Intent(this, CoachProfileActivity.class));
     }
 
 

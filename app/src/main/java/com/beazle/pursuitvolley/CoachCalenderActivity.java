@@ -36,24 +36,21 @@ public class CoachCalenderActivity extends AppCompatActivity {
     }
 
     private void SetDateBoundaries() {
-        long min = GetFirstDateOfMonth(new Date());
-        long max = GetEndDate(new Date());
+        long min = GetFirstDateOfMonth();
+        long max = GetEndDate();
 
         dateCalender.setMinDate(min);
         dateCalender.setMaxDate(max);
     }
 
-    public long GetFirstDateOfMonth(Date date){
+    public long GetFirstDateOfMonth(){
         Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
         return cal.getTimeInMillis();
     }
 
-    public long GetEndDate(Date date) {
+    public long GetEndDate() {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.set(Calendar.DAY_OF_MONTH+1, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+        cal.add(Calendar.DATE, 14);
         return cal.getTimeInMillis();
     }
 

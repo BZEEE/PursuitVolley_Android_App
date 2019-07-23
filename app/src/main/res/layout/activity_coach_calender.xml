@@ -4,20 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/aquaBlue"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    android:background="@color/darkBlue"
     tools:context=".CoachCalenderActivity">
 
     <CalendarView
         android:id="@+id/dateCalender"
-        android:unfocusedMonthDateColor="@color/white"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/continueToTimeSelectionButton"
         android:layout_alignParentBottom="true"
         android:text="@string/continue_to_time_selection_text"
         android:textSize="28sp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_corners_blue_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
