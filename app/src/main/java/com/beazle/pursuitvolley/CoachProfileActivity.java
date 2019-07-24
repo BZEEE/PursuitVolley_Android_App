@@ -9,6 +9,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -46,9 +48,6 @@ public class CoachProfileActivity extends AppCompatActivity {
 
         signOutDialog = new Dialog(this);
 
-        Toolbar myToolbar = findViewById(R.id.coachProfileToolbar);
-        setSupportActionBar(myToolbar);
-
         mAuth = FirebaseAuth.getInstance();
 
 //        NavigationUI.setupWithNavController(bottomNavView,
@@ -60,6 +59,12 @@ public class CoachProfileActivity extends AppCompatActivity {
         currentFragment = coachScheduleFragment;
         getSupportFragmentManager().beginTransaction().replace(
                 R.id.coachProfileViewContainer, coachScheduleFragment).commit();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.coach_profile_app_bar, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

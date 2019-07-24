@@ -1,18 +1,18 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="MainAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="PlayerLoginTheme" parent="AppTheme">
+    <style name="PlayerLoginTheme" parent="MainAppTheme">
         <item name="android:windowBackground">@android:color/black</item>
     </style>
 
-    <style name="CoachProfileActionBar"
+    <style name="CoachProfileTheme"
         parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/orange</item>

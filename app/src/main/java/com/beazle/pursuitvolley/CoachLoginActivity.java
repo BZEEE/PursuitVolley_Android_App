@@ -109,7 +109,7 @@ public class CoachLoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         // user is already signed in, so go straight to coach profile
-        if(curent_user_id == null){
+        if(curent_user_id != null){
             startActivity(new Intent(this, CoachProfileActivity.class));
             finish();
         }
