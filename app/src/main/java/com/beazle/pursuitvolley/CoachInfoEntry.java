@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -16,7 +17,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.List;
+
 public class CoachInfoEntry extends AppCompatActivity {
+
+    private static final String TAG = "CoachInfoEntryTAG";
 
     private FirebaseFirestore mFirestore;
     private FirebaseAuth mAuth;
@@ -53,74 +58,96 @@ public class CoachInfoEntry extends AppCompatActivity {
     }
 
     private void WriteCoachInfoToFirestore() {
-        String fullname = fullnameEditText.getText().toString();
-        String age = ageEditText.getText().toString();
-        String location = locationEditText.getText().toString();
-        String bio = bioEditText.getText().toString();
+        final String fullname = fullnameEditText.getText().toString();
+        final String age = ageEditText.getText().toString();
+        final String location = locationEditText.getText().toString();
+        final String bio = bioEditText.getText().toString();
 
-        DocumentReference coachesRef = mFirestore.collection("coaches").document(mAuth.getCurrentUser().getUid());
+        final String coachUniqueId = mAuth.getCurrentUser().getUid();
+        final Coach coach = CoachManager.GetSpecificCoach(coachUniqueId);
 
-        // handle exception and edge cases
-        // write data to all fields of the coach's firestore document
-        coachesRef
-                .update("fullname", fullname)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // document successfully update
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // document not successfully updated
-                    }
-                });
+        if (coach != null) {
+            DocumentReference coachesRef = mFirestore.collection("coaches").document(coachUniqueId);
 
-        coachesRef
-                .update("age", age)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // document successfully update
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // document not successfully updated
-                    }
-                });
+            // handle exception and edge cases
+            // write data to all fields of the coach's firestore document
+            coachesRef
+                    .update("fullname", fullname)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // document successfully update
+                            // so also update Coach object for the Recycler view to reference as well
+                            coach.SetName(fullname);
 
-        coachesRef
-                .update("location", location)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // document successfully update
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // document not successfully updated
-                    }
-                });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // document not successfully updated
+                            Log.d(TAG, "Failed to update document in (coach) collection with field name 'fullname'");
+                        }
+                    });
 
-        coachesRef
-                .update("bio", bio)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // document successfully update
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // document not successfully updated
-                    }
-                });
+            coachesRef
+                    .update("age", age)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // document successfully update
+                            // so also update Coach object for the Recycler view to reference as well
+                            coach.SetAge(age);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // document not successfully updated
+                            Log.d(TAG, "Failed to update document in (coach) collection with field name 'fullname'");
+                        }
+                    });
+
+            coachesRef
+                    .update("location", location)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // document successfully update
+                            // so also update Coach object for the Recycler view to reference as well
+                            coach.SetLocaton(location);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // document not successfully updated
+                            Log.d(TAG, "Failed to update document in (coach) collection with field name 'fullname'");
+                        }
+                    });
+
+            coachesRef
+                    .update("bio", bio)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // document successfully update
+                            // so also update Coach object for the Recycler view to reference as well
+                            coach.SetBio(bio);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // document not successfully updated
+                            Log.d(TAG, "Failed to update document in (coach) collection with field name 'fullname'");
+                        }
+                    });
+        } else {
+            Toast.makeText(this, "coach is not in the list of CoachManager", Toast.LENGTH_LONG).show();
+        }
+
+
 
     }
 

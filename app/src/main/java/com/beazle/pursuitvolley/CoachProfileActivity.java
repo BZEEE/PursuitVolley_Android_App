@@ -3,7 +3,6 @@ package com.beazle.pursuitvolley;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -15,14 +14,13 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class CoachProfileActivity extends AppCompatActivity {
 
     private Fragment currentFragment;
-    private ScheduleFragment scheduleFragment;
-    private BioFragment bioFragment;
-    private PaymentSettingsFragment paymentSettingsFragment;
+    private CoachScheduleFragment coachScheduleFragment;
+    private CoachBioFragment bioFragment;
+    private CoachPaymentSettingsFragment coachPaymentSettingsFragment;
     private Dialog signOutDialog;
     private FirebaseAuth mAuth;
 
@@ -31,9 +29,9 @@ public class CoachProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_profile);
 
-        scheduleFragment = new ScheduleFragment();
-        bioFragment = new BioFragment();
-        paymentSettingsFragment = new PaymentSettingsFragment();
+        coachScheduleFragment = new CoachScheduleFragment();
+        bioFragment = new CoachBioFragment();
+        coachPaymentSettingsFragment = new CoachPaymentSettingsFragment();
 
         signOutDialog = new Dialog(this);
 
@@ -45,9 +43,9 @@ public class CoachProfileActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         // set schedule fragment as the default fragment
-        currentFragment = scheduleFragment;
+        currentFragment = coachScheduleFragment;
         getSupportFragmentManager().beginTransaction().replace(
-                R.id.coachProfileViewContainer, scheduleFragment).commit();
+                R.id.coachProfileViewContainer, coachScheduleFragment).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -57,13 +55,13 @@ public class CoachProfileActivity extends AppCompatActivity {
                     Fragment selectedFragment = null;
                     switch (menuItem.getItemId()) {
                         case R.id.nav_schedule:
-                            selectedFragment = scheduleFragment;
+                            selectedFragment = coachScheduleFragment;
                             break;
                         case R.id.nav_bio:
                             selectedFragment = bioFragment;
                             break;
                         case R.id.nav_payment_settings:
-                            selectedFragment = paymentSettingsFragment;
+                            selectedFragment = coachPaymentSettingsFragment;
                             break;
                         case R.id.nav_log_out:
                             selectedFragment = currentFragment;

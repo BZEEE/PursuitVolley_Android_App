@@ -20,9 +20,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
-public class BioFragment extends Fragment {
+public class CoachBioFragment extends Fragment {
 
-    private final static String TAG = "BioFragment";
+    private final static String TAG = "CoachBioFragment";
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;

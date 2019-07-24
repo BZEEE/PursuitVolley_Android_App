@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class PaymentSettingsFragment extends Fragment {
+public class CoachPaymentSettingsFragment extends Fragment {
 
     private Button enterNewDirectDepositInfoButtonToggle;
     private Button viewCurrentDirectDepositInfoButtonToggle;

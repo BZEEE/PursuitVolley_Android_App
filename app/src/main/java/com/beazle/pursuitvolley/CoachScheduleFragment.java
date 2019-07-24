@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class ScheduleFragment extends Fragment {
+public class CoachScheduleFragment extends Fragment {
 
     @Nullable
     @Override

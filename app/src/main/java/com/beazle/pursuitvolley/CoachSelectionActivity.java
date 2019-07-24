@@ -11,14 +11,12 @@ import java.util.List;
 
 public class CoachSelectionActivity extends AppCompatActivity {
 
-    List<Coach> coachList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_selection);
 
-        coachList = new ArrayList<>();
+        List<Coach> coachList = CoachManager.GetCoachList();
         // retreive all coaches and their info from firestore
         // pull down their relavent thumbnail images from cloud storage as well
         // create new Coach objects and add them to the list

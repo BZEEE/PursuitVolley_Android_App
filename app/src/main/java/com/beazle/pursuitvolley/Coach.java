@@ -2,22 +2,26 @@ package com.beazle.pursuitvolley;
 
 public class Coach {
 
+    private String uniqueId;
     private String name;
     private String age;
     private String locaton;
     private String bio;
     private int thumbnail;
 
-    public Coach() {
-
+    public Coach(String uniqueId) {
+        this.uniqueId = uniqueId;
     }
 
-    public Coach(String name, String age, String location, String bio) {
+    public Coach(String uniqueId, String name, String age, String location, String bio) {
+        this.uniqueId = uniqueId;
         this.name = name;
         this.age = age;
         this.locaton = location;
         this.bio = bio;
     }
+
+    public String GetUniqueId() { return this.uniqueId; }
 
     public String GetName() {
         return this.name;
@@ -38,6 +42,8 @@ public class Coach {
     public int GetThumbnail() {
         return thumbnail;
     }
+
+    public void SetUniqueId(String id) { this.uniqueId = id; }
 
     public void SetName(String name) {
         this.name = name;

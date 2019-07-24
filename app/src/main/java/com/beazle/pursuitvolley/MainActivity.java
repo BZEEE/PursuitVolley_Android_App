@@ -15,24 +15,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-         startActivity(new Intent(this, CoachCalenderActivity.class));
+//         startActivity(new Intent(this, CoachCalenderActivity.class));
 
-//        TextView coachPortalText = findViewById(R.id.coachPortalClickableText);
-//        Button bookAnAppointmentButton = findViewById(R.id.bookAnAppointmentButton);
-//
-//        coachPortalText.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                GoToCoachPortal();
-//            }
-//        });
-//
-//        bookAnAppointmentButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                GoToPlayerSignInPage();
-//            }
-//        });
+        TextView coachPortalText = findViewById(R.id.coachPortalClickableText);
+        Button bookAnAppointmentButton = findViewById(R.id.bookAnAppointmentButton);
+
+        coachPortalText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoToCoachPortal();
+            }
+        });
+
+        bookAnAppointmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoToPlayerSignInPage();
+            }
+        });
     }
 
     private void GoToCoachPortal() {
@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void GoToPlayerSignInPage() {
-        startActivity(new Intent(this, PlayerLoginActivity.class));
+
+        // ***** actually need to go to PlayerLoginActivity.class
+        startActivity(new Intent(this, CoachSelectionActivity.class));
     }
 }

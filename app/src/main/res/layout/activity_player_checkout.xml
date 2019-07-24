@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:background="@color/black"
+    tools:context=".PlayerCheckoutActivity">
+
+    <TextView
+        android:id="@+id/player_checkout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="44sp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/player_checkout_receipt_title"/>
+
+    <TextView
+        android:id="@+id/player_checkout_intro_phrase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/player_checkout_title"
+        android:text="@string/intro_phrase"/>
+
+    <TextView
+        android:id="@+id/player_checkout_coach_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/player_checkout_intro_phrase" />
+
+    <TextView
+        android:id="@+id/player_checkout_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/player_checkout_coach_name" />
+
+    <TextView
+        android:id="@+id/player_checkout_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/player_checkout_date" />
+
+</RelativeLayout>

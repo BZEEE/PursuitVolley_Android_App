@@ -2,6 +2,9 @@ package com.beazle.pursuitvolley;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -9,14 +12,21 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class CoachTimeSelectionActivity extends AppCompatActivity {
 
     private FirebaseFirestore mFirestore;
     private FirebaseAuth mAuth;
+    private RecyclerView timeSlotList;
 
     public static final String TAG = "CoachTimeActivity";
 
@@ -29,28 +39,35 @@ public class CoachTimeSelectionActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         long date = getIntent().getLongExtra(CoachCalenderActivity.dateTAG, 0);
-        GetAvailabletimeSlotsForThatDate(Long.toString(date));
 
+        List<String> timeSlots = GetAvailabletimeSlotsForThatDate(Long.toString(date));
+
+
+        timeSlotList = findViewById(R.id.timeSelectionRecyclerView);
+        timeSlotList.setLayoutManager(new LinearLayoutManager(this));
+        timeSlotList.setAdapter(new CoachTimeSelectionRecyclerViewAdapter(this, timeSlots));
     }
 
-    private void GetAvailabletimeSlotsForThatDate(String date) {
-//        DocumentReference docRef = mFirestore.collection("coaches").document(mAuth.getCurrentUser().getUid()).collection(date);
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (document.exists()) {
-//                        // get activation from document data
-//                        String codeFromFirebase = (String) document.getData().get("code");
-//
-//                    } else {
-//                        Log.d(TAG, "Admin codes document does not exist");
-//                    }
-//                } else {
-//                    Log.d(TAG, "document get() failed with ", task.getException());
-//                }
-//            }
-//        });
+    private List<String> GetAvailabletimeSlotsForThatDate(String date) {
+        // get all relaven
+        final List<String> timeSlots = new ArrayList<>();
+        CollectionReference collectionRef = mFirestore.collection("coaches").document(mAuth.getCurrentUser().getUid()).collection(date);
+        collectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                    for (int i = 0; i < documents.size(); i++) {
+                        DocumentSnapshot doc = documents.get(i);
+                        boolean timeSlotIsBooked = (boolean) doc.getData().get("booked");
+                        if (timeSlotIsBooked) {
+                            timeSlots.add(doc.getId());
+                        }
+                    }
+                }
+            }
+        });
+
+        return timeSlots;
     }
 }
