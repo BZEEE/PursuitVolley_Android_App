@@ -22,13 +22,16 @@ public class CoachCalenderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_calender);
 
+        Intent receivedIntent = getIntent();
+        final String coachId = receivedIntent.getStringExtra(CoachSelectionRecyclerViewAdapter.CoachCardViewHolder.coachSelectionViewHolderTag);
+
         dateCalender = findViewById(R.id.dateCalender);
         continueButton = findViewById(R.id.continueToTimeSelectionButton);
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GoToTimeSelectionActivity(GetSelectedDate());
+                GoToTimeSelectionActivity(coachId, GetSelectedDate());
             }
         });
 
@@ -58,8 +61,9 @@ public class CoachCalenderActivity extends AppCompatActivity {
         return dateCalender.getDate();
     }
 
-    public void GoToTimeSelectionActivity(long selectedDate) {
+    public void GoToTimeSelectionActivity(String coachId, long selectedDate) {
         Intent intent = new Intent(this, CoachTimeSelectionActivity.class);
+        intent.putExtra(CoachSelectionRecyclerViewAdapter.CoachCardViewHolder.coachSelectionViewHolderTag, coachId);
         intent.putExtra(dateTAG, selectedDate);
         startActivity(intent);
     }

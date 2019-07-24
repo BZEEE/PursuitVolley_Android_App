@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".CoachProfileActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/coachProfileToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/CoachProfileActionBar">
+    </androidx.appcompat.widget.Toolbar>
+
     <FrameLayout
         android:id="@+id/coachProfileViewContainer"
         android:layout_width="match_parent"

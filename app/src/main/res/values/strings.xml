@@ -21,6 +21,7 @@
     <string name="coachAgeHeader">Age: </string>
     <string name="coachLocationHeader">Location: </string>
     <string name="coachBioHeader">Bio: </string>
+    <string name="coach_delete_account_text">delete account</string>
 
     <!--Coach Login Activity-->
     <string name="coach_activation_code_text">enter activation code</string>
@@ -57,5 +58,6 @@
 
     <!--Player Checkout Activity-->
     <string name="player_checkout_receipt_title">Receipt Info</string>
-    <string name="intro_phrase">Your training session contains the following details</string>
+    <string name="player_checkout_intro_phrase">Your training session contains the following details</string>
+    <string name="player_checkout_continue_to_payment_button_text">continue to payment</string>
 </resources>

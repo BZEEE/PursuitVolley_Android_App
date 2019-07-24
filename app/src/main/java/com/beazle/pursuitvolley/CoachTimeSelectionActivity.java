@@ -38,20 +38,21 @@ public class CoachTimeSelectionActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        long date = getIntent().getLongExtra(CoachCalenderActivity.dateTAG, 0);
+        String coachId = getIntent().getStringExtra(CoachSelectionRecyclerViewAdapter.CoachCardViewHolder.coachSelectionViewHolderTag);
+        long selectedDate = getIntent().getLongExtra(CoachCalenderActivity.dateTAG, 0);
 
-        List<String> timeSlots = GetAvailabletimeSlotsForThatDate(Long.toString(date));
+        List<String> timeSlots = GetAvailabletimeSlotsForThatDate(coachId, Long.toString(selectedDate));
 
 
         timeSlotList = findViewById(R.id.timeSelectionRecyclerView);
         timeSlotList.setLayoutManager(new LinearLayoutManager(this));
-        timeSlotList.setAdapter(new CoachTimeSelectionRecyclerViewAdapter(this, timeSlots));
+        timeSlotList.setAdapter(new CoachTimeSelectionRecyclerViewAdapter(this, timeSlots, coachId, selectedDate));
     }
 
-    private List<String> GetAvailabletimeSlotsForThatDate(String date) {
+    private List<String> GetAvailabletimeSlotsForThatDate(String coachId, String date) {
         // get all relaven
         final List<String> timeSlots = new ArrayList<>();
-        CollectionReference collectionRef = mFirestore.collection("coaches").document(mAuth.getCurrentUser().getUid()).collection(date);
+        CollectionReference collectionRef = mFirestore.collection("coaches").document(coachId).collection(date);
         collectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

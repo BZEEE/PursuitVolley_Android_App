@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private void GoToPlayerSignInPage() {
 
         // ***** actually need to go to PlayerLoginActivity.class
-        startActivity(new Intent(this, CoachSelectionActivity.class));
+        // startActivity(new Intent(this, CoachSelectionActivity.class));
+        startActivity(new Intent(this, PlayerLoginActivity.class));
     }
 }

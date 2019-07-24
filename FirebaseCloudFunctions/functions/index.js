@@ -34,3 +34,8 @@ exports.AddCoachCalenderDataToFirestoreAfterSigningUp = functions.auth.user().on
     //    return;
     // });
 });
+
+// delete user document from firestore if account is deleted
+exports.DeleteCoachDataFromFirestoreAfterDeletingAccount = functions.auth.user().onDelete((user) => {
+    functions.firestore.collection("coaches").doc(user.data.uid).delete()
+});

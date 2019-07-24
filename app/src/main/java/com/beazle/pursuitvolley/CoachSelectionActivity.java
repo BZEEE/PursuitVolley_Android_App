@@ -25,5 +25,6 @@ public class CoachSelectionActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerViewCoachSelection);
         CoachSelectionRecyclerViewAdapter adapter = new CoachSelectionRecyclerViewAdapter(this, coachList);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setAdapter(adapter);
     }
 }
