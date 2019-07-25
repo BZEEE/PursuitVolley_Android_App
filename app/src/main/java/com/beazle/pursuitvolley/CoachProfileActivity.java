@@ -24,6 +24,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class CoachProfileActivity extends AppCompatActivity {
 
@@ -159,8 +161,8 @@ public class CoachProfileActivity extends AppCompatActivity {
                             Log.d(TAG, "User account deleted.");
                             // successful delete from FirebaseAuth
                             // now delete coach document from Firestore
-                            // try deleting firestore data with cloud function trigger instead
-                            // if that doesnt work then do it here
+                            // NOTE: Deleting a document does not delete its subcollection, have to do this manually or recursively
+
                             // DeleteUserDocumentFromFirestore(user);
                             startActivity(new Intent(CoachProfileActivity.this, MainActivity.class));
                             finish();
@@ -172,6 +174,22 @@ public class CoachProfileActivity extends AppCompatActivity {
     }
 
 //    private void DeleteUserDocumentFromFirestore(FirebaseUser user) {
+//        // loop through and delete all documents in the subcollection "booking", which will then delete the subcollection
+//        // once all the documents are deleted within that subcollection
+//        mFirestore.collection("coaches").document(user.getUid()).collection("bookings")
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        // delete document
+//                        document.
+//                    }
+//                } else {
+//                    Log.d(TAG, "Error Getting Documents", task.getException());
+//                }
+//            }
+//        });
 //        mFirestore.collection("coaches").document(user.getUid())
 //                .delete()
 //                .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -186,6 +204,42 @@ public class CoachProfileActivity extends AppCompatActivity {
 //                        Log.w(TAG, "Error deleting document", e);
 //                    }
 //                });
+//    }
+
+    // ********************************************
+    // https://stackoverflow.com/questions/50220287/how-do-you-iterate-through-documents-in-a-sub-collection-within-a-transaction-fo
+
+//    private void deleteCollection(final CollectionReference collection, Executor executor) {
+//        Tasks.call(executor, new Callable<Object>() {
+//            @Override
+//            public Object call() throws Exception {
+//                int batchSize = 10;
+//                Query query = db.collection("job_skills").whereEqualTo("job_id", job_id);
+//                List<DocumentSnapshot> deleted = deleteQueryBatch(query);
+//
+//                while (deleted.size() >= batchSize) {
+//                    DocumentSnapshot last = deleted.get(deleted.size() - 1);
+//                    query = collection.orderBy(FieldPath.documentId()).startAfter(last.getId()).limit(batchSize);
+//
+//                    deleted = deleteQueryBatch(query);
+//                }
+//
+//                return null;
+//            }
+//        });
+//    }
+
+//    @WorkerThread
+//    private List<DocumentSnapshot> deleteQueryBatch(final Query query) throws Exception {
+//        QuerySnapshot querySnapshot = Tasks.await(query.get());
+//
+//        WriteBatch batch = query.getFirestore().batch();
+//        for (DocumentSnapshot snapshot : querySnapshot) {
+//            batch.delete(snapshot.getReference());
+//        }
+//        Tasks.await(batch.commit());
+//
+//        return querySnapshot.getDocuments();
 //    }
 
 }

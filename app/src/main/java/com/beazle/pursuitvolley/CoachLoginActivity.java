@@ -148,8 +148,9 @@ public class CoachLoginActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             // coach document is initialized using cloud functions
                             // add new coach to CoachManager class so that the recycler view knows which coaches to show to players
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            CoachManager.AddCoachToList(new Coach(user.getUid()));
+                            String coachId = mAuth.getCurrentUser().getUid();
+                            CoachManager.AddCoachToList(new Coach(coachId));
+                            AddDefaultCoachDataToFirestoreAfterSigningUp(coachId);
                             GoToCoachInfoEntryActivity();
 
                         } else {
@@ -195,6 +196,16 @@ public class CoachLoginActivity extends AppCompatActivity {
 
     private void GoToCoachProfileActivity() {
         startActivity(new Intent(this, CoachProfileActivity.class));
+    }
+
+    private void AddDefaultCoachDataToFirestoreAfterSigningUp(String coachId) {
+        // add intial data fields to firestore for coach specific document
+        Map<String, Object> data = new HashMap<>();
+        data.put("fullname", "");
+        data.put("age", "");
+        data.put("location", "");
+        data.put("bio", "");
+        mFirestore.collection("coaches").document(coachId).set(data);
     }
 
 
