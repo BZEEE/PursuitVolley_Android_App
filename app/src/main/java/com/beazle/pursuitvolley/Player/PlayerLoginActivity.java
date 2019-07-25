@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionActivity;
+import com.beazle.pursuitvolley.Player.PlayerProfile.PlayerProfileActivity;
 import com.beazle.pursuitvolley.R;
 import com.facebook.CallbackManager;
 import com.firebase.ui.auth.AuthUI;
@@ -62,7 +63,7 @@ public class PlayerLoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (currentUser != null) {
-            startActivity(new Intent(this, CoachSelectionActivity.class));
+            startActivity(new Intent(this, PlayerProfileActivity.class));
             finish();
             return;
         }
@@ -79,6 +80,9 @@ public class PlayerLoginActivity extends AppCompatActivity {
                 //ccurrent user is no longer null
                 FirebaseUser user = mAuth.getCurrentUser();
                 AddDefaultCoachDataToFirestoreAfterSigningUp(user);
+                // go to player profile activity
+                startActivity(new Intent(this, PlayerProfileActivity.class));
+                finish();
             } else {
                 // error with Authentication
                 Toast.makeText(this, ""+response.getError().getMessage(), Toast.LENGTH_SHORT).show();

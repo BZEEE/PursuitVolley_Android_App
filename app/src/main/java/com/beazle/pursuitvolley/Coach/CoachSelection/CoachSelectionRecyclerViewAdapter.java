@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.beazle.pursuitvolley.Coach.Coach;
 import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
 import com.beazle.pursuitvolley.R;
 

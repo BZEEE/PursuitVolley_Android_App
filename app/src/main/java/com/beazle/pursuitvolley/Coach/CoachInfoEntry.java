@@ -11,9 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.beazle.pursuitvolley.Coach.Coach;
-import com.beazle.pursuitvolley.Coach.CoachManager;
+import com.beazle.pursuitvolley.Coach.CoachSelection.Coach;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachProfileActivity;
+import com.beazle.pursuitvolley.Coach.CoachSelection.CoachManager;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

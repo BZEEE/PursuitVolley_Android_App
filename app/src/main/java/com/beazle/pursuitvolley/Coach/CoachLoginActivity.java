@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachProfileActivity;
+import com.beazle.pursuitvolley.Coach.CoachSelection.Coach;
+import com.beazle.pursuitvolley.Coach.CoachSelection.CoachManager;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

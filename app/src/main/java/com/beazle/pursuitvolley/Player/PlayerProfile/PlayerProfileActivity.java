@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.net.Uri;
 import android.os.Bundle;
 
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.PlayerCurrentAppointmentsFragment;
+import com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents.PlayerUpcomingEventsFragment;
 import com.beazle.pursuitvolley.R;
 import com.google.android.material.tabs.TabLayout;
 

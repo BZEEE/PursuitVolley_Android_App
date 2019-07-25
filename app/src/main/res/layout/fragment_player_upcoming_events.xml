@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@color/aquaBlue"
+    android:background="@color/black"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/playerProfileFragmentUpcomingEventsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentTop="true"
+        android:text="@string/player_upcoming_events_tab_text"
+        android:textStyle="italic|bold"
+        android:gravity="center"
+        android:textColor="@color/white"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playerProfileFragmentUpcomingEventsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/playerProfileFragmentUpcomingEventsTitle">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

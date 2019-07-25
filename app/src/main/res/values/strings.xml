@@ -36,7 +36,7 @@
     <string name="sign_out_yes">yes</string>
     <string name="sign_out_no">no</string>
 
-    <!--Payment Setting Fragment-->
+    <!--Coach Payment Setting Fragment-->
     <string name="coach_payment_settings_title_text">Direct Deposit</string>
     <string name="coach_institution_number_text">enter institution number</string>
     <string name="coach_transit_number_text">enter transit number</string>
@@ -64,6 +64,6 @@
     <!--Player Profile Activity-->
     <string name="player_profile_title">Your Appointments</string>
     <string name="player_profile_book_an_appointment_button_text">book a new appointment</string>
-    <string name="player_current_appointments_tab_text">current appointments</string>
-    <string name="player_upcoming_events_tab_text">upcoming events</string>
+    <string name="player_current_appointments_tab_text">Current Appointments</string>
+    <string name="player_upcoming_events_tab_text">Upcoming Events</string>
 </resources>

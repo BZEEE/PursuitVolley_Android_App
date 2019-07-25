@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.beazle.pursuitvolley.Coach.Coach;
-import com.beazle.pursuitvolley.Coach.CoachManager;
 import com.beazle.pursuitvolley.R;
 
 import java.util.List;

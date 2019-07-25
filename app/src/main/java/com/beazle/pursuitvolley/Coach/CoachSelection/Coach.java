@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley.Coach;
+package com.beazle.pursuitvolley.Coach.CoachSelection;
 
 public class Coach {
 
