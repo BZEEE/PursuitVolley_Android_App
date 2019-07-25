@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley;
+package com.beazle.pursuitvolley.Coach.CoachDateSelection;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 
-import java.util.Calendar;
-import java.util.Date;
+import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
+import com.beazle.pursuitvolley.Coach.CoachTimeSelection.CoachTimeSelectionActivity;
+import com.beazle.pursuitvolley.R;
 
-public class CoachCalenderActivity extends AppCompatActivity {
+import java.util.Calendar;
+
+public class CoachDateSelectionActivity extends AppCompatActivity {
 
     private CalendarView dateCalender;
     private Button continueButton;

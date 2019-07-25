@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley;
+package com.beazle.pursuitvolley.Coach.CoachSelection;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
+import com.beazle.pursuitvolley.Coach.Coach;
+import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
+import com.beazle.pursuitvolley.R;
 
 import java.util.List;
 
@@ -73,7 +75,7 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
         }
 
         private void GoToCoachCalenderSelectionActivity(Context context) {
-            Intent intent = new Intent(context, CoachCalenderActivity.class);
+            Intent intent = new Intent(context, CoachDateSelectionActivity.class);
             intent.putExtra(coachSelectionViewHolderTag, coachUniqueId);
             context.startActivity(intent);
         }

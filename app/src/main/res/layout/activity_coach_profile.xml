@@ -5,14 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/black"
     android:layout_height="match_parent"
-    tools:context=".CoachProfileActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/coachProfileToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/CoachProfileTheme">
-    </androidx.appcompat.widget.Toolbar>
+    tools:context=".Coach.CoachProfile.CoachProfileActivity">
 
     <FrameLayout
         android:id="@+id/coachProfileViewContainer"
@@ -24,8 +17,14 @@
         android:id="@+id/coachProfileBottomNavView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/orange"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/coach_profile_bottom_navigation" />
+        app:menu="@menu/coach_profile_bottom_navigation"
+        app:itemIconTint="@drawable/coach_profile_bottom_navigation_item_selector"
+        app:itemTextColor="@drawable/coach_profile_bottom_navigation_item_selector"
+        app:labelVisibilityMode="labeled"/>
 
 </RelativeLayout>
+
+<!--to disable animation for Bottom navigation View-->
+<!--add style="@style/BottomNavigationView" to BottomNavigationView block-->

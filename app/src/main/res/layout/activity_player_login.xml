@@ -7,7 +7,7 @@
     android:background="@color/black"
     android:paddingRight="20dp"
     android:paddingLeft="20dp"
-    tools:context=".PlayerLoginActivity">
+    tools:context=".Player.PlayerLoginActivity">
 
 
 

@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley;
+package com.beazle.pursuitvolley.Coach.CoachSelection;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import java.util.ArrayList;
+import com.beazle.pursuitvolley.Coach.Coach;
+import com.beazle.pursuitvolley.Coach.CoachManager;
+import com.beazle.pursuitvolley.R;
+
 import java.util.List;
 
 public class CoachSelectionActivity extends AppCompatActivity {

@@ -12,15 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MainAppTheme">
-        <activity android:name=".PlayerPaymentActivity"></activity>
-        <activity android:name=".PlayerCheckoutActivity" />
-        <activity android:name=".CoachSelectionActivity" />
-        <activity android:name=".CoachInfoEntry" />
-        <activity android:name=".CoachProfileActivity" />
-        <activity android:name=".PlayerLoginActivity" />
-        <activity android:name=".CoachLoginActivity" />
-        <activity android:name=".CoachTimeSelectionActivity" />
-        <activity android:name=".CoachCalenderActivity" />
+        <activity android:name=".Player.PlayerProfile.PlayerProfileActivity"></activity>
+        <activity android:name=".Player.PlayerPaymentActivity" />
+        <activity android:name=".Player.PlayerCheckoutActivity" />
+        <activity android:name=".Coach.CoachSelection.CoachSelectionActivity" />
+        <activity android:name=".Coach.CoachInfoEntry" />
+        <activity android:name=".Coach.CoachProfile.CoachProfileActivity" />
+        <activity android:name=".Player.PlayerLoginActivity" />
+        <activity android:name=".Coach.CoachLoginActivity" />
+        <activity android:name=".Coach.CoachTimeSelection.CoachTimeSelectionActivity" />
+        <activity android:name=".Coach.CoachDateSelection.CoachDateSelectionActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +30,9 @@
             </intent-filter>
         </activity>
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_application_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_application_id" />
     </application>
 
 </manifest>

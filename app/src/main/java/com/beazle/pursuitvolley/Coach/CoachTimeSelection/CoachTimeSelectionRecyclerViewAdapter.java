@@ -1,16 +1,19 @@
-package com.beazle.pursuitvolley;
+package com.beazle.pursuitvolley.Coach.CoachTimeSelection;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
+import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
+import com.beazle.pursuitvolley.Player.PlayerCheckoutActivity;
+import com.beazle.pursuitvolley.R;
 
 import java.util.List;
 import java.util.Locale;
@@ -90,7 +93,7 @@ public class CoachTimeSelectionRecyclerViewAdapter extends RecyclerView.Adapter<
             Intent intent = new Intent(context, PlayerCheckoutActivity.class);
             intent.putExtra(timeSlotTag, timeSlot.getText());
             intent.putExtra(CoachSelectionRecyclerViewAdapter.CoachCardViewHolder.coachSelectionViewHolderTag, coachId);
-            intent.putExtra(CoachCalenderActivity.dateTAG, selectedDate);
+            intent.putExtra(CoachDateSelectionActivity.dateTAG, selectedDate);
             context.startActivity(intent);
         }
 

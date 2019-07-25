@@ -1,8 +1,10 @@
-package com.beazle.pursuitvolley;
+package com.beazle.pursuitvolley.Player;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.beazle.pursuitvolley.R;
 
 public class PlayerPaymentActivity extends AppCompatActivity {
 

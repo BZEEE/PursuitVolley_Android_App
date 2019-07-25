@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley;
+package com.beazle.pursuitvolley.Coach;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,13 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.beazle.pursuitvolley.Coach.Coach;
+import com.beazle.pursuitvolley.Coach.CoachManager;
+import com.beazle.pursuitvolley.Coach.CoachProfile.CoachProfileActivity;
+import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.List;
 
 public class CoachInfoEntry extends AppCompatActivity {
 

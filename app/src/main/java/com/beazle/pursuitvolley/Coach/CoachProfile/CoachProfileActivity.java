@@ -1,8 +1,7 @@
-package com.beazle.pursuitvolley;
+package com.beazle.pursuitvolley.Coach.CoachProfile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.app.Dialog;
@@ -16,16 +15,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.beazle.pursuitvolley.Coach.CoachLoginActivity;
+import com.beazle.pursuitvolley.MainActivity;
+import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class CoachProfileActivity extends AppCompatActivity {
 
@@ -102,6 +100,7 @@ public class CoachProfileActivity extends AppCompatActivity {
                         case R.id.nav_log_out:
                             selectedFragment = currentFragment;
                             ShowSignOutDialog();
+                            break;
 
                         default:
                             // a fragment was selected that is not a part of our app

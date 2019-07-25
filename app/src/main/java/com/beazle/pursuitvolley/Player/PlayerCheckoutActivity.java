@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley;
+package com.beazle.pursuitvolley.Player;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
+import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
+import com.beazle.pursuitvolley.Coach.CoachTimeSelection.CoachTimeSelectionRecyclerViewAdapter;
+import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -18,7 +22,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 public class PlayerCheckoutActivity extends AppCompatActivity {
 
@@ -49,7 +52,7 @@ public class PlayerCheckoutActivity extends AppCompatActivity {
 
         // set details of player appointment
         SetCheckoutCoachNameDetails(receivedIntent.getStringExtra(CoachSelectionRecyclerViewAdapter.CoachCardViewHolder.coachSelectionViewHolderTag));
-        selectedDateTextView.setText(df.format(receivedIntent.getLongExtra(CoachCalenderActivity.dateTAG, 0)));
+        selectedDateTextView.setText(df.format(receivedIntent.getLongExtra(CoachDateSelectionActivity.dateTAG, 0)));
         selectedTimeTextView.setText(receivedIntent.getStringExtra(CoachTimeSelectionRecyclerViewAdapter.TimeSlotViewHolder.timeSlotTag));
 
         continueToPaymentButton.setOnClickListener(new View.OnClickListener() {

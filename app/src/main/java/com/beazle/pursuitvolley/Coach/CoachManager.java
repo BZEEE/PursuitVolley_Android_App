@@ -1,4 +1,6 @@
-package com.beazle.pursuitvolley;
+package com.beazle.pursuitvolley.Coach;
+
+import com.beazle.pursuitvolley.Coach.Coach;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley;
+package com.beazle.pursuitvolley.Coach.CoachTimeSelection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,21 +6,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
+import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
+import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
+import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class CoachTimeSelectionActivity extends AppCompatActivity {
 
@@ -39,7 +38,7 @@ public class CoachTimeSelectionActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         String coachId = getIntent().getStringExtra(CoachSelectionRecyclerViewAdapter.CoachCardViewHolder.coachSelectionViewHolderTag);
-        long selectedDate = getIntent().getLongExtra(CoachCalenderActivity.dateTAG, 0);
+        long selectedDate = getIntent().getLongExtra(CoachDateSelectionActivity.dateTAG, 0);
 
         List<String> timeSlots = GetAvailabletimeSlotsForThatDate(coachId, Long.toString(selectedDate));
 

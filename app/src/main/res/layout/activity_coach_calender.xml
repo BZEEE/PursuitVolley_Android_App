@@ -7,7 +7,7 @@
     android:paddingRight="10dp"
     android:paddingLeft="10dp"
     android:background="@color/darkBlue"
-    tools:context=".CoachCalenderActivity">
+    tools:context=".Coach.CoachDateSelection.CoachDateSelectionActivity">
 
     <CalendarView
         android:id="@+id/dateCalender"

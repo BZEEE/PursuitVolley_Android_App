@@ -15,7 +15,7 @@
     <!--Coach Profile Activity-->
     <string name="coach_profile_nav_schedule_text">Schedule</string>
     <string name="coach_profile_nav_bio_text">Bio</string>
-    <string name="coach_profile_nav_payment_settings_text">Payment Settings</string>
+    <string name="coach_profile_nav_payment_settings_text">Pay Settings</string>
     <string name="coach_profile_nav_sign_out_text">Sign Out</string>
     <string name="coachNameHeader">Name: </string>
     <string name="coachAgeHeader">Age: </string>
@@ -60,4 +60,10 @@
     <string name="player_checkout_receipt_title">Receipt Info</string>
     <string name="player_checkout_intro_phrase">Your training session contains the following details</string>
     <string name="player_checkout_continue_to_payment_button_text">continue to payment</string>
+    
+    <!--Player Profile Activity-->
+    <string name="player_profile_title">Your Appointments</string>
+    <string name="player_profile_book_an_appointment_button_text">book a new appointment</string>
+    <string name="player_current_appointments_tab_text">current appointments</string>
+    <string name="player_upcoming_events_tab_text">upcoming events</string>
 </resources>
