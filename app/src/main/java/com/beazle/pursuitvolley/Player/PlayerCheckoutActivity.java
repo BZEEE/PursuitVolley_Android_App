@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
 import com.beazle.pursuitvolley.Coach.CoachTimeSelection.CoachTimeSelectionRecyclerViewAdapter;
+import com.beazle.pursuitvolley.Player.PlayerPaymentFlow.PlayerCreditCardPaymentAcivity;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -85,7 +86,7 @@ public class PlayerCheckoutActivity extends AppCompatActivity {
     }
 
     private void GoToPaymentActivity() {
-        Intent intent = new Intent(this, PlayerPaymentActivity.class);
+        Intent intent = new Intent(this, PlayerCreditCardPaymentAcivity.class);
         startActivity(intent);
     }
 }

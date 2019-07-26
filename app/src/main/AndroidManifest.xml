@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MainAppTheme">
-        <activity android:name=".Player.PlayerProfile.PlayerProfileActivity"></activity>
-        <activity android:name=".Player.PlayerPaymentActivity" />
+        <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentResultActivity"></activity>
+        <activity android:name=".Player.PlayerPaymentFlow.PlayerCreditCardPaymentAcivity" />
+        <activity android:name=".Player.PlayerProfile.PlayerProfileActivity" />
         <activity android:name=".Player.PlayerCheckoutActivity" />
         <activity android:name=".Coach.CoachSelection.CoachSelectionActivity" />
         <activity android:name=".Coach.CoachInfoEntry" />

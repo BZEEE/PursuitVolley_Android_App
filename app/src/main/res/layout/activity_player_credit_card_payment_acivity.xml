@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stripe="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orange"
+    tools:context=".Player.PlayerPaymentFlow.PlayerCreditCardPaymentAcivity">
+
+    <TextView
+        android:id="@+id/creditCardPaymentTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:textStyle="italic|bold"
+        android:text="@string/player_payment_method_title"
+        android:gravity="center"/>
+
+    <com.stripe.android.view.CardInputWidget
+        android:id="@+id/cardInputWidget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        stripe:cardTextErrorColor="@color/red"
+        android:theme="@style/CardWidgetStyle"
+        android:layout_below="@+id/creditCardPaymentTitle"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/cardInputWidget"
+        android:layout_marginBottom="15dp">
+
+        <Button
+            android:id="@+id/addCreditCardButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_background"
+            android:textSize="24sp"
+            android:text="@string/player_add_credit_card_button"
+            android:textStyle="italic|bold"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp">
+
+        <Button
+            android:id="@+id/goToCheckoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners_blue_background"
+            android:textSize="24sp"
+            android:text="@string/make_payment_button_text"
+            android:textStyle="italic|bold"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
