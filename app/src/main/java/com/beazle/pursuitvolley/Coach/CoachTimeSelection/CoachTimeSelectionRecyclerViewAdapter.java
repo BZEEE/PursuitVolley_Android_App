@@ -10,9 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
-import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
-import com.beazle.pursuitvolley.Player.PlayerCheckoutActivity;
+import com.beazle.pursuitvolley.IntentTags.IntentTags;
+import com.beazle.pursuitvolley.Player.PlayerPaymentFlow.PlayerCheckoutActivity;
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 
 import java.util.List;
@@ -22,14 +22,12 @@ public class CoachTimeSelectionRecyclerViewAdapter extends RecyclerView.Adapter<
 
     private List<String> data;
     private Context context;
-    private String coachId;
-    private long selectedDate;
+    private CurrentAppointmentReceiptParcelable receipt;
 
-    public CoachTimeSelectionRecyclerViewAdapter(Context context, List<String> list, String coachId, long selectedData) {
+    public CoachTimeSelectionRecyclerViewAdapter(Context context, List<String> list, CurrentAppointmentReceiptParcelable receipt) {
         this.context = context;
         this.data = list;
-        this.coachId = coachId;
-        this.selectedDate = selectedData;
+        this.receipt = receipt;
     }
 
     @NonNull
@@ -37,7 +35,7 @@ public class CoachTimeSelectionRecyclerViewAdapter extends RecyclerView.Adapter<
     public TimeSlotViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.list_item_time_slot, parent, false);
-        return new TimeSlotViewHolder(this.context, view, this.coachId, this.selectedDate);
+        return new TimeSlotViewHolder(this.context, view, this.receipt);
     }
 
     @Override
@@ -76,7 +74,7 @@ public class CoachTimeSelectionRecyclerViewAdapter extends RecyclerView.Adapter<
         TextView timeSlot;
         public static final String timeSlotTag = "TimeSlotViewHolderTag";
 
-        public TimeSlotViewHolder(final Context context, View itemView, final String coachId, final long selectedDate) {
+        public TimeSlotViewHolder(final Context context, View itemView, final CurrentAppointmentReceiptParcelable receipt) {
             super(itemView);
             timeSlot = itemView.findViewById(R.id.time_slot);
 
@@ -84,16 +82,15 @@ public class CoachTimeSelectionRecyclerViewAdapter extends RecyclerView.Adapter<
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                        GoToPlayerCheckoutActivity(context, coachId, selectedDate);
+                        GoToPlayerCheckoutActivity(context, receipt);
                 }
             });
         }
 
-        private void GoToPlayerCheckoutActivity(Context context, String coachId, long selectedDate) {
+        private void GoToPlayerCheckoutActivity(Context context, CurrentAppointmentReceiptParcelable receipt) {
             Intent intent = new Intent(context, PlayerCheckoutActivity.class);
-            intent.putExtra(timeSlotTag, timeSlot.getText());
-            intent.putExtra(CoachSelectionRecyclerViewAdapter.CoachCardViewHolder.coachSelectionViewHolderTag, coachId);
-            intent.putExtra(CoachDateSelectionActivity.dateTAG, selectedDate);
+            receipt.setCurrentAppointmentBeginTime(timeSlot.getText().toString());
+            intent.putExtra(IntentTags.currentReceiptTAG, receipt);
             context.startActivity(intent);
         }
 

@@ -15,7 +15,7 @@
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentResultActivity"></activity>
         <activity android:name=".Player.PlayerPaymentFlow.PlayerCreditCardPaymentAcivity" />
         <activity android:name=".Player.PlayerProfile.PlayerProfileActivity" />
-        <activity android:name=".Player.PlayerCheckoutActivity" />
+        <activity android:name=".Player.PlayerPaymentFlow.PlayerCheckoutActivity" />
         <activity android:name=".Coach.CoachSelection.CoachSelectionActivity" />
         <activity android:name=".Coach.CoachInfoEntry" />
         <activity android:name=".Coach.CoachProfile.CoachProfileActivity" />

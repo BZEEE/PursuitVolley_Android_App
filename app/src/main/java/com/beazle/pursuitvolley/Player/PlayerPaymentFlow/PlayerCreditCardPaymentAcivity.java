@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.beazle.pursuitvolley.Player.PlayerCheckoutActivity;
 import com.beazle.pursuitvolley.R;
 import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.Stripe;

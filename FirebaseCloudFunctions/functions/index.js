@@ -17,6 +17,24 @@ admin.initializeApp(functions.config().firebase);
   * @see use SendGrid to send emails from cloud functions, best practice (https://firebase.google.com/docs/functions/tips)
   */
 
+
+// create a charge from a dtrip token on our server
+// second param is important (our key)
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+
+// Token is created using Checkout or Elements!
+// Get the payment token ID submitted by the form:
+const token = request.body.stripeToken; // Using Express
+
+(async () => {
+  const charge = await stripe.charges.create({
+    amount: 999,
+    currency: 'usd',
+    description: 'Example charge',
+    source: token,
+  });
+})();
+
 // **********************************
 // **********************************
 

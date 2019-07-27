@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
+import com.beazle.pursuitvolley.IntentTags.IntentTags;
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,15 +39,14 @@ public class CoachTimeSelectionActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        String coachId = getIntent().getStringExtra(CoachSelectionRecyclerViewAdapter.CoachCardViewHolder.coachSelectionViewHolderTag);
-        long selectedDate = getIntent().getLongExtra(CoachDateSelectionActivity.dateTAG, 0);
+        CurrentAppointmentReceiptParcelable receipt = (CurrentAppointmentReceiptParcelable) getIntent().getParcelableExtra(IntentTags.currentReceiptTAG);
 
-        List<String> timeSlots = GetAvailabletimeSlotsForThatDate(coachId, Long.toString(selectedDate));
+        List<String> timeSlots = GetAvailabletimeSlotsForThatDate(receipt.getCurrentAppointmentCoachUid(), Long.toString(receipt.getCurrentAppointmentDate()));
 
 
         timeSlotList = findViewById(R.id.timeSelectionRecyclerView);
         timeSlotList.setLayoutManager(new LinearLayoutManager(this));
-        timeSlotList.setAdapter(new CoachTimeSelectionRecyclerViewAdapter(this, timeSlots, coachId, selectedDate));
+        timeSlotList.setAdapter(new CoachTimeSelectionRecyclerViewAdapter(this, timeSlots, receipt));
     }
 
     private List<String> GetAvailabletimeSlotsForThatDate(String coachId, String date) {

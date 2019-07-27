@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
+import com.beazle.pursuitvolley.IntentTags.IntentTags;
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 
 import java.util.List;
@@ -50,8 +52,6 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
 
     public static class CoachCardViewHolder extends RecyclerView.ViewHolder {
 
-        public static final String coachSelectionViewHolderTag = "CoachSelectionViewHolderTag";
-
         LinearLayout coachCardLayout;
         ImageView coachImg;
         TextView coachName;
@@ -75,7 +75,10 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
 
         private void GoToCoachCalenderSelectionActivity(Context context) {
             Intent intent = new Intent(context, CoachDateSelectionActivity.class);
-            intent.putExtra(coachSelectionViewHolderTag, coachUniqueId);
+            CurrentAppointmentReceiptParcelable receipt = new CurrentAppointmentReceiptParcelable();
+            receipt.setCurrentAppointmentCoachName(coachName.getText().toString());
+            receipt.setCurrentAppointmentCoachUid(coachUniqueId);
+            intent.putExtra(IntentTags.currentReceiptTAG, receipt);
             context.startActivity(intent);
         }
 

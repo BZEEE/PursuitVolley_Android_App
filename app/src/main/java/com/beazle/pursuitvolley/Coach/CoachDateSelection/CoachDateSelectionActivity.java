@@ -3,12 +3,15 @@ package com.beazle.pursuitvolley.Coach.CoachDateSelection;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
 import com.beazle.pursuitvolley.Coach.CoachTimeSelection.CoachTimeSelectionActivity;
+import com.beazle.pursuitvolley.IntentTags.IntentTags;
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 
 import java.util.Calendar;
@@ -26,7 +29,7 @@ public class CoachDateSelectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_coach_calender);
 
         Intent receivedIntent = getIntent();
-        final String coachId = receivedIntent.getStringExtra(CoachSelectionRecyclerViewAdapter.CoachCardViewHolder.coachSelectionViewHolderTag);
+        final CurrentAppointmentReceiptParcelable receipt = (CurrentAppointmentReceiptParcelable) receivedIntent.getParcelableExtra(IntentTags.currentReceiptTAG);
 
         dateCalender = findViewById(R.id.dateCalender);
         continueButton = findViewById(R.id.continueToTimeSelectionButton);
@@ -34,7 +37,7 @@ public class CoachDateSelectionActivity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GoToTimeSelectionActivity(coachId, GetSelectedDate());
+                GoToTimeSelectionActivity(receipt, GetSelectedDate());
             }
         });
 
@@ -64,10 +67,10 @@ public class CoachDateSelectionActivity extends AppCompatActivity {
         return dateCalender.getDate();
     }
 
-    public void GoToTimeSelectionActivity(String coachId, long selectedDate) {
+    public void GoToTimeSelectionActivity(CurrentAppointmentReceiptParcelable receipt, long selectedDate) {
         Intent intent = new Intent(this, CoachTimeSelectionActivity.class);
-        intent.putExtra(CoachSelectionRecyclerViewAdapter.CoachCardViewHolder.coachSelectionViewHolderTag, coachId);
-        intent.putExtra(dateTAG, selectedDate);
+        receipt.setCurrentAppointmentDate(selectedDate);
+        intent.putExtra(IntentTags.currentReceiptTAG, receipt);
         startActivity(intent);
     }
 }

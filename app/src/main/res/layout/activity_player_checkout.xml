@@ -7,7 +7,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:background="@color/black"
-    tools:context=".Player.PlayerCheckoutActivity">
+    tools:context=".Player.PlayerPaymentFlow.PlayerCheckoutActivity">
 
     <TextView
         android:id="@+id/player_checkout_title"

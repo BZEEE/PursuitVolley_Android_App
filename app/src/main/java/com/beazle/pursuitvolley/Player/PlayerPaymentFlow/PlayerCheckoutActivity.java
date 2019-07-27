@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley.Player;
+package com.beazle.pursuitvolley.Player.PlayerPaymentFlow;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +13,10 @@ import android.widget.TextView;
 import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
 import com.beazle.pursuitvolley.Coach.CoachTimeSelection.CoachTimeSelectionRecyclerViewAdapter;
+import com.beazle.pursuitvolley.IntentTags.IntentTags;
 import com.beazle.pursuitvolley.Player.PlayerPaymentFlow.PlayerCreditCardPaymentAcivity;
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointment;
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,7 +43,6 @@ public class PlayerCheckoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_checkout);
 
-        Intent receivedIntent = getIntent();
         mFirestore = FirebaseFirestore.getInstance();
 
         coachNameTextView = findViewById(R.id.player_checkout_coach_name);
@@ -51,10 +53,12 @@ public class PlayerCheckoutActivity extends AppCompatActivity {
         DateFormat df = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL);
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
 
+
+        CurrentAppointmentReceiptParcelable receipt = getIntent().getParcelableExtra(IntentTags.currentReceiptTAG);
         // set details of player appointment
-        SetCheckoutCoachNameDetails(receivedIntent.getStringExtra(CoachSelectionRecyclerViewAdapter.CoachCardViewHolder.coachSelectionViewHolderTag));
-        selectedDateTextView.setText(df.format(receivedIntent.getLongExtra(CoachDateSelectionActivity.dateTAG, 0)));
-        selectedTimeTextView.setText(receivedIntent.getStringExtra(CoachTimeSelectionRecyclerViewAdapter.TimeSlotViewHolder.timeSlotTag));
+        SetCheckoutCoachNameDetails(receipt.getCurrentAppointmentCoachUid());
+        selectedDateTextView.setText(df.format(receipt.getCurrentAppointmentDate()));
+        selectedTimeTextView.setText(receipt.getCurrentAppointmentBeginTime());
 
         continueToPaymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
