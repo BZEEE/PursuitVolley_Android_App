@@ -10,12 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
-import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
-import com.beazle.pursuitvolley.Coach.CoachTimeSelection.CoachTimeSelectionRecyclerViewAdapter;
 import com.beazle.pursuitvolley.IntentTags.IntentTags;
-import com.beazle.pursuitvolley.Player.PlayerPaymentFlow.PlayerCreditCardPaymentAcivity;
-import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointment;
 import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -90,7 +85,7 @@ public class PlayerCheckoutActivity extends AppCompatActivity {
     }
 
     private void GoToPaymentActivity() {
-        Intent intent = new Intent(this, PlayerCreditCardPaymentAcivity.class);
+        Intent intent = new Intent(this, PlayerPaymentAdyenAcivity.class);
         startActivity(intent);
     }
 }

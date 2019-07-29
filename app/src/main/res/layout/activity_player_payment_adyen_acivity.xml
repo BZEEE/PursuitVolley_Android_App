@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange"
-    tools:context=".Player.PlayerPaymentFlow.PlayerCreditCardPaymentAcivity">
+    tools:context=".Player.PlayerPaymentFlow.PlayerPaymentAdyenAcivity">
 
     <TextView
         android:id="@+id/creditCardPaymentTitle"
@@ -20,21 +20,12 @@
         android:text="@string/player_payment_method_title"
         android:gravity="center"/>
 
-    <com.stripe.android.view.CardInputWidget
-        android:id="@+id/cardInputWidget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        stripe:cardTextErrorColor="@color/red"
-        android:theme="@style/CardWidgetStyle"
-        android:layout_below="@+id/creditCardPaymentTitle"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:layout_marginTop="15dp"
-        android:layout_below="@+id/cardInputWidget"
         android:layout_marginBottom="15dp">
 
         <Button

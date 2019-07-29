@@ -46,7 +46,15 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
 
     // sripe payment access
-    implementation 'com.stripe:stripe-android:10.0.3'
+    // implementation 'com.stripe:stripe-android:10.0.3'
+
+    // adyen drop-in dependency
+    implementation "com.adyen.checkout:drop-in:3.0.0"
+    // adyen Components dependency
+    implementation "com.adyen.checkout:card-ui:3.0.0"
+
+    // google pay dependency
+    implementation 'com.google.android.gms:play-services-wallet:16.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
