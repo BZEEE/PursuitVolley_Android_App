@@ -19,16 +19,67 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionActivity;
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
+import com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents.UpcomingEvent;
+import com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents.UpcomingEventsManager;
 import com.beazle.pursuitvolley.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
+import java.util.Map;
 
 public class PlayerCurrentAppointmentsFragment extends Fragment {
+
+    private FirebaseFirestore mFirestore;
+    private FirebaseAuth mAuth;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_player_current_appointments, container, false);
+
+        mFirestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        CurrentAppointmentsManager.ClearCurrentAppointmentList();
+
+        mFirestore.collection("players").document(user.getUid())
+                .collection("current_appointments").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (!document.getId().equals("placeholder_document")) {
+                                    // firestore requires at least one document to be initialized in a collection
+                                    // so we initialize a dummy placeholder document
+                                    // then show the upcoming event to the user
+                                    // add it to the current appointments manager
+                                    Map data = document.getData();
+                                    CurrentAppointment appointment = new CurrentAppointment(
+                                            (String) data.get("appointmentCoachName"),
+                                            (String) data.get("appointmentDate"),
+                                            (String) data.get("appointmentBeginTime"),
+                                            (String) data.get("appointmentEndTime"),
+                                            (String) data.get("appointmentLocation")
+                                    );
+                                    CurrentAppointmentsManager.AddAppointmentToList(appointment);
+                                }
+                            }
+                        } else {
+                            // error getting documents
+                        }
+                    }
+                });
 
         List<CurrentAppointment> currentAppointmentsList = CurrentAppointmentsManager.GetCurrentAppointmentsList();
 

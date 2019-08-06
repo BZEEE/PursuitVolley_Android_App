@@ -6,11 +6,15 @@ public class UpcomingEvent {
     // such as location, time, age groups, etc
     private String eventTitle;
     private String eventDate;
+    private String eventBeginTime;
+    private String eventEndTime;
     private String eventLocation;
 
-    public UpcomingEvent(String eventTitle, String eventDate, String eventLocation) {
+    public UpcomingEvent(String eventTitle, String eventDate, String eventBeginTime, String eventEndTime, String eventLocation) {
         this.eventTitle = eventTitle;
         this.eventDate = eventDate;
+        this.eventBeginTime = eventBeginTime;
+        this.eventEndTime = eventEndTime;
         this.eventLocation = eventLocation;
     }
 
@@ -20,6 +24,14 @@ public class UpcomingEvent {
 
     public String GetEventDate() {
         return eventDate;
+    }
+
+    public String GetEventBeginTime() {
+        return eventBeginTime;
+    }
+
+    public String GetEventEndTime() {
+        return eventEndTime;
     }
 
     public String GetEventLocation() {
@@ -32,6 +44,14 @@ public class UpcomingEvent {
 
     public void SetEventDate(String eventDate) {
         this.eventDate = eventDate;
+    }
+
+    public void SetEventBeginTime(String eventBeginTime) {
+        this.eventBeginTime = eventBeginTime;
+    }
+
+    public void SetEventEndTime(String eventEndTime) {
+        this.eventEndTime = eventEndTime;
     }
 
     public void SetEventLocation(String eventLocation) {

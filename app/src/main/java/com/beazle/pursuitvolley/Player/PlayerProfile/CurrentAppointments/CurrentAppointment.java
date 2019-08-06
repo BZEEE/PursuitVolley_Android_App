@@ -6,11 +6,20 @@ public class CurrentAppointment {
     // such as coach name, time, location etc
     private String appointmentCoachName;
     private String appointmentDate;
+    private String appointmentBeginTime;
+    private String appointmentEndTime;
     private String appointmentLocation;
 
-    public CurrentAppointment(String appointmentCoachName, String appointmentDate, String appointmentLocation) {
+    public CurrentAppointment(
+            String appointmentCoachName,
+            String appointmentDate,
+            String appointmentBeginTime,
+            String appointmentEndTime,
+            String appointmentLocation) {
         this.appointmentCoachName = appointmentCoachName;
         this.appointmentDate = appointmentDate;
+        this.appointmentBeginTime = appointmentBeginTime;
+        this.appointmentEndTime = appointmentEndTime;
         this.appointmentLocation = appointmentLocation;
     }
 
@@ -20,6 +29,14 @@ public class CurrentAppointment {
 
     public String GetAppointmentDate() {
         return appointmentDate;
+    }
+
+    public String getAppointmentBeginTime() {
+        return appointmentBeginTime;
+    }
+
+    public String getAppointmentEndTime() {
+        return appointmentEndTime;
     }
 
     public String GetAppointmentLocation() {
@@ -32,6 +49,14 @@ public class CurrentAppointment {
 
     public void SetAppointmentDate(String appointmentDate) {
         this.appointmentDate = appointmentDate;
+    }
+
+    public void SetAppointmentBeginTime(String appointmentBeginTime) {
+        this.appointmentBeginTime = appointmentBeginTime;
+    }
+
+    public void SetAppointmentEndTime(String appointmentEndTime) {
+        this.appointmentEndTime = appointmentEndTime;
     }
 
     public void SetAppointmentLocation(String appointmentLocation) {

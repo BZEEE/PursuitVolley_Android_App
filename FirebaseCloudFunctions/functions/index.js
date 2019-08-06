@@ -1,4 +1,12 @@
 const functions = require('firebase-functions');
+var braintree = require("braintree");
+
+var gateway = braintree.connect({
+  environment: braintree.Environment.Sandbox,
+  merchantId: "256442yk8gyp5w4b",
+  publicKey: "4rhmb2d3kcpn3hvy",
+  privateKey: "a60e93114ee1998c147875c2c2e207cd"
+});
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -17,23 +25,34 @@ admin.initializeApp(functions.config().firebase);
   * @see use SendGrid to send emails from cloud functions, best practice (https://firebase.google.com/docs/functions/tips)
   */
 
-
-// create a charge from a dtrip token on our server
-// second param is important (our key)
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
-
-// Token is created using Checkout or Elements!
-// Get the payment token ID submitted by the form:
-const token = request.body.stripeToken; // Using Express
-
-(async () => {
-  const charge = await stripe.charges.create({
-    amount: 999,
-    currency: 'usd',
-    description: 'Example charge',
-    source: token,
+// Generate a client token on the server and send the response back to the client
+exports.ReturnClientToken = functions.https.onCall((data, context) => {
+    gateway.clientToken.generate({
+        customerId: aCustomerId
+      }, function (err, response) {
+        // If the customer can't be found, it will return a validation error
+        var clientToken = response.clientToken;
+        return { token: clientToken };
+      });
   });
-})();
+
+
+// create a charge from a stripe token on our server
+// second param is important (our key)
+// const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+
+// // Token is created using Checkout or Elements!
+// // Get the payment token ID submitted by the form:
+// const token = request.body.stripeToken; // Using Express
+
+// (async () => {
+//   const charge = await stripe.charges.create({
+//     amount: 999,
+//     currency: 'usd',
+//     description: 'Example charge',
+//     source: token,
+//   });
+// })();
 
 // **********************************
 // **********************************
@@ -51,70 +70,70 @@ const token = request.body.stripeToken; // Using Express
 // **********************************
 
 // create new Stripe Customer when a user is authenticated
-exports.createStripeCustomer = functions.auth.user().onCreate(async (user) => {
-  const customer = await stripe.customers.create({email: user.email});
-  return admin.firestore().collection(‘players’)
-      .doc(user.uid).set({customer_id: customer.id});
-});
+// exports.createStripeCustomer = functions.auth.user().onCreate(async (user) => {
+//   const customer = await stripe.customers.create({email: user.email});
+//   return admin.firestore().collection(‘players’)
+//       .doc(user.uid).set({customer_id: customer.id});
+// });
 
-exports.addPaymentSource = functions.firestore
-    .document(‘/stripe_customers/{userId}/tokens/{pushId}’)
-    .onWrite(async (change, context) => {
-    const source = change.after.data();
-    const token = source.token;
-    if (source === null) {
-        return null;
-    }
-    try {
-    const snapshot = await
-    admin.firestore()
-    .collection(‘stripe_customers’)
-    .doc(context.params.userId)
-    .get();
-    const customer = snapshot.data().customer_id;
-    const response = await stripe.customers
-        .createSource(customer, {source: token});
-    return admin.firestore()
-    .collection(‘stripe_customers’)
-    .doc(context.params.userId)
-    .collection(“sources”)
-    .doc(response.fingerprint)
-    .set(response, {merge: true});
-    } catch (error) {
-    await change.after.ref
-        .set({‘error’:userFacingMessage(error)},{merge:true});
-    }
-});
+// exports.addPaymentSource = functions.firestore
+//     .document(‘/stripe_customers/{userId}/tokens/{pushId}’)
+//     .onWrite(async (change, context) => {
+//     const source = change.after.data();
+//     const token = source.token;
+//     if (source === null) {
+//         return null;
+//     }
+//     try {
+//     const snapshot = await
+//     admin.firestore()
+//     .collection(‘stripe_customers’)
+//     .doc(context.params.userId)
+//     .get();
+//     const customer = snapshot.data().customer_id;
+//     const response = await stripe.customers
+//         .createSource(customer, {source: token});
+//     return admin.firestore()
+//     .collection(‘stripe_customers’)
+//     .doc(context.params.userId)
+//     .collection(“sources”)
+//     .doc(response.fingerprint)
+//     .set(response, {merge: true});
+//     } catch (error) {
+//     await change.after.ref
+//         .set({‘error’:userFacingMessage(error)},{merge:true});
+//     }
+// });
 
-// necessary for idempotency
-exports.createStripeCharge = functions.firestore
-    .document(‘stripe_customers/{userId}/charges/{id}’)
-    .onCreate(async (snap, context) => {
-    const val = snap.data();
-    try {
-    // Look up the Stripe customer id written in createStripeCustomer
-    const snapshot = await admin.firestore()
-    .collection(`stripe_customers`)
-    .doc(context.params.userId).get();
+// // necessary for idempotency
+// exports.createStripeCharge = functions.firestore
+//     .document(‘stripe_customers/{userId}/charges/{id}’)
+//     .onCreate(async (snap, context) => {
+//     const val = snap.data();
+//     try {
+//     // Look up the Stripe customer id written in createStripeCustomer
+//     const snapshot = await admin.firestore()
+//     .collection(`stripe_customers`)
+//     .doc(context.params.userId).get();
     
-    const snapval = snapshot.data();
-    const customer = snapval.customer_id;
-    // Create a charge using the pushId as the idempotency key
-    // protecting against double charges
-    const amount = val.amount;
-    const idempotencyKey = context.params.id;
-    const charge = {amount, currency, customer};
-    if (val.source !== null) {
-       charge.source = val.source;
-    }
-    const response = await stripe.charges
-        .create(charge, {idempotency_key: idempotencyKey});
-    // If the result is successful, write it back to the database
-    return snap.ref.set(response, { merge: true });
-    } catch(error) {
-        await snap.ref.set({error: userFacingMessage(error)}, { merge: true });
-    }
-});
+//     const snapval = snapshot.data();
+//     const customer = snapval.customer_id;
+//     // Create a charge using the pushId as the idempotency key
+//     // protecting against double charges
+//     const amount = val.amount;
+//     const idempotencyKey = context.params.id;
+//     const charge = {amount, currency, customer};
+//     if (val.source !== null) {
+//        charge.source = val.source;
+//     }
+//     const response = await stripe.charges
+//         .create(charge, {idempotency_key: idempotencyKey});
+//     // If the result is successful, write it back to the database
+//     return snap.ref.set(response, { merge: true });
+//     } catch(error) {
+//         await snap.ref.set({error: userFacingMessage(error)}, { merge: true });
+//     }
+// });
 
 
 

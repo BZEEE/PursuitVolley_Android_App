@@ -9,7 +9,7 @@
     <string name="facebook_login_protocol_scheme" translatable="false">fb2495475950488247</string>
 
     <!--Main Activity-->
-    <string name="coach_portal_text">enter coach portal</string>
+    <string name="coach_portal_text">coach portal</string>
     <string name="book_an_appointment_button_text">book an appointment</string>
 
     <!--Coach Profile Activity-->
@@ -55,6 +55,13 @@
     <string name="coach_info_entry_location_text">enter you location</string>
     <string name="coach_info_entry_bio_text">briefly explain your volleyball career</string>
     <string name="coach_info_entry_button_text">complete sign up</string>
+
+    <!--Player Info Entry Activity-->
+    <string name="player_info_entry_title_text">Personal Info</string>
+    <string name="player_info_entry_name_text">enter your full name</string>
+    <string name="player_info_entry_age_text">enter your age</string>
+    <string name="player_info_entry_location_text">enter you location</string>
+    <string name="player_info_entry_button_text">complete sign up</string>
 
     <!--Player Checkout Activity-->
     <string name="player_checkout_receipt_title">Receipt Info</string>

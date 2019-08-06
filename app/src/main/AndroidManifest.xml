@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MainAppTheme">
-        <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentGooglePayActivity"></activity>
+        <activity android:name=".Player.PlayerInfoEntry"></activity>
+        <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentBrainTreeActivity" />
+        <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentGooglePayActivity" />
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentResultActivity" />
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentAdyenAcivity" />
         <activity android:name=".Player.PlayerProfile.PlayerProfileActivity" />
@@ -30,14 +32,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!--Facebook Integration-->
+        </activity> <!-- Facebook Integration -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_application_id" />
-
-        <!--Google Pay Integration-->
+            android:value="@string/facebook_application_id" /> <!-- Google Pay Integration -->
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />

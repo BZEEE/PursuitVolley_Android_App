@@ -55,7 +55,6 @@ public class PlayerLoginActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
 
         AuthenticateUser();
-
     }
 
 
@@ -78,8 +77,8 @@ public class PlayerLoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Authentication is completed
                 //ccurrent user is no longer null
-                FirebaseUser user = mAuth.getCurrentUser();
-                AddDefaultCoachDataToFirestoreAfterSigningUp(user);
+                currentUser = mAuth.getCurrentUser();
+                AddDefaultCoachDataToFirestoreAfterSigningUp();
                 // go to player profile activity
                 startActivity(new Intent(this, PlayerProfileActivity.class));
                 finish();
@@ -114,8 +113,8 @@ public class PlayerLoginActivity extends AppCompatActivity {
                 PURSUIT_VOLLEY_REQUEST_CODE);
     }
 
-    private void AddDefaultCoachDataToFirestoreAfterSigningUp(final FirebaseUser user) {
-        DocumentReference docRef = mFirestore.collection("players").document(user.getUid());
+    private void AddDefaultCoachDataToFirestoreAfterSigningUp() {
+        DocumentReference docRef = mFirestore.collection("players").document(currentUser.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -124,8 +123,15 @@ public class PlayerLoginActivity extends AppCompatActivity {
                     if (!document.exists()) {
                         // if player document does not exist, then add the default field data
                         Map<String, Object> data = new HashMap<>();
+                        data.put("uniqueID", currentUser.getUid());
+                        data.put("fullname", currentUser.getDisplayName());
+                        data.put("email", currentUser.getEmail());
+                        data.put("metadata", currentUser.getMetadata());
+                        data.put("phonenumber", currentUser.getPhoneNumber());
                         data.put("tokens", 0);
-                        mFirestore.collection("players").document(user.getUid()).set(data);
+                        mFirestore.collection("players").document(currentUser.getUid()).set(data);
+                        mFirestore.collection("players").document(currentUser.getUid())
+                                .collection("current_appointments").document("placeholder_document");
                     }
                 } else {
                     // task is unsuccessful

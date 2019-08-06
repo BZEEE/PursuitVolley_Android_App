@@ -28,6 +28,10 @@ public final class CoachManager {
         return coachList;
     }
 
+    public static void ClearCoachList() {
+        coachList.clear();
+    }
+
     public static Coach GetSpecificCoach(String uid) {
         Iterator itr = coachList.iterator();
         while (itr.hasNext())

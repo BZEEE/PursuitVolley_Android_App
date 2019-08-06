@@ -17,9 +17,15 @@ import com.beazle.pursuitvolley.Coach.CoachSelection.Coach;
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachManager;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,6 +37,8 @@ public class CoachLoginActivity extends AppCompatActivity {
 
     private static final String TAG = "CoachLoginActivity";
 
+    private DatabaseReference mRealtimeDatabaseRootReference;
+    private FirebaseDatabase mRealtimeDatabase;
     private FirebaseFirestore mFirestore;
     private FirebaseAuth mAuth;
     private String curent_user_id;
@@ -48,6 +56,8 @@ public class CoachLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_login);
 
+        mRealtimeDatabase = FirebaseDatabase.getInstance();
+        mRealtimeDatabaseRootReference = mRealtimeDatabase.getReference();
         mFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         curent_user_id = mAuth.getUid();
@@ -60,6 +70,24 @@ public class CoachLoginActivity extends AppCompatActivity {
         activationCodeEditText.setVisibility(View.INVISIBLE);
         emailEditText = findViewById(R.id.coachEmailAddressEntryBox);
         passwordEditText = findViewById(R.id.coachPasswordEntryBox);
+
+        mRealtimeDatabaseRootReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child("coaches").exists()) {
+                    // push coach object to database
+                }else{
+                    // add "coaches" child field to root reference
+                    mRealtimeDatabaseRootReference.setValue("coaches");
+                    // then push coach object to database
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         signInSignUpTextSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,8 +171,10 @@ public class CoachLoginActivity extends AppCompatActivity {
                             // coach document is initialized using cloud functions
                             // add new coach to CoachManager class so that the recycler view knows which coaches to show to players
                             String coachId = mAuth.getCurrentUser().getUid();
-                            CoachManager.AddCoachToList(new Coach(coachId));
+                            Coach coach = new Coach(coachId);
+                            CoachManager.AddCoachToList(coach);
                             AddDefaultCoachDataToFirestoreAfterSigningUp(coachId);
+                            // AddDefaultCoachDataToRealtimeDatabaseAfterSigningUp(coach);
                             GoToCoachInfoEntryActivity();
 
                         } else {
@@ -201,6 +231,5 @@ public class CoachLoginActivity extends AppCompatActivity {
         data.put("bio", "");
         mFirestore.collection("coaches").document(coachId).set(data);
     }
-
 
 }

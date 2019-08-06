@@ -22,6 +22,10 @@ public final class CurrentAppointmentsManager {
         }
     }
 
+    public static void ClearCurrentAppointmentList() {
+        currentAppointmentsList.clear();
+    }
+
     public static List<CurrentAppointment> GetCurrentAppointmentsList() {
         return currentAppointmentsList;
     }

@@ -13,18 +13,30 @@ import android.widget.TextView;
 import com.beazle.pursuitvolley.IntentTags.IntentTags;
 import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
+import com.braintreepayments.api.dropin.DropInActivity;
+import com.braintreepayments.api.dropin.DropInRequest;
+import com.braintreepayments.api.dropin.DropInResult;
+import com.braintreepayments.api.dropin.utils.PaymentMethodType;
+import com.braintreepayments.api.models.PaymentMethodNonce;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.FirebaseFunctionsException;
+import com.google.firebase.functions.HttpsCallableResult;
 
 import java.text.DateFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class PlayerCheckoutActivity extends AppCompatActivity {
 
     private static final String TAG = "PlayerCheckoutActivity";
+    private static final int REQUEST_CODE = 42;
 
     private TextView coachNameTextView;
     private TextView selectedDateTextView;
@@ -32,6 +44,7 @@ public class PlayerCheckoutActivity extends AppCompatActivity {
     private Button continueToPaymentButton;
 
     private FirebaseFirestore mFirestore;
+    private FirebaseFunctions mFunctions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +52,7 @@ public class PlayerCheckoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player_checkout);
 
         mFirestore = FirebaseFirestore.getInstance();
+        mFunctions = FirebaseFunctions.getInstance();
 
         coachNameTextView = findViewById(R.id.player_checkout_coach_name);
         selectedDateTextView = findViewById(R.id.player_checkout_date);
@@ -58,7 +72,7 @@ public class PlayerCheckoutActivity extends AppCompatActivity {
         continueToPaymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GoToPaymentActivity();
+                ContinueToPayment();
             }
         });
     }
@@ -84,8 +98,19 @@ public class PlayerCheckoutActivity extends AppCompatActivity {
         });
     }
 
-    private void GoToPaymentActivity() {
-        Intent intent = new Intent(this, PlayerPaymentAdyenAcivity.class);
-        startActivity(intent);
+    // Has to be created on the server
+//    private String ReturnClientToken() {
+//        ClientTokenRequest clientTokenRequest = new ClientTokenRequest()
+//                .customerId(aCustomerId);
+//        String clientToken = gateway.clientToken().generate(clientTokenRequest);
+//        return clientToken;
+//    }
+
+    private void ContinueToPayment() {
+        // really should have payment logic for braintree in this activity
+        // generate a client token asynchronously as the activity is loaded
+        // when a client token is returned, allow the user to continue to the drop-in payment screen
+        // drop-in payment screen does not need its own activity, since it exposed as an API from brain tree
+        startActivity(new Intent(this, PlayerPaymentBrainTreeActivity.class));
     }
 }

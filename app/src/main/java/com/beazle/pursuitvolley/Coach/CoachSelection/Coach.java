@@ -9,6 +9,10 @@ public class Coach {
     private String bio;
     private int thumbnail;
 
+    public Coach() {
+        // Default constructor required for calls to DataSnapshot.getValue(Coach.class)
+    }
+
     public Coach(String uniqueId) {
         this.uniqueId = uniqueId;
     }

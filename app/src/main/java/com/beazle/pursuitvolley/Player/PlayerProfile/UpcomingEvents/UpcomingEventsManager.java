@@ -23,6 +23,10 @@ public final class UpcomingEventsManager {
         }
     }
 
+    public static void ClearUpcomingEventsList() {
+        upcomingEventsList.clear();
+    }
+
     public static List<UpcomingEvent> GetUpcomingEventsList() {
         return upcomingEventsList;
     }
