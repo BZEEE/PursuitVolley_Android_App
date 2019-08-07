@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.beazle.pursuitvolley.Coach.CoachSelection.Coach;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachProfileActivity;
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachManager;
+import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,8 +23,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CoachInfoEntry extends AppCompatActivity {
-
-    private static final String TAG = "CoachInfoEntryTAG";
 
     private FirebaseFirestore mFirestore;
     private FirebaseAuth mAuth;
@@ -40,6 +39,7 @@ public class CoachInfoEntry extends AppCompatActivity {
         setContentView(R.layout.activity_coach_info_entry);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
 
         fullnameEditText = findViewById(R.id.coachInfoEntryNameEditBox);
         ageEditText = findViewById(R.id.coachInfoEntryAgeEditBox);
@@ -68,9 +68,13 @@ public class CoachInfoEntry extends AppCompatActivity {
         final String coachUniqueId = mAuth.getCurrentUser().getUid();
         final Coach coach = CoachManager.GetSpecificCoach(coachUniqueId);
 
-        if (coach != null) {
-            DocumentReference coachesRef = mFirestore.collection("coaches").document(coachUniqueId);
+        Log.d(DebugTags.DebugTAG, "activate bro");
 
+        if (coach != null) {
+            Log.d(DebugTags.DebugTAG, "we good");
+            DocumentReference coachesRef = mFirestore.collection("coaches").document(coachUniqueId);
+            Log.d(DebugTags.DebugTAG, "got document reference");
+            Log.d(DebugTags.DebugTAG, coachesRef.toString());
             // handle exception and edge cases
             // write data to all fields of the coach's firestore document
             coachesRef
@@ -80,6 +84,7 @@ public class CoachInfoEntry extends AppCompatActivity {
                         public void onSuccess(Void aVoid) {
                             // document successfully update
                             // so also update Coach object for the Recycler view to reference as well
+                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name 'fullname'");
                             coach.SetName(fullname);
 
                         }
@@ -88,7 +93,7 @@ public class CoachInfoEntry extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             // document not successfully updated
-                            Log.d(TAG, "Failed to update document in (coach) collection with field name 'fullname'");
+                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name 'fullname'");
                         }
                     });
 
@@ -99,6 +104,7 @@ public class CoachInfoEntry extends AppCompatActivity {
                         public void onSuccess(Void aVoid) {
                             // document successfully update
                             // so also update Coach object for the Recycler view to reference as well
+                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name 'age'");
                             coach.SetAge(age);
                         }
                     })
@@ -106,7 +112,7 @@ public class CoachInfoEntry extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             // document not successfully updated
-                            Log.d(TAG, "Failed to update document in (coach) collection with field name 'fullname'");
+                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name 'age'");
                         }
                     });
 
@@ -117,6 +123,7 @@ public class CoachInfoEntry extends AppCompatActivity {
                         public void onSuccess(Void aVoid) {
                             // document successfully update
                             // so also update Coach object for the Recycler view to reference as well
+                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name 'location'");
                             coach.SetLocaton(location);
                         }
                     })
@@ -124,7 +131,7 @@ public class CoachInfoEntry extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             // document not successfully updated
-                            Log.d(TAG, "Failed to update document in (coach) collection with field name 'fullname'");
+                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name 'location'");
                         }
                     });
 
@@ -135,6 +142,7 @@ public class CoachInfoEntry extends AppCompatActivity {
                         public void onSuccess(Void aVoid) {
                             // document successfully update
                             // so also update Coach object for the Recycler view to reference as well
+                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name 'bio'");
                             coach.SetBio(bio);
                         }
                     })
@@ -142,11 +150,11 @@ public class CoachInfoEntry extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             // document not successfully updated
-                            Log.d(TAG, "Failed to update document in (coach) collection with field name 'fullname'");
+                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name 'bio'");
                         }
                     });
         } else {
-            Toast.makeText(this, "coach is not in the list of CoachManager", Toast.LENGTH_LONG).show();
+            Log.d(DebugTags.DebugTAG, "coach is not in the list of CoachManager");
         }
 
 

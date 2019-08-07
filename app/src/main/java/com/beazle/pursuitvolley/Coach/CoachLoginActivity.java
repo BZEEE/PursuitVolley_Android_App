@@ -15,12 +15,14 @@ import android.widget.Toast;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachProfileActivity;
 import com.beazle.pursuitvolley.Coach.CoachSelection.Coach;
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachManager;
+import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,8 +36,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CoachLoginActivity extends AppCompatActivity {
-
-    private static final String TAG = "CoachLoginActivity";
 
     private DatabaseReference mRealtimeDatabaseRootReference;
     private FirebaseDatabase mRealtimeDatabase;
@@ -60,6 +60,7 @@ public class CoachLoginActivity extends AppCompatActivity {
         mRealtimeDatabaseRootReference = mRealtimeDatabase.getReference();
         mFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        mAuth.signOut();
         curent_user_id = mAuth.getUid();
 
         signInState = true;
@@ -145,12 +146,13 @@ public class CoachLoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInUserWithEmail:success");
+                            Log.d(DebugTags.DebugTAG, "signInUserWithEmail:success");
                             GoToCoachProfileActivity();
+                            finish();
                             // updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInUserWithEmail:failure", task.getException());
+                            Log.w(DebugTags.DebugTAG, "signInUserWithEmail:failure", task.getException());
                             Toast.makeText(CoachLoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             // updateUI(null);
@@ -167,7 +169,7 @@ public class CoachLoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
+                            Log.d(DebugTags.DebugTAG, "createUserWithEmail:success");
                             // coach document is initialized using cloud functions
                             // add new coach to CoachManager class so that the recycler view knows which coaches to show to players
                             String coachId = mAuth.getCurrentUser().getUid();
@@ -176,10 +178,20 @@ public class CoachLoginActivity extends AppCompatActivity {
                             AddDefaultCoachDataToFirestoreAfterSigningUp(coachId);
                             // AddDefaultCoachDataToRealtimeDatabaseAfterSigningUp(coach);
                             GoToCoachInfoEntryActivity();
+                            finish();
 
                         } else {
+                            // NOTE: authentication fails if it is a weak password
+                            // FirebaseAuthInvalidCredentialsException: The email address is badly formatted
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+//                            switch (task.getException()) {
+//                                case FirebaseAuthWeakPasswordException:
+//
+//                            }
+//                            if (task.getException() == FirebaseAuthWeakPasswordException) {
+//
+//                            }
+                            Log.w(DebugTags.DebugTAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(CoachLoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             // updateUI(null);
@@ -205,10 +217,10 @@ public class CoachLoginActivity extends AppCompatActivity {
                             Toast.makeText(CoachLoginActivity.this, "wrong activation code", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Log.d(TAG, "Admin codes document does not exist");
+                        Log.d(DebugTags.DebugTAG, "Admin codes document does not exist");
                     }
                 } else {
-                    Log.d(TAG, "document get() failed with ", task.getException());
+                    Log.d(DebugTags.DebugTAG, "document get() failed with ", task.getException());
                 }
             }
         });

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.beazle.pursuitvolley.Coach.CoachLoginActivity;
+import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.MainActivity;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,6 +51,7 @@ public class CoachProfileActivity extends AppCompatActivity {
         signOutDialog = new Dialog(this);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
 
 //        NavigationUI.setupWithNavController(bottomNavView,
 //                Navigation.findNavController(this, R.id.nav_host_fragment))
@@ -75,6 +78,7 @@ public class CoachProfileActivity extends AppCompatActivity {
                 // delete account from FirebaseAuth
                 // remove coaches document from firestore
                 FirebaseUser user = mAuth.getCurrentUser();
+                mAuth.signOut();
                 DeleteUserAccount(user);
                 return true;
             default:
@@ -90,16 +94,20 @@ public class CoachProfileActivity extends AppCompatActivity {
                     switch (menuItem.getItemId()) {
                         case R.id.nav_schedule:
                             selectedFragment = coachScheduleFragment;
+                            currentFragment = coachScheduleFragment;
                             break;
                         case R.id.nav_bio:
                             selectedFragment = bioFragment;
+                            currentFragment = bioFragment;
                             break;
                         case R.id.nav_payment_settings:
                             selectedFragment = coachPaymentSettingsFragment;
+                            currentFragment = coachPaymentSettingsFragment;
                             break;
                         case R.id.nav_log_out:
                             selectedFragment = currentFragment;
-                            ShowSignOutDialog();
+                            SignOut();
+                            // ShowSignOutDialog();
                             break;
 
                         default:
@@ -108,6 +116,7 @@ public class CoachProfileActivity extends AppCompatActivity {
                             break;
                     }
 
+                    Log.d(DebugTags.DebugTAG, "sign out bruh");
                     getSupportFragmentManager().beginTransaction().replace(
                             R.id.coachProfileViewContainer, selectedFragment).commit();
 
@@ -142,7 +151,8 @@ public class CoachProfileActivity extends AppCompatActivity {
         // sign out user from firebase
         signOutDialog.dismiss();
         mAuth.signOut();
-        startActivity(new Intent(this, CoachLoginActivity.class));
+        Toast.makeText(this, "successfully signed out", Toast.LENGTH_SHORT).show();
+        // startActivity(new Intent(this, CoachLoginActivity.class));
         // finish the activity
         finish();
     }
