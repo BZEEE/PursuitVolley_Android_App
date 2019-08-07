@@ -5,15 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.beazle.pursuitvolley.Coach.CoachLoginActivity;
@@ -35,9 +41,10 @@ public class CoachProfileActivity extends AppCompatActivity {
     private CoachScheduleFragment coachScheduleFragment;
     private CoachBioFragment bioFragment;
     private CoachPaymentSettingsFragment coachPaymentSettingsFragment;
-    private Dialog signOutDialog;
+    private PopupWindow signOutWindow;
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
+    private RelativeLayout coachProfileActivityRelativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +55,6 @@ public class CoachProfileActivity extends AppCompatActivity {
         bioFragment = new CoachBioFragment();
         coachPaymentSettingsFragment = new CoachPaymentSettingsFragment();
 
-        signOutDialog = new Dialog(this);
-
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
 
@@ -57,6 +62,9 @@ public class CoachProfileActivity extends AppCompatActivity {
 //                Navigation.findNavController(this, R.id.nav_host_fragment))
         BottomNavigationView bottomNavigationView = findViewById(R.id.coachProfileBottomNavView);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+
+        // get layout reference for layout pop-up window
+        coachProfileActivityRelativeLayout = findViewById(R.id.coachProfileActivityRelativeLayout);
 
         // set schedule fragment as the default fragment
         currentFragment = coachScheduleFragment;
@@ -106,8 +114,7 @@ public class CoachProfileActivity extends AppCompatActivity {
                             break;
                         case R.id.nav_log_out:
                             selectedFragment = currentFragment;
-                            SignOut();
-                            // ShowSignOutDialog();
+                            ShowSignOutDialog();
                             break;
 
                         default:
@@ -125,7 +132,16 @@ public class CoachProfileActivity extends AppCompatActivity {
             };
 
     private void ShowSignOutDialog() {
-        signOutDialog.setContentView(R.layout.coach_sign_out_pop_up);
+
+        //instantiate the popup.xml layout file
+        LayoutInflater layoutInflater = (LayoutInflater) CoachProfileActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View customView = layoutInflater.inflate(R.layout.coach_sign_out_pop_up,null);
+
+        //instantiate popup window
+        signOutWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        //display the popup window
+        signOutWindow.showAtLocation(coachProfileActivityRelativeLayout, Gravity.CENTER, 0, 0);
         Button yesButton = findViewById(R.id.signOutYesButton);
         Button noButton = findViewById(R.id.signOutNoButton);
 
@@ -142,14 +158,12 @@ public class CoachProfileActivity extends AppCompatActivity {
             }
         });
 
-        signOutDialog.show();
-
     }
 
     private void SignOut() {
         // perform sign out operations
         // sign out user from firebase
-        signOutDialog.dismiss();
+        signOutWindow.dismiss();
         mAuth.signOut();
         Toast.makeText(this, "successfully signed out", Toast.LENGTH_SHORT).show();
         // startActivity(new Intent(this, CoachLoginActivity.class));
@@ -158,7 +172,7 @@ public class CoachProfileActivity extends AppCompatActivity {
     }
 
     private void DoNotSignOut() {
-        signOutDialog.dismiss();
+        signOutWindow.dismiss();
     }
 
     private void DeleteUserAccount(FirebaseUser user) {
