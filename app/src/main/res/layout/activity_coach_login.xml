@@ -7,7 +7,7 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:background="@color/black"
-    tools:context=".Coach.CoachLoginActivity">
+    tools:context=".Coach.CoachAuthentication.CoachLoginActivity">
 
     <TextView
         android:id="@+id/coachSignInSignUpTitle"

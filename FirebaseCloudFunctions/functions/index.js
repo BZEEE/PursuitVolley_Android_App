@@ -36,6 +36,18 @@ exports.ReturnClientToken = functions.https.onCall((data, context) => {
       });
   });
 
+  // sign the (coach) user out when we delete their account from the firebase 
+  // also remove all of the coaches data from the database 
+  exports.DeleteCoachAccount = functions.auth.user().onDelete((user) => {
+    user.signOut();
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+    }).catch(function(error) {
+      // An error happened.
+    });
+    // still have to remove coaches data from database
+  });
+
 
 // create a charge from a stripe token on our server
 // second param is important (our key)

@@ -23,7 +23,7 @@
         <activity android:name=".Coach.CoachInfoEntry" />
         <activity android:name=".Coach.CoachProfile.CoachProfileActivity" />
         <activity android:name=".Player.PlayerLoginActivity" />
-        <activity android:name=".Coach.CoachLoginActivity" />
+        <activity android:name=".Coach.CoachAuthentication.CoachLoginActivity" />
         <activity android:name=".Coach.CoachTimeSelection.CoachTimeSelectionActivity" />
         <activity android:name=".Coach.CoachDateSelection.CoachDateSelectionActivity" />
         <activity android:name=".MainActivity">

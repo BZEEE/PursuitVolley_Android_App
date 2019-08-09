@@ -4,11 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,7 +20,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.beazle.pursuitvolley.Coach.CoachLoginActivity;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.MainActivity;
 import com.beazle.pursuitvolley.R;
