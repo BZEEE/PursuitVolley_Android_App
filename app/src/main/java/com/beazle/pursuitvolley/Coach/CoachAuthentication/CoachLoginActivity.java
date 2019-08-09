@@ -15,11 +15,13 @@ import android.widget.Toast;
 import com.beazle.pursuitvolley.Coach.CoachInfoEntry;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachProfileActivity;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
+import com.beazle.pursuitvolley.FirestoreTags.FirestoreTags;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +40,7 @@ public class CoachLoginActivity extends AppCompatActivity {
     private FirebaseDatabase mRealtimeDatabase;
     private FirebaseFirestore mFirestore;
     private FirebaseAuth mAuth;
-    private String curent_user_id;
+    private FirebaseUser currentCoach;
 
     private TextView signInSignUpTextSwitch;
     private TextView signInSignUpTitle;
@@ -57,8 +59,8 @@ public class CoachLoginActivity extends AppCompatActivity {
         mRealtimeDatabaseRootReference = mRealtimeDatabase.getReference();
         mFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        currentCoach = mAuth.getCurrentUser();
         mAuth.signOut();
-        curent_user_id = mAuth.getUid();
 
         signInState = true;
         signInSignUpButton = findViewById(R.id.coachSignInSignUpButton);
@@ -129,7 +131,7 @@ public class CoachLoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         // user is already signed in, so go straight to coach profile
-        if(curent_user_id != null){
+        if(currentCoach != null){
             startActivity(new Intent(this, CoachProfileActivity.class));
             finish();
         }
@@ -241,8 +243,7 @@ public class CoachLoginActivity extends AppCompatActivity {
                             Log.d(DebugTags.DebugTAG, "createUserWithEmail:success");
                             // coach document is initialized using cloud functions
                             // add new coach to CoachManager class so that the recycler view knows which coaches to show to players
-                            String coachId = mAuth.getCurrentUser().getUid();
-                            AddCoachToFirestoreAfterSigningUp(coachId);
+                            AddCoachToFirestoreAfterSigningUp();
                             // AddDefaultCoachDataToRealtimeDatabaseAfterSigningUp(coach);
                             GoToCoachInfoEntryActivity();
                             finish();
@@ -330,9 +331,9 @@ public class CoachLoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void CheckActivationCode(final String activationCode, final String email, final String password) {
+    private void CheckActivationCode(final String accountActivationCode, final String email, final String password) {
         // get activation code from cloud firestore query
-        DocumentReference docRef = mFirestore.collection("admin_codes").document("coach_activation_code");
+        DocumentReference docRef = mFirestore.collection(FirestoreTags.adminCodesCollection).document(FirestoreTags.coachAccountActivationCode);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -340,8 +341,8 @@ public class CoachLoginActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         // get activation from document data
-                        String codeFromFirebase = (String) document.getData().get("code");
-                        if (codeFromFirebase.equals(activationCode)) {
+                        String codeFromFirebase = (String) document.getData().get(FirestoreTags.codeKey);
+                        if (codeFromFirebase.equals(accountActivationCode)) {
                             SignUpCoach(email, password);
                         } else {
                             Toast.makeText(CoachLoginActivity.this, "wrong activation code", Toast.LENGTH_SHORT).show();
@@ -364,14 +365,14 @@ public class CoachLoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, CoachProfileActivity.class));
     }
 
-    private void AddCoachToFirestoreAfterSigningUp(String coachId) {
+    private void AddCoachToFirestoreAfterSigningUp() {
         // add intial data fields to firestore for coach specific document
         Map<String, Object> data = new HashMap<>();
-        data.put("fullname", "");
-        data.put("age", "");
-        data.put("location", "");
-        data.put("bio", "");
-        mFirestore.collection("coaches").document(coachId).set(data);
+        data.put(FirestoreTags.coachDocumentFullname, "");
+        data.put(FirestoreTags.coachDocumentAge, "");
+        data.put(FirestoreTags.coachDocumentLocation, "");
+        data.put(FirestoreTags.coachDocumentBio, "");
+        mFirestore.collection(FirestoreTags.coachCollection).document(currentCoach.getUid()).set(data);
     }
 
 }

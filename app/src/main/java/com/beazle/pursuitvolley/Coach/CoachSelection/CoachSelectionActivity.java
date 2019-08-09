@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionActivity;
+import com.beazle.pursuitvolley.FirestoreTags.FirestoreTags;
 import com.beazle.pursuitvolley.Player.PlayerProfile.PlayerProfileActivity;
 import com.beazle.pursuitvolley.R;
 import com.facebook.CallbackManager;
@@ -33,7 +34,7 @@ public class PlayerLoginActivity extends AppCompatActivity {
     public static final String TAG = "PlayerLoginActivityTAG";
     public static final String googleSignInAccountId = "GoogleSignInAccount";
     private static final int PURSUIT_VOLLEY_REQUEST_CODE = 9001;
-    private FirebaseUser currentUser;
+    private FirebaseUser currentPlayer;
     // Firebase Auth Object.
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
@@ -51,8 +52,8 @@ public class PlayerLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player_login);
 
         mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
         mFirestore = FirebaseFirestore.getInstance();
+        currentPlayer = mAuth.getCurrentUser();
 
         AuthenticateUser();
     }
@@ -61,7 +62,7 @@ public class PlayerLoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (currentUser != null) {
+        if (currentPlayer != null) {
             startActivity(new Intent(this, PlayerProfileActivity.class));
             finish();
             return;
@@ -76,9 +77,8 @@ public class PlayerLoginActivity extends AppCompatActivity {
             IdpResponse response = IdpResponse.fromResultIntent(data);
             if (resultCode == RESULT_OK) {
                 // Authentication is completed
-                //ccurrent user is no longer null
-                currentUser = mAuth.getCurrentUser();
-                AddDefaultCoachDataToFirestoreAfterSigningUp();
+                //current user is no longer null
+                AddPlayerToFirestoreAfterSigningUp();
                 // go to player profile activity
                 startActivity(new Intent(this, PlayerProfileActivity.class));
                 finish();
@@ -113,131 +113,16 @@ public class PlayerLoginActivity extends AppCompatActivity {
                 PURSUIT_VOLLEY_REQUEST_CODE);
     }
 
-    private void AddDefaultCoachDataToFirestoreAfterSigningUp() {
-        DocumentReference docRef = mFirestore.collection("players").document(currentUser.getUid());
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (!document.exists()) {
-                        // if player document does not exist, then add the default field data
-                        Map<String, Object> data = new HashMap<>();
-                        data.put("uniqueID", currentUser.getUid());
-                        data.put("fullname", currentUser.getDisplayName());
-                        data.put("email", currentUser.getEmail());
-                        data.put("metadata", currentUser.getMetadata());
-                        data.put("phonenumber", currentUser.getPhoneNumber());
-                        data.put("tokens", 0);
-                        mFirestore.collection("players").document(currentUser.getUid()).set(data);
-                        mFirestore.collection("players").document(currentUser.getUid())
-                                .collection("current_appointments").document("placeholder_document");
-                    }
-                } else {
-                    // task is unsuccessful
-                }
-            }
-        });
+    private void AddPlayerToFirestoreAfterSigningUp() {
+        // add intial data fields to firestore for coach specific document
+        Map<String, Object> data = new HashMap<>();
+        data.put(FirestoreTags.playerDocumentFullname, currentPlayer.getDisplayName() == null ? "" : currentPlayer.getDisplayName());
+        data.put(FirestoreTags.playerDocumentEmail, currentPlayer.getEmail() == null ? "" : currentPlayer.getEmail());
+        data.put(FirestoreTags.playerDocumentMetadata, currentPlayer.getMetadata() == null ? "" : currentPlayer.getMetadata());
+        data.put(FirestoreTags.playerDocumentPhonenumber, currentPlayer.getPhoneNumber() == null ? "" : currentPlayer.getPhoneNumber());
+        data.put(FirestoreTags.playerDocumentTokens, 0);
+        mFirestore.collection(FirestoreTags.playerCollection).document(currentPlayer.getUid()).set(data);
+        mFirestore.collection(FirestoreTags.playerCollection).document(currentPlayer.getUid())
+                .collection(FirestoreTags.playerCurrentAppointmentsCollection).document(FirestoreTags.playerDocumentPlaceholderTAG);
     }
 }
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_player_login);
-//
-//        // LoginButton loginButton = findViewById(R.id.facebookSignInButton);
-//
-//        mAuth = FirebaseAuth.getInstance();
-//
-//        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-
-//        mCallbackManager = CallbackManager.Factory.create();
-//        loginButton.setReadPermissions("email");
-//        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-//            @Override
-//            public void onSuccess(LoginResult loginResult) {
-//
-//                Log.i(TAG,"Hello"+loginResult.getAccessToken().getToken());
-//                //  Toast.makeText(MainActivity.this, "Token:"+loginResult.getAccessToken(), Toast.LENGTH_SHORT).show();
-//
-//                handleFacebookAccessToken(loginResult.getAccessToken());
-//            }
-//
-//            @Override
-//            public void onCancel() {
-//
-//            }
-//
-//            @Override
-//            public void onError(FacebookException error) {
-//
-//            }
-//        });
-//
-//
-//        mAuthListener = new FirebaseAuth.AuthStateListener(){
-//
-//
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//
-//                FirebaseUser user = firebaseAuth.getCurrentUser();
-//
-//                if (user!=null){
-//                    String name = user.getDisplayName();
-//                    Toast.makeText(PlayerLoginActivity.this,""+user.getDisplayName(),Toast.LENGTH_LONG).show();
-//                }else {
-//                    Toast.makeText(PlayerLoginActivity.this,"something went wrong",Toast.LENGTH_LONG).show();
-//                }
-//
-//
-//            }
-//        };
-
-//    }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        if (currentUser != null) {
-//            startActivity(new Intent(this, CoachSelectionActivity.class));
-//            finish();
-//            return;
-//        }
-//    }
-
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        // Pass the activity result back to the Facebook SDK
-//        mCallbackManager.onActivityResult(requestCode, resultCode, data);
-//    }
-//
-//    private void handleFacebookAccessToken(AccessToken token) {
-//        Log.d(TAG, "handleFacebookAccessToken:" + token);
-//
-//        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-//        mAuth.signInWithCredential(credential)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//
-//                        if (task.isSuccessful()) {
-//                            Log.w(TAG, "signInWithCredential", task.getException());
-//                            Toast.makeText(PlayerLoginActivity.this, "Success",
-//                                    Toast.LENGTH_SHORT).show();
-//                        }else{
-//                            Toast.makeText(PlayerLoginActivity.this, "Authentication error",
-//                                    Toast.LENGTH_SHORT).show();
-//
-//                        }
-//
-//
-//                    }
-//                });
-//    }

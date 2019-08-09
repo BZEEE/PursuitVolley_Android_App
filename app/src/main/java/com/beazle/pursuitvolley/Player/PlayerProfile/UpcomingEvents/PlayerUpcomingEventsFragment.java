@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.beazle.pursuitvolley.Coach.CoachSelection.CoachSelectionRecyclerViewAdapter;
+import com.beazle.pursuitvolley.FirestoreTags.FirestoreTags;
 import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointment;
 import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointmentsManager;
 import com.beazle.pursuitvolley.R;
@@ -40,25 +41,25 @@ public class PlayerUpcomingEventsFragment extends Fragment {
 
         UpcomingEventsManager.ClearUpcomingEventsList();
 
-        mFirestore.collection("upcoming_events")
+        mFirestore.collection(FirestoreTags.upcomingEventsCollection)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (!document.getId().equals("placeholder_document")) {
+                                if (!document.getId().equals(FirestoreTags.documentPlaceholderTAG)) {
                                     // firestore requires at least one document to be initialized in a collection
                                     // so we initialize a dummy placeholder document
                                     // then show the upcoming event to the user
                                     // add it to the upcoming events manager
                                     Map data = document.getData();
                                     UpcomingEvent event = new UpcomingEvent(
-                                            (String) data.get("eventTitle"),
-                                            (String) data.get("eventDate"),
-                                            (String) data.get("eventBeginTime"),
-                                            (String) data.get("eventEndTime"),
-                                            (String) data.get("eventLocation")
+                                            (String) data.get(FirestoreTags.upcomingEventTitle),
+                                            (String) data.get(FirestoreTags.upcomingEventDate),
+                                            (String) data.get(FirestoreTags.upcomingEventBeginTime),
+                                            (String) data.get(FirestoreTags.upcomingEventEndTime),
+                                            (String) data.get(FirestoreTags.upcomingEventLocation)
                                     );
                                     UpcomingEventsManager.AddEventToList(event);
                                 }

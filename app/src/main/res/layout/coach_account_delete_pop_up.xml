@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/darkGrey"
+    android:padding="30dp"
+    android:layout_width="250dp"
+    android:layout_gravity="center"
+    android:weightSum="2"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/deleteCodeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/coach_delete_account_text"
+        android:textColor="@color/white"
+        android:textColorHint="@color/aquaBlue"
+        android:textSize="18sp"
+        android:background="@drawable/rounded_corners_blue_background"/>
+
+    <Button
+        android:id="@+id/deleteAccountYesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/delete_account_yes"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_corners_blue_background"/>
+
+    <Button
+        android:id="@+id/deleteAccountCancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_account_no"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_corners_blue_background"/>
+
+
+</LinearLayout>

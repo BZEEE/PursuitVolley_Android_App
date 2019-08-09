@@ -33,8 +33,13 @@
     <string name="coach_sign_up_clickable_text">Already have an Account</string>
 
     <!--Sign Out Pop Up Menu-->
-    <string name="sign_out_yes">yes</string>
-    <string name="sign_out_no">no</string>
+    <string name="sign_out_yes">Yes</string>
+    <string name="sign_out_no">No</string>
+
+    <!--Delete Account Pop Up Menu-->
+    <string name="coach_deletion_code_text">enter deletion code</string>
+    <string name="delete_account_yes">Delete Account</string>
+    <string name="delete_account_no">Cancel</string>
 
     <!--Coach Payment Setting Fragment-->
     <string name="coach_payment_settings_title_text">Direct Deposit</string>
