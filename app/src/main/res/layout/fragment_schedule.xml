@@ -4,4 +4,16 @@
     android:background="@color/black"
     android:layout_height="match_parent">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/coachScheduleFragmentSwipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </GridView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </RelativeLayout>
