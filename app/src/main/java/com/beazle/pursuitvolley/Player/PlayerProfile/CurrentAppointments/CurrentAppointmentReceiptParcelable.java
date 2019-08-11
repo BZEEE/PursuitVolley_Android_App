@@ -13,6 +13,7 @@ public class CurrentAppointmentReceiptParcelable implements Parcelable {
     private long currentAppointmentDate;
     private String currentAppointmentBeginTime;
     private String currentAppointmentEndTime;
+    private String currentAppointmentLocation;
 
     public CurrentAppointmentReceiptParcelable() {
 
@@ -24,13 +25,15 @@ public class CurrentAppointmentReceiptParcelable implements Parcelable {
             double cuurentAppointmentPrice,
             long currentAppointmentDate,
             String currentAppointmentBeginTime,
-            String currentAppointmentEndTime) {
+            String currentAppointmentEndTime,
+            String currentAppointmentLocation) {
         this.currentAppointmentCoachName = currentAppointmentCoachName;
         this.currentAppointmentCoachUid = currentAppointmentCoachUid;
         this.currentAppointmentPrice = cuurentAppointmentPrice;
         this.currentAppointmentDate = currentAppointmentDate;
         this.currentAppointmentBeginTime = currentAppointmentBeginTime;
         this.currentAppointmentEndTime = currentAppointmentEndTime;
+        this.currentAppointmentLocation = currentAppointmentLocation;
     }
 
     public String getCurrentAppointmentCoachName() {
@@ -57,6 +60,10 @@ public class CurrentAppointmentReceiptParcelable implements Parcelable {
         return currentAppointmentEndTime;
     }
 
+    public String getCurrentAppointmentLocation() {
+        return currentAppointmentLocation;
+    }
+
     public void setCurrentAppointmentCoachName(String currentAppointmentCoachName) {
         this.currentAppointmentCoachName = currentAppointmentCoachName;
     }
@@ -81,6 +88,10 @@ public class CurrentAppointmentReceiptParcelable implements Parcelable {
         this.currentAppointmentEndTime = currentAppointmentEndTime;
     }
 
+    public void setCurrentAppointmentLocation(String currentAppointmentLocation) {
+        this.currentAppointmentLocation = currentAppointmentLocation;
+    }
+
     // Parcelling part
     public CurrentAppointmentReceiptParcelable(Parcel in){
         this.currentAppointmentCoachName = in.readString();
@@ -89,6 +100,7 @@ public class CurrentAppointmentReceiptParcelable implements Parcelable {
         this.currentAppointmentDate =  in.readLong();
         this.currentAppointmentBeginTime = in.readString();
         this.currentAppointmentEndTime = in.readString();
+        this.currentAppointmentLocation = in.readString();
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -115,6 +127,7 @@ public class CurrentAppointmentReceiptParcelable implements Parcelable {
         dest.writeLong(this.currentAppointmentDate);
         dest.writeString(this.currentAppointmentBeginTime);
         dest.writeString(this.currentAppointmentEndTime);
+        dest.writeString(this.currentAppointmentLocation);
     }
 
     @Override
@@ -125,6 +138,7 @@ public class CurrentAppointmentReceiptParcelable implements Parcelable {
                 ", appointment date='" + Long.toString(this.currentAppointmentDate) + '\'' +
                 ", appointment begin time='" + this.currentAppointmentBeginTime + '\'' +
                 ", appointment end time='" + this.currentAppointmentEndTime + '\'' +
+                ", appointment location='" + this.currentAppointmentLocation + '\'' +
                 '}';
     }
 }

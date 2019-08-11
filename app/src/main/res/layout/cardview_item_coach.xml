@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/coachCard"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     android:layout_width="160dp"
-    android:layout_height="190dp"
+    android:layout_height="220dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     app:cardCornerRadius="5dp">
@@ -20,6 +24,13 @@
         
         <TextView
             android:id="@+id/cardCoachName"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/cardCoachLocation"
             android:layout_width="match_parent"
             android:gravity="center"
             android:textSize="13sp"

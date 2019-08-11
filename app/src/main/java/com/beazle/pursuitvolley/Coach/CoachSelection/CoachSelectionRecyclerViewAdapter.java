@@ -41,7 +41,8 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
     @Override
     public void onBindViewHolder(@NonNull CoachCardViewHolder holder, int position) {
         holder.coachName.setText(data.get(position).GetName());
-        holder.coachImg.setImageResource(data.get(position).GetThumbnail());
+        holder.coachImg.setImageBitmap(data.get(position).GetThumbnail());
+        holder.coachLocation.setText(data.get(position).GetLocation());
         holder.coachUniqueId = data.get(position).GetUniqueId();
     }
 
@@ -55,6 +56,7 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
         LinearLayout coachCardLayout;
         ImageView coachImg;
         TextView coachName;
+        TextView coachLocation;
         String coachUniqueId;
 
         public CoachCardViewHolder(final Context context, View itemView) {
@@ -62,6 +64,7 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
 
             coachImg = itemView.findViewById(R.id.cardCoachImage);
             coachName = itemView.findViewById(R.id.cardCoachName);
+            coachLocation = itemView.findViewById(R.id.cardCoachLocation);
             coachCardLayout = itemView.findViewById(R.id.coachCardLayout);
 
 
@@ -78,6 +81,7 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
             CurrentAppointmentReceiptParcelable receipt = new CurrentAppointmentReceiptParcelable();
             receipt.setCurrentAppointmentCoachName(coachName.getText().toString());
             receipt.setCurrentAppointmentCoachUid(coachUniqueId);
+            receipt.setCurrentAppointmentLocation(coachLocation.getText().toString());
             intent.putExtra(IntentTags.currentReceiptTAG, receipt);
             context.startActivity(intent);
         }

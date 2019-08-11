@@ -43,7 +43,7 @@ public class CoachSelectionActivity extends AppCompatActivity {
         CoachManager model = ViewModelProviders.of(this).get(CoachManager.class);
         // get the coaches list from the mutable view model
         // view model takes care of retrieving data from firebase
-        List coachesList = model.GetCoaches().getValue();
+        List coachesList = model.GetCoaches(this).getValue();
 
         RecyclerView recyclerView = findViewById(R.id.recyclerViewCoachSelection);
         CoachSelectionRecyclerViewAdapter adapter = new CoachSelectionRecyclerViewAdapter(this, coachesList);

@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.beazle.pursuitvolley.Coach.CoachInfoEntry;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachProfileActivity;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
-import com.beazle.pursuitvolley.FirestoreTags.FirestoreTags;
+import com.beazle.pursuitvolley.FirebaseFirestoreTags.FirestoreTags;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

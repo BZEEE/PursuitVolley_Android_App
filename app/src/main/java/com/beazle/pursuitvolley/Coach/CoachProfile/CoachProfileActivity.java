@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,10 +20,8 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.beazle.pursuitvolley.Coach.CoachAuthentication.CoachLoginActivity;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
-import com.beazle.pursuitvolley.FirestoreTags.FirestoreTags;
-import com.beazle.pursuitvolley.MainActivity;
+import com.beazle.pursuitvolley.FirebaseFirestoreTags.FirestoreTags;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

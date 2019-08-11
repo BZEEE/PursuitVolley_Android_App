@@ -44,31 +44,40 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:18.1.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     // GCP firebase-firestore
-    implementation 'com.google.firebase:firebase-firestore:20.1.0'
+    implementation 'com.google.firebase:firebase-firestore:20.2.0'
     // GCP firebase realtime database
     implementation 'com.google.firebase:firebase-database:18.0.1'
     // GCP Firebase Functions
-    implementation 'com.google.firebase:firebase-functions:17.0.0'
+    implementation 'com.google.firebase:firebase-functions:18.1.0'
+    // CGP Firebase Cloud Storage
+    implementation 'com.google.firebase:firebase-storage:18.1.1'
+    // GCP FirebaseUI Cloud Storage only
+    implementation 'com.firebaseui:firebase-ui-storage:4.3.1'
 
     // Facebook login access
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
 
-    // sripe payment access
-    // implementation 'com.stripe:stripe-android:10.0.3'
+    // Glide Image Loader dependency
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
     // adyen drop-in dependency
     implementation "com.adyen.checkout:drop-in:3.0.0"
+
     // adyen Components dependency
     implementation "com.adyen.checkout:card-ui:3.0.0"
 
     // google pay dependency
-    implementation 'com.google.android.gms:play-services-wallet:16.0.0'
+    implementation 'com.google.android.gms:play-services-wallet:17.0.0'
 
     // Braintree payment gateway dependency
     implementation 'com.braintreepayments.api:drop-in:4.2.0'
 
-    // Volley library fro caching network requests
+    // Volley library for caching network requests
     implementation 'com.android.volley:volley:1.1.1'
+
+    // SendGrid email service
+    implementation 'com.sendgrid:sendgrid-java:4.4.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

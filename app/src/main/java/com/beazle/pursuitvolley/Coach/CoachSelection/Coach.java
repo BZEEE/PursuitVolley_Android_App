@@ -1,5 +1,7 @@
 package com.beazle.pursuitvolley.Coach.CoachSelection;
 
+import android.graphics.Bitmap;
+
 public class Coach {
 
     private String uniqueId;
@@ -7,7 +9,7 @@ public class Coach {
     private String age;
     private String locaton;
     private String bio;
-    private int thumbnail;
+    private Bitmap thumbnail;
 
     public Coach() {
         // Default constructor required for calls to DataSnapshot.getValue(Coach.class)
@@ -43,7 +45,7 @@ public class Coach {
         return this.bio;
     }
 
-    public int GetThumbnail() {
+    public Bitmap GetThumbnail() {
         return thumbnail;
     }
 
@@ -65,7 +67,7 @@ public class Coach {
         this.bio = bio;
     }
 
-    public void SetThumbnail(int thumbnail) {
+    public void SetThumbnail(Bitmap thumbnail) {
         this.thumbnail = thumbnail;
     }
 }

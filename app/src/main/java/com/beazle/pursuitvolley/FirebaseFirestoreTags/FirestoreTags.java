@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley.FirestoreTags;
+package com.beazle.pursuitvolley.FirebaseFirestoreTags;
 
 public final class FirestoreTags {
 
