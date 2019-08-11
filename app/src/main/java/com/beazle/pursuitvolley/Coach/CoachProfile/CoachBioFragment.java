@@ -57,7 +57,7 @@ public class CoachBioFragment extends Fragment {
         coachAgeValueBox = bioFragmentView.findViewById(R.id.coachAgeValue);
         coachLocationValueBox = bioFragmentView.findViewById(R.id.coachLocationValue);
         coachBioValueBox = bioFragmentView.findViewById(R.id.coachBioValue);
-        coachProfilePic = bioFragmentView.findViewById(R.id.coachProfilePicImageView);
+        coachProfilePic = bioFragmentView.findViewById(R.id.bioFragmentCoachProfilePicImageView);
         RefreshCoachBioUI();
 
         return bioFragmentView;

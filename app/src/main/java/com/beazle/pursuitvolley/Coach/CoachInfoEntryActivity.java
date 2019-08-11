@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class CoachInfoEntry extends AppCompatActivity {
+public class CoachInfoEntryActivity extends AppCompatActivity {
 
     private FirebaseFirestore mFirestore;
     private FirebaseAuth mAuth;
@@ -31,6 +31,7 @@ public class CoachInfoEntry extends AppCompatActivity {
     private EditText ageEditText;
     private EditText locationEditText;
     private EditText bioEditText;
+    private Button selectProfilePictureButton;
     private Button enterCoachInfoButton;
 
     @Override
@@ -45,7 +46,18 @@ public class CoachInfoEntry extends AppCompatActivity {
         ageEditText = findViewById(R.id.coachInfoEntryAgeEditBox);
         locationEditText = findViewById(R.id.coachInfoEntryLocationEditBox);
         bioEditText = findViewById(R.id.coachInfoEntryBioEditBox);
+        selectProfilePictureButton = findViewById(R.id.coachSelectProfilePictureButton)
         enterCoachInfoButton = findViewById(R.id.coachInfoEntryButton);
+
+        selectProfilePictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // start intent filter to do the following
+                // (1) allow the user to take a picture from their camera as their profile pic
+                // (2) allow the user to select an image from gallery as profile pic
+            }
+        });
+
         enterCoachInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,8 +79,6 @@ public class CoachInfoEntry extends AppCompatActivity {
 
         final String coachUniqueId = mAuth.getCurrentUser().getUid();
         final Coach coach = CoachManager.GetSpecificCoach(coachUniqueId);
-
-        Log.d(DebugTags.DebugTAG, "activate bro");
 
         if (coach != null) {
             Log.d(DebugTags.DebugTAG, "we good");

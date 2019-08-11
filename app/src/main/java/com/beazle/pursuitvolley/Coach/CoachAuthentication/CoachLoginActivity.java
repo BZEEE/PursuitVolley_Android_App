@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.beazle.pursuitvolley.Coach.CoachInfoEntry;
+import com.beazle.pursuitvolley.Coach.CoachInfoEntryActivity;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachProfileActivity;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.FirebaseFirestoreTags.FirestoreTags;
@@ -358,7 +358,7 @@ public class CoachLoginActivity extends AppCompatActivity {
     }
 
     private void GoToCoachInfoEntryActivity() {
-        startActivity(new Intent(this, CoachInfoEntry.class));
+        startActivity(new Intent(this, CoachInfoEntryActivity.class));
     }
 
     private void GoToCoachProfileActivity() {
