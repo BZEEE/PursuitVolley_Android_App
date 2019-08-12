@@ -48,10 +48,7 @@ public class PlayerLoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
         currentPlayer = mAuth.getCurrentUser();
-
-        AuthenticateUser();
     }
-
 
     @Override
     protected void onStart() {
@@ -59,7 +56,9 @@ public class PlayerLoginActivity extends AppCompatActivity {
         if (currentPlayer != null) {
             startActivity(new Intent(this, PlayerProfileActivity.class));
             finish();
-            return;
+        } else {
+            // show player sign in options
+            AuthenticateUser();
         }
     }
 
@@ -116,7 +115,5 @@ public class PlayerLoginActivity extends AppCompatActivity {
         data.put(FirestoreTags.playerDocumentPhonenumber, currentPlayer.getPhoneNumber() == null ? "" : currentPlayer.getPhoneNumber());
         data.put(FirestoreTags.playerDocumentTokens, 0);
         mFirestore.collection(FirestoreTags.playerCollection).document(currentPlayer.getUid()).set(data);
-        mFirestore.collection(FirestoreTags.playerCollection).document(currentPlayer.getUid())
-                .collection(FirestoreTags.playerCurrentAppointmentsCollection).document(FirestoreTags.playerDocumentPlaceholderTAG);
     }
 }

@@ -71,6 +71,8 @@ public class CoachInfoEntryActivity extends AppCompatActivity {
                 UpdateCoachInfoInFirestore();
                 UpdateCoachInfoInRealtimeDatabase();
                 GoToCoachUserProfile();
+                // end the activity once we've finished the info entry
+                finish();
             }
         });
     }

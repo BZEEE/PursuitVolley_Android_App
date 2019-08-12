@@ -23,6 +23,9 @@
     <string name="coachBioHeader">Bio: </string>
     <string name="coach_delete_account_text">delete account</string>
 
+    <!--Coach Bio Fragment-->
+    <string name="coach_profile_bio_fragment_edit_bio_button_text">edit info</string>
+
     <!--Coach Login Activity-->
     <string name="coach_activation_code_text">enter activation code</string>
     <string name="coach_email_address_text">enter email</string>

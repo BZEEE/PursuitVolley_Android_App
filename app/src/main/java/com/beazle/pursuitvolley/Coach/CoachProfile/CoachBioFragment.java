@@ -1,5 +1,6 @@
 package com.beazle.pursuitvolley.Coach.CoachProfile;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.beazle.pursuitvolley.Coach.CoachInfoEntryActivity;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.FirebaseCloudStorageTags.CloudStorageTags;
 import com.beazle.pursuitvolley.FirebaseFirestoreTags.FirestoreTags;
@@ -45,6 +48,7 @@ public class CoachBioFragment extends Fragment {
     private TextView coachLocationValueBox;
     private TextView coachBioValueBox;
     private ImageView coachProfilePic;
+    private Button coachEditInfoButtton;
 
     @Nullable
     @Override
@@ -59,9 +63,22 @@ public class CoachBioFragment extends Fragment {
         coachLocationValueBox = bioFragmentView.findViewById(R.id.coachLocationValue);
         coachBioValueBox = bioFragmentView.findViewById(R.id.coachBioValue);
         coachProfilePic = bioFragmentView.findViewById(R.id.bioFragmentCoachProfilePicImageView);
+        coachEditInfoButtton = bioFragmentView.findViewById(R.id.coachBioFragmentEditInfoButton);
+
+        coachEditInfoButtton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoToCoachInfoEntryActivity();
+            }
+        });
+
         RefreshCoachBioUI();
 
         return bioFragmentView;
+    }
+
+    private void GoToCoachInfoEntryActivity() {
+        startActivity(new Intent(getActivity(), CoachInfoEntryActivity.class));
     }
 
     private void RefreshCoachBioUI() {
