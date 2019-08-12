@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.FirebaseCloudStorageTags.CloudStorageTags;
+import com.beazle.pursuitvolley.FirebaseFirestoreTags.FirestoreTags;
 import com.beazle.pursuitvolley.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -64,7 +65,7 @@ public class CoachBioFragment extends Fragment {
     }
 
     private void RefreshCoachBioUI() {
-        DocumentReference docRef = mFirestore.collection("coaches").document(mAuth.getCurrentUser().getUid());
+        DocumentReference docRef = mFirestore.collection(FirestoreTags.coachCollection).document(mAuth.getCurrentUser().getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -72,10 +73,10 @@ public class CoachBioFragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         // set UI data to be th refreshed data from firestore
-                        coachNameValueBox.setText(document.getString("fullname"));
-                        coachAgeValueBox.setText(document.getString("age"));
-                        coachLocationValueBox.setText(document.getString("location"));
-                        coachBioValueBox.setText(document.getString("bio"));
+                        coachNameValueBox.setText(document.getString(FirestoreTags.coachDocumentFullname));
+                        coachAgeValueBox.setText(document.getString(FirestoreTags.coachDocumentAge));
+                        coachLocationValueBox.setText(document.getString(FirestoreTags.coachDocumentLocation));
+                        coachBioValueBox.setText(document.getString(FirestoreTags.coachDocumentBio));
 
                         // get thumbnail from cloud storage
                         mCloudStorage.getReference().child(CloudStorageTags.coachesFolder).child(document.getId()).child(CloudStorageTags.coachThumbnailTAG).

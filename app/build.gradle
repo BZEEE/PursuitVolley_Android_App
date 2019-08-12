@@ -53,6 +53,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:18.1.1'
     // GCP FirebaseUI Cloud Storage only
     implementation 'com.firebaseui:firebase-ui-storage:4.3.1'
+    // GCP firebase In-App Messaging for user engagement
+    implementation 'com.google.firebase:firebase-inappmessaging-display:18.0.2'
 
     // Facebook login access
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
@@ -75,9 +77,6 @@ dependencies {
 
     // Volley library for caching network requests
     implementation 'com.android.volley:volley:1.1.1'
-
-    // SendGrid email service
-    implementation 'com.sendgrid:sendgrid-java:4.4.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

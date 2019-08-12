@@ -14,9 +14,11 @@ import android.widget.Toast;
 
 import com.beazle.pursuitvolley.Coach.CoachInfoEntryActivity;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachProfileActivity;
+import com.beazle.pursuitvolley.Coach.CoachSelection.Coach;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.FirebaseFirestoreTags.FirestoreTags;
 import com.beazle.pursuitvolley.R;
+import com.beazle.pursuitvolley.RealtimeDatabaseTags.RealtimeDatabaseTags;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -244,6 +246,7 @@ public class CoachLoginActivity extends AppCompatActivity {
                             // coach document is initialized using cloud functions
                             // add new coach to CoachManager class so that the recycler view knows which coaches to show to players
                             AddCoachToFirestoreAfterSigningUp();
+                            AddCoachToRealtimeDatabaseAfterSigningUp();
                             // AddDefaultCoachDataToRealtimeDatabaseAfterSigningUp(coach);
                             GoToCoachInfoEntryActivity();
                             finish();
@@ -373,6 +376,12 @@ public class CoachLoginActivity extends AppCompatActivity {
         data.put(FirestoreTags.coachDocumentLocation, "");
         data.put(FirestoreTags.coachDocumentBio, "");
         mFirestore.collection(FirestoreTags.coachCollection).document(currentCoach.getUid()).set(data);
+    }
+
+    private void AddCoachToRealtimeDatabaseAfterSigningUp() {
+        // add intial data fields to firestore for coach specific document
+        Coach coach = new Coach(currentCoach.getUid(), "", "", "", "");
+        mRealtimeDatabaseRootReference.child(RealtimeDatabaseTags.coachesCollecion).child(currentCoach.getUid()).setValue(coach);
     }
 
 }

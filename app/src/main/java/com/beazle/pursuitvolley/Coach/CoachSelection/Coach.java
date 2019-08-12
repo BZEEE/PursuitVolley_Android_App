@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 public class Coach {
 
     private String uniqueId;
-    private String name;
+    private String fullname;
     private String age;
     private String locaton;
     private String bio;
@@ -21,7 +21,7 @@ public class Coach {
 
     public Coach(String uniqueId, String name, String age, String location, String bio) {
         this.uniqueId = uniqueId;
-        this.name = name;
+        this.fullname = name;
         this.age = age;
         this.locaton = location;
         this.bio = bio;
@@ -30,7 +30,7 @@ public class Coach {
     public String GetUniqueId() { return this.uniqueId; }
 
     public String GetName() {
-        return this.name;
+        return this.fullname;
     }
 
     public String GetAge() {
@@ -52,7 +52,7 @@ public class Coach {
     public void SetUniqueId(String id) { this.uniqueId = id; }
 
     public void SetName(String name) {
-        this.name = name;
+        this.fullname = name;
     }
 
     public void SetAge(String age) {
