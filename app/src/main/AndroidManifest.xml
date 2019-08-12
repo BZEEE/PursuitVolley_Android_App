@@ -4,6 +4,7 @@
     package="com.beazle.pursuitvolley">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -11,28 +12,33 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/MainAppTheme">
-        <activity android:name=".Player.PlayerInfoEntry"></activity>
+        <activity android:name=".Player.PlayerInfoEntry" />
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentBrainTreeActivity" />
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentGooglePayActivity" />
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentResultActivity" />
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentAdyenAcivity" />
         <activity android:name=".Player.PlayerProfile.PlayerProfileActivity" />
-        <activity android:name=".Player.PlayerPaymentFlow.PlayerCheckoutActivity" >
-            <!--Email Intent Filter-->
+        <activity android:name=".Player.PlayerPaymentFlow.PlayerCheckoutActivity">
+
+            <!-- Email Intent Filter -->
             <intent-filter>
                 <action android:name="android.intent.action.SENDTO" />
+
                 <data android:scheme="mailto" />
                 <data android:mimeType="text/plain" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
-            <!--SMS Intent Filter-->
+            <!-- SMS Intent Filter -->
             <intent-filter>
                 <action android:name="android.intent.action.SENDTO" />
+
                 <data android:mimeType="text/plain" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

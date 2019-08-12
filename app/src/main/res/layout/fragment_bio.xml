@@ -36,7 +36,8 @@
                     <ImageView
                         android:id="@+id/bioFragmentCoachProfilePicImageView"
                         android:layout_width="wrap_content"
-                        android:layout_height="180dp" />
+                        android:layout_height="180dp"
+                        android:src="@drawable/default_coach_profile_pic"/>
 
                 </RelativeLayout>
 

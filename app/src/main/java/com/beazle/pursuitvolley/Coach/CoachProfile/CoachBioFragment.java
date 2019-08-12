@@ -56,6 +56,7 @@ public class CoachBioFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
+        mCloudStorage = FirebaseStorage.getInstance();
 
         bioFragmentView = inflater.inflate(R.layout.fragment_bio, container, false);
         coachNameValueBox = bioFragmentView.findViewById(R.id.coachNameValue);
@@ -101,16 +102,32 @@ public class CoachBioFragment extends Fragment {
                             @Override
                             public void onSuccess(byte[] bytes) {
                                 // Use the bytes to display the image
+                                Log.d(DebugTags.DebugTAG, "successfully retrieved coach thumbnail from cloud storage");
                                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                                 coachProfilePic.setImageBitmap(bitmap);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception exception) {
-                                // set default picture as profile pic
-                                Bitmap bitmap = BitmapFactory.decodeResource(bioFragmentView.getResources(), R.drawable.default_coach_profile_pic);
-                                coachProfilePic.setImageBitmap(bitmap);
-                                Log.d(DebugTags.DebugTAG, "failed to thumbnail from cloud storage, setting coach thumbnailas default pic");
+                                // Attempt to get default profile picture from cloud storage
+                                Log.d(DebugTags.DebugTAG, "failed to get coach thumbnail from cloud storage, attempting to get default thumbnail from cloud storage");
+                                mCloudStorage.getReference().child(CloudStorageTags.coachesFolder).child(CloudStorageTags.defaultCoachProfilePicFolder).child(CloudStorageTags.coachThumbnailTAG).
+                                        getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                                    @Override
+                                    public void onSuccess(byte[] bytes) {
+                                        Log.d(DebugTags.DebugTAG, "successfully retrieved default coach thumbnail from cloud storage");
+                                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                        coachProfilePic.setImageBitmap(bitmap);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // the base default is we use a static resource image
+                                        Bitmap bitmap = BitmapFactory.decodeResource(bioFragmentView.getResources(), R.drawable.default_coach_profile_pic);
+                                        coachProfilePic.setImageBitmap(bitmap);
+                                        Log.d(DebugTags.DebugTAG, "failed to get default thumbnail from cloud storage, setting coach thumbnail as static resource default pic");
+                                    }
+                                });
                                 // Handle any errors
                             }
                         });
