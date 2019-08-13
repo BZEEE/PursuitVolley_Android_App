@@ -31,8 +31,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
-import org.w3c.dom.Text;
-
 public class CoachBioFragment extends Fragment {
 
     private final static String TAG = "CoachBioFragment";
@@ -58,7 +56,7 @@ public class CoachBioFragment extends Fragment {
         mFirestore = FirebaseFirestore.getInstance();
         mCloudStorage = FirebaseStorage.getInstance();
 
-        bioFragmentView = inflater.inflate(R.layout.fragment_bio, container, false);
+        bioFragmentView = inflater.inflate(R.layout.fragment_coach_bio, container, false);
         coachNameValueBox = bioFragmentView.findViewById(R.id.coachNameValue);
         coachAgeValueBox = bioFragmentView.findViewById(R.id.coachAgeValue);
         coachLocationValueBox = bioFragmentView.findViewById(R.id.coachLocationValue);

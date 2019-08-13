@@ -3,7 +3,8 @@ package com.beazle.pursuitvolley.FirebaseFirestoreTags;
 public final class FirestoreTags {
 
     // placeholder tags, required since collections require at least one document in them
-    public static String documentPlaceholderTAG = "placeholder_document";
+    // might not need this
+    // public static String documentPlaceholderTAG = "placeholder_document";
 
     // players
     public static String playerCollection = "players";

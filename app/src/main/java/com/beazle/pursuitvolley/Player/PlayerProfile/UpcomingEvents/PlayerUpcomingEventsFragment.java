@@ -42,24 +42,23 @@ public class PlayerUpcomingEventsFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (!document.getId().equals(FirestoreTags.documentPlaceholderTAG)) {
-                                    // firestore requires at least one document to be initialized in a collection
-                                    // so we initialize a dummy placeholder document
-                                    // then show the upcoming event to the user
-                                    // add it to the upcoming events manager
-                                    Map data = document.getData();
-                                    UpcomingEvent event = new UpcomingEvent(
-                                            (String) data.get(FirestoreTags.upcomingEventTitle),
-                                            (String) data.get(FirestoreTags.upcomingEventDate),
-                                            (String) data.get(FirestoreTags.upcomingEventBeginTime),
-                                            (String) data.get(FirestoreTags.upcomingEventEndTime),
-                                            (String) data.get(FirestoreTags.upcomingEventLocation)
-                                    );
-                                    UpcomingEventsManager.AddEventToList(event);
-                                }
+                                // firestore requires at least one document to be initialized in a collection
+                                // so we initialize a dummy placeholder document
+                                // then show the upcoming event to the user
+                                // add it to the upcoming events manager
+                                Map data = document.getData();
+                                UpcomingEvent event = new UpcomingEvent(
+                                        (String) data.get(FirestoreTags.upcomingEventTitle),
+                                        (String) data.get(FirestoreTags.upcomingEventDate),
+                                        (String) data.get(FirestoreTags.upcomingEventBeginTime),
+                                        (String) data.get(FirestoreTags.upcomingEventEndTime),
+                                        (String) data.get(FirestoreTags.upcomingEventLocation)
+                                );
+                                UpcomingEventsManager.AddEventToList(event);
                             }
                         } else {
                             // error getting documents
+                            // collecion might not exist yet until we create the first document
                         }
                     }
                 });

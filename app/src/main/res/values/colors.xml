@@ -19,4 +19,14 @@
     <color name="profile_desc">#D1D1FF</color>
     <color name="bg_meta_container">#000000</color>
     <color name="profile_default_tint">#e0e0e0</color>
+
+    <!--Coach Schedule Fragment-->
+    <color name="sunday_color">#1863a5</color>
+    <color name="monday_color">@android:color/holo_orange_light</color>
+    <color name="tuesday_color">@android:color/holo_green_light</color>
+    <color name="wednesday_color">@android:color/holo_red_light</color>
+    <color name="thursday_color">@android:color/holo_purple</color>
+    <color name="friday_color">@android:color/white</color>
+    <color name="saturday_color">@android:color/darker_gray</color>
+
 </resources>

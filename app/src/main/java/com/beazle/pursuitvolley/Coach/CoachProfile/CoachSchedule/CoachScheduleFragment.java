@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley.Coach.CoachProfile;
+package com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -16,10 +16,16 @@ import com.beazle.pursuitvolley.R;
 
 public class CoachScheduleFragment extends Fragment {
 
+    private CoachScheduleView coachSchedule;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+        View view = inflater.inflate(R.layout.fragment_coach_schedule, container, false);
+
+        coachSchedule = view.findViewById(R.id.coachScheduleView);
+
+        // try not to refres the UI every time we switch back to the Schedule Fragment
 
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.coachScheduleFragmentSwipeLayout);
         swipeRefreshLayout.setOnRefreshListener(

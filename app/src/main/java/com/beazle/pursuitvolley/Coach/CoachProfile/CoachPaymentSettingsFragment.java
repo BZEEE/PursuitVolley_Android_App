@@ -24,7 +24,7 @@ public class CoachPaymentSettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View paymentSettingFragmentView = inflater.inflate(R.layout.fragment_payment_settings, container, false);
+        View paymentSettingFragmentView = inflater.inflate(R.layout.fragment_coach_payment_settings, container, false);
 
         enterNewDirectDepositInfoButtonToggle = paymentSettingFragmentView.findViewById(R.id.enterNewDirectDepositInfoButtonToggle);
         viewCurrentDirectDepositInfoButtonToggle = paymentSettingFragmentView.findViewById(R.id.viewCurrentDirectDepositInfoButtonToggle);

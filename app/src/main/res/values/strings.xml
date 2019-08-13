@@ -23,6 +23,17 @@
     <string name="coachBioHeader">Bio: </string>
     <string name="coach_delete_account_text">delete account</string>
 
+    <!--Coach Schedule Fragment-->
+    <string name="coach_schedule_fragment_current_date_title">Current Date</string>
+    <string name="sunday_title">Sun</string>
+    <string name="monday_title">Mon</string>
+    <string name="tuesday_title">Tue</string>
+    <string name="wednesday_title">Wed</string>
+    <string name="thursday_title">Thu</string>
+    <string name="friday_title">Fri</string>
+    <string name="saturday_title">Sat</string>
+
+
     <!--Coach Bio Fragment-->
     <string name="coach_profile_bio_fragment_edit_bio_button_text">edit info</string>
 

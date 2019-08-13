@@ -52,24 +52,24 @@ public class PlayerCurrentAppointmentsFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (!document.getId().equals(FirestoreTags.documentPlaceholderTAG)) {
-                                    // firestore requires at least one document to be initialized in a collection
-                                    // so we initialize a dummy placeholder document
-                                    // then show the upcoming event to the user
-                                    // add it to the current appointments manager
-                                    Map data = document.getData();
-                                    CurrentAppointment appointment = new CurrentAppointment(
-                                            (String) data.get(FirestoreTags.currentAppointmentsCoachName),
-                                            (String) data.get(FirestoreTags.playerCurrentAppointmentsDate),
-                                            (String) data.get(FirestoreTags.playerCurrentAppointmentsBeginTime),
-                                            (String) data.get(FirestoreTags.playerCurrentAppointmentsEndTime),
-                                            (String) data.get(FirestoreTags.playerCurrentAppointmentsLocation)
-                                    );
-                                    CurrentAppointmentsManager.AddAppointmentToList(appointment);
-                                }
+                                // firestore requires at least one document to be initialized in a collection
+                                // so we initialize a dummy placeholder document
+                                // then show the upcoming event to the user
+                                // add it to the current appointments manager
+                                Map data = document.getData();
+                                CurrentAppointment appointment = new CurrentAppointment(
+                                        (String) data.get(FirestoreTags.currentAppointmentsCoachName),
+                                        (String) data.get(FirestoreTags.playerCurrentAppointmentsDate),
+                                        (String) data.get(FirestoreTags.playerCurrentAppointmentsBeginTime),
+                                        (String) data.get(FirestoreTags.playerCurrentAppointmentsEndTime),
+                                        (String) data.get(FirestoreTags.playerCurrentAppointmentsLocation)
+                                );
+                                CurrentAppointmentsManager.AddAppointmentToList(appointment);
+
                             }
                         } else {
                             // error getting documents
+                            // collection might not exist yet until player makes first appointment
                         }
                     }
                 });
