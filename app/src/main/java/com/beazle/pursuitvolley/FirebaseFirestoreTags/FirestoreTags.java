@@ -9,9 +9,10 @@ public final class FirestoreTags {
     // players
     public static String playerCollection = "players";
     public static String playerDocumentFullname = "full_name";
+    public static String playerDocumentAge = "age";
+    public static String playerDocumentLocation = "location";
     public static String playerDocumentEmail = "email";
-    public static String playerDocumentMetadata = "metadata";
-    public static String playerDocumentPhonenumber = "phone_number";
+    public static String playerDocumentPhoneNumber = "phone_number";
     public static String playerDocumentTokens = "tokens";
 
     // coaches

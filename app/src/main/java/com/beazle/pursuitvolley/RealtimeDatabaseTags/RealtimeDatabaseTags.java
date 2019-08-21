@@ -2,6 +2,15 @@ package com.beazle.pursuitvolley.RealtimeDatabaseTags;
 
 public final class RealtimeDatabaseTags {
 
+    // coaches
+    public static String playersCollecion = "coaches";
+    public static String playerDataFullname = "fullname";
+    public static String playerDataAge = "age";
+    public static String playerDataLocation = "location";
+    public static String playerDataPhoneNumber = "phone_number";
+    public static String playerDataEmail = "email";
+
+    // coaches
     public static String coachesCollecion = "coaches";
     public static String coachDataFullname = "fullname";
     public static String coachDataAge = "age";

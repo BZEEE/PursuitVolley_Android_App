@@ -25,6 +25,11 @@ admin.initializeApp(functions.config().firebase);
   * @see use SendGrid to send emails from cloud functions, best practice (https://firebase.google.com/docs/functions/tips)
   */
 
+// generate a custom authentication token for player sign-up
+exports.GeneratePlayerAuthenticationToken = functions.https.onCall((data, context) => {
+  
+});
+
 // Generate a client token on the server and send the response back to the client
 exports.ReturnClientToken = functions.https.onCall((data, context) => {
     gateway.clientToken.generate({

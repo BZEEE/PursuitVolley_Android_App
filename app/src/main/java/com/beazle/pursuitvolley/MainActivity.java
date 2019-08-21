@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.beazle.pursuitvolley.Coach.CoachAuthentication.CoachLoginActivity;
-import com.beazle.pursuitvolley.Player.PlayerLoginActivity;
+import com.beazle.pursuitvolley.Player.PlayerAuthentication.PlayerLoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 

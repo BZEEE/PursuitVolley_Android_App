@@ -73,24 +73,6 @@ public class CoachLoginActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.coachEmailAddressEntryBox);
         passwordEditText = findViewById(R.id.coachPasswordEntryBox);
 
-        mRealtimeDatabaseRootReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("coaches").exists()) {
-                    // push coach object to database
-                }else{
-                    // add "coaches" child field to root reference
-                    mRealtimeDatabaseRootReference.setValue("coaches");
-                    // then push coach object to database
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
         signInSignUpTextSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

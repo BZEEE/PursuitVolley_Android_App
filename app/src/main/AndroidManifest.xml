@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/MainAppTheme">
         <activity android:name=".Coach.CoachProfile.CoachSchedule.CoachAppointments.CoachAppointment.CoachScheduleAppointmentPage"></activity>
-        <activity android:name=".Player.PlayerInfoEntry" />
+        <activity android:name=".Player.PlayerInfoEntryActivity" />
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentBrainTreeActivity" />
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentGooglePayActivity" />
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentResultActivity" />
@@ -46,7 +46,7 @@
         <activity android:name=".Coach.CoachSelection.CoachSelectionActivity" />
         <activity android:name=".Coach.CoachInfoEntryActivity" />
         <activity android:name=".Coach.CoachProfile.CoachProfileActivity" />
-        <activity android:name=".Player.PlayerLoginActivity" />
+        <activity android:name=".Player.PlayerAuthentication.PlayerLoginActivity" />
         <activity android:name=".Coach.CoachAuthentication.CoachLoginActivity" />
         <activity android:name=".Coach.CoachTimeSelection.CoachTimeSelectionActivity" />
         <activity android:name=".Coach.CoachDateSelection.CoachDateSelectionActivity" />
