@@ -27,7 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.List;
 import java.util.Map;
 
-public class PlayerCurrentAppointmentsFragment extends Fragment {
+public class PlayerAppointmentsFragment extends Fragment {
 
     private FirebaseFirestore mFirestore;
     private FirebaseAuth mAuth;
@@ -43,7 +43,7 @@ public class PlayerCurrentAppointmentsFragment extends Fragment {
 
         currentUser = mAuth.getCurrentUser();
 
-        CurrentAppointmentsManager.ClearCurrentAppointmentList();
+        PlayerAppointmentsManager.ClearCurrentAppointmentList();
 
         mFirestore.collection(FirestoreTags.playerCollection).document(currentUser.getUid())
                 .collection(FirestoreTags.playerCurrentAppointmentsCollection).get()
@@ -57,14 +57,14 @@ public class PlayerCurrentAppointmentsFragment extends Fragment {
                                 // then show the upcoming event to the user
                                 // add it to the current appointments manager
                                 Map data = document.getData();
-                                CurrentAppointment appointment = new CurrentAppointment(
+                                PlayerAppointment playerAppointment = new PlayerAppointment(
                                         (String) data.get(FirestoreTags.currentAppointmentsCoachName),
                                         (String) data.get(FirestoreTags.playerCurrentAppointmentsDate),
                                         (String) data.get(FirestoreTags.playerCurrentAppointmentsBeginTime),
                                         (String) data.get(FirestoreTags.playerCurrentAppointmentsEndTime),
                                         (String) data.get(FirestoreTags.playerCurrentAppointmentsLocation)
                                 );
-                                CurrentAppointmentsManager.AddAppointmentToList(appointment);
+                                PlayerAppointmentsManager.AddAppointmentToList(playerAppointment);
 
                             }
                         } else {
@@ -74,10 +74,10 @@ public class PlayerCurrentAppointmentsFragment extends Fragment {
                     }
                 });
 
-        List<CurrentAppointment> currentAppointmentsList = CurrentAppointmentsManager.GetCurrentAppointmentsList();
+        List<PlayerAppointment> currentAppointmentsList = PlayerAppointmentsManager.GetCurrentAppointmentsList();
 
         RecyclerView recyclerView = view.findViewById(R.id.playerProfileFragmentCurrentAppointmentsRecyclerView);
-        CurrentAppointmentsRecyclerViewAdapter adapter = new CurrentAppointmentsRecyclerViewAdapter(getContext(), currentAppointmentsList);
+        PlayerAppointmentsRecyclerViewAdapter adapter = new PlayerAppointmentsRecyclerViewAdapter(getContext(), currentAppointmentsList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 

@@ -15,6 +15,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/MainAppTheme">
+        <activity android:name=".Coach.CoachProfile.CoachSchedule.CoachAppointments.CoachAppointment.CoachScheduleAppointmentPage"></activity>
         <activity android:name=".Player.PlayerInfoEntry" />
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentBrainTreeActivity" />
         <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentGooglePayActivity" />

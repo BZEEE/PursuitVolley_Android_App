@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
 import com.beazle.pursuitvolley.IntentTags.IntentTags;
-import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointmentReceiptParcelable;
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.PlayerAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 
 import java.util.List;
@@ -78,7 +78,7 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
 
         private void GoToCoachCalenderSelectionActivity(Context context) {
             Intent intent = new Intent(context, CoachDateSelectionActivity.class);
-            CurrentAppointmentReceiptParcelable receipt = new CurrentAppointmentReceiptParcelable();
+            PlayerAppointmentReceiptParcelable receipt = new PlayerAppointmentReceiptParcelable();
             receipt.setCurrentAppointmentCoachName(coachName.getText().toString());
             receipt.setCurrentAppointmentCoachUid(coachUniqueId);
             receipt.setCurrentAppointmentLocation(coachLocation.getText().toString());

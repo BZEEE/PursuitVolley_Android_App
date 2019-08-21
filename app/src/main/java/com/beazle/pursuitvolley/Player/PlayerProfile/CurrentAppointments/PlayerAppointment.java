@@ -1,6 +1,6 @@
 package com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments;
 
-public class CurrentAppointment {
+public class PlayerAppointment {
 
     // represents all the data of a current appointment instance for the player
     // such as coach name, time, location etc
@@ -10,7 +10,7 @@ public class CurrentAppointment {
     private String appointmentEndTime;
     private String appointmentLocation;
 
-    public CurrentAppointment(
+    public PlayerAppointment(
             String appointmentCoachName,
             String appointmentDate,
             String appointmentBeginTime,
@@ -31,11 +31,11 @@ public class CurrentAppointment {
         return appointmentDate;
     }
 
-    public String getAppointmentBeginTime() {
+    public String GetAppointmentBeginTime() {
         return appointmentBeginTime;
     }
 
-    public String getAppointmentEndTime() {
+    public String GetAppointmentEndTime() {
         return appointmentEndTime;
     }
 

@@ -6,7 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.PlayerCurrentAppointmentsFragment;
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.PlayerAppointmentsFragment;
 import com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents.PlayerUpcomingEventsFragment;
 import com.beazle.pursuitvolley.R;
 import com.google.android.material.tabs.TabLayout;
@@ -31,7 +31,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
     private void SetupViewPager(ViewPager viewPager) {
         PlayerProfileTabsAdapter adapter = new PlayerProfileTabsAdapter(getSupportFragmentManager());
-        adapter.AddFragment(new PlayerCurrentAppointmentsFragment(), getResources().getString(R.string.player_current_appointments_tab_text));
+        adapter.AddFragment(new PlayerAppointmentsFragment(), getResources().getString(R.string.player_current_appointments_tab_text));
         adapter.AddFragment(new PlayerUpcomingEventsFragment(), getResources().getString(R.string.player_upcoming_events_tab_text));
         viewPager.setAdapter(adapter);
     }

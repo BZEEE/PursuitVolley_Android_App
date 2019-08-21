@@ -15,27 +15,27 @@ import com.beazle.pursuitvolley.R;
 
 import java.util.List;
 
-public class CurrentAppointmentsRecyclerViewAdapter extends RecyclerView.Adapter<CurrentAppointmentsRecyclerViewAdapter.CurrentAppointmentViewHolder> {
+public class PlayerAppointmentsRecyclerViewAdapter extends RecyclerView.Adapter<PlayerAppointmentsRecyclerViewAdapter.CurrentAppointmentViewHolder> {
 
     private Context context;
-    private List<CurrentAppointment> data;
+    private List<PlayerAppointment> data;
 
-    public CurrentAppointmentsRecyclerViewAdapter(Context context, List<CurrentAppointment> list) {
+    public PlayerAppointmentsRecyclerViewAdapter(Context context, List<PlayerAppointment> list) {
         this.context = context;
         this.data = list;
     }
 
     @NonNull
     @Override
-    public CurrentAppointmentsRecyclerViewAdapter.CurrentAppointmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PlayerAppointmentsRecyclerViewAdapter.CurrentAppointmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater inflater = LayoutInflater.from(context);
         view = inflater.inflate(R.layout.list_item_current_appointment, parent, false);
-        return new CurrentAppointmentsRecyclerViewAdapter.CurrentAppointmentViewHolder(this.context, view);
+        return new PlayerAppointmentsRecyclerViewAdapter.CurrentAppointmentViewHolder(this.context, view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CurrentAppointmentsRecyclerViewAdapter.CurrentAppointmentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PlayerAppointmentsRecyclerViewAdapter.CurrentAppointmentViewHolder holder, int position) {
         holder.appointmentCoachName.setText(data.get(position).GetAppointmentCoachName());
         holder.appointmentDateAndTime.setText(data.get(position).GetAppointmentDate());
         holder.appointmentLocation.setText(data.get(position).GetAppointmentLocation());

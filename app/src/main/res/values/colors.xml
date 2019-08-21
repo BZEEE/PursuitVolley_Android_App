@@ -28,5 +28,7 @@
     <color name="thursday_color">@android:color/holo_purple</color>
     <color name="friday_color">@android:color/white</color>
     <color name="saturday_color">@android:color/darker_gray</color>
+    <color name="hasAppointmentsCellIndicatorColor">@android:color/holo_green_dark</color>
+    <color name="doesNotHaveAppointmentsCellIndicatorColor">#78766f</color>
 
 </resources>

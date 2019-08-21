@@ -3,9 +3,7 @@ package com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents.UpcomingEventReceiptParcelable;
-
-public class CurrentAppointmentReceiptParcelable implements Parcelable {
+public class PlayerAppointmentReceiptParcelable implements Parcelable {
 
     private String currentAppointmentCoachName;
     private String currentAppointmentCoachUid;
@@ -15,11 +13,11 @@ public class CurrentAppointmentReceiptParcelable implements Parcelable {
     private String currentAppointmentEndTime;
     private String currentAppointmentLocation;
 
-    public CurrentAppointmentReceiptParcelable() {
+    public PlayerAppointmentReceiptParcelable() {
 
     }
 
-    public CurrentAppointmentReceiptParcelable(
+    public PlayerAppointmentReceiptParcelable(
             String currentAppointmentCoachName,
             String currentAppointmentCoachUid,
             double cuurentAppointmentPrice,
@@ -93,7 +91,7 @@ public class CurrentAppointmentReceiptParcelable implements Parcelable {
     }
 
     // Parcelling part
-    public CurrentAppointmentReceiptParcelable(Parcel in){
+    public PlayerAppointmentReceiptParcelable(Parcel in){
         this.currentAppointmentCoachName = in.readString();
         this.currentAppointmentCoachUid = in.readString();
         this.currentAppointmentPrice = in.readDouble();
@@ -104,12 +102,12 @@ public class CurrentAppointmentReceiptParcelable implements Parcelable {
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public CurrentAppointmentReceiptParcelable createFromParcel(Parcel in) {
-            return new CurrentAppointmentReceiptParcelable(in);
+        public PlayerAppointmentReceiptParcelable createFromParcel(Parcel in) {
+            return new PlayerAppointmentReceiptParcelable(in);
         }
 
-        public CurrentAppointmentReceiptParcelable[] newArray(int size) {
-            return new CurrentAppointmentReceiptParcelable[size];
+        public PlayerAppointmentReceiptParcelable[] newArray(int size) {
+            return new PlayerAppointmentReceiptParcelable[size];
         }
     };
 

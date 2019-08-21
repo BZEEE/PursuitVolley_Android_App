@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.FirebaseFirestoreTags.FirestoreTags;
 import com.beazle.pursuitvolley.IntentTags.IntentTags;
-import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointmentReceiptParcelable;
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.PlayerAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 import com.braintreepayments.api.dropin.DropInActivity;
 import com.braintreepayments.api.dropin.DropInRequest;
@@ -65,7 +65,7 @@ public class PlayerCheckoutActivity extends AppCompatActivity {
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
 
 
-        CurrentAppointmentReceiptParcelable receipt = getIntent().getParcelableExtra(IntentTags.currentReceiptTAG);
+        PlayerAppointmentReceiptParcelable receipt = getIntent().getParcelableExtra(IntentTags.currentReceiptTAG);
         // set details of player appointment
         SetCheckoutCoachNameDetails(receipt.getCurrentAppointmentCoachUid());
         selectedDateTextView.setText(df.format(receipt.getCurrentAppointmentDate()));

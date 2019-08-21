@@ -16,6 +16,7 @@ public final class FirestoreTags {
 
     // coaches
     public static String coachCollection = "coaches";
+    public static String coachAppointmentsCollection = "appointments";
     public static String coachDocumentFullname = "full_name";
     public static String coachDocumentAge = "age";
     public static String coachDocumentBio = "bio";

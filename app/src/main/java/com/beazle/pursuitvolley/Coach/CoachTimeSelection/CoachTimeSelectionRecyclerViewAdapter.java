@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.beazle.pursuitvolley.IntentTags.IntentTags;
 import com.beazle.pursuitvolley.Player.PlayerPaymentFlow.PlayerCheckoutActivity;
-import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.CurrentAppointmentReceiptParcelable;
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.PlayerAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 
 import java.util.List;
@@ -22,9 +22,9 @@ public class CoachTimeSelectionRecyclerViewAdapter extends RecyclerView.Adapter<
 
     private List<String> data;
     private Context context;
-    private CurrentAppointmentReceiptParcelable receipt;
+    private PlayerAppointmentReceiptParcelable receipt;
 
-    public CoachTimeSelectionRecyclerViewAdapter(Context context, List<String> list, CurrentAppointmentReceiptParcelable receipt) {
+    public CoachTimeSelectionRecyclerViewAdapter(Context context, List<String> list, PlayerAppointmentReceiptParcelable receipt) {
         this.context = context;
         this.data = list;
         this.receipt = receipt;
@@ -74,7 +74,7 @@ public class CoachTimeSelectionRecyclerViewAdapter extends RecyclerView.Adapter<
         TextView timeSlot;
         public static final String timeSlotTag = "TimeSlotViewHolderTag";
 
-        public TimeSlotViewHolder(final Context context, View itemView, final CurrentAppointmentReceiptParcelable receipt) {
+        public TimeSlotViewHolder(final Context context, View itemView, final PlayerAppointmentReceiptParcelable receipt) {
             super(itemView);
             timeSlot = itemView.findViewById(R.id.time_slot);
 
@@ -87,7 +87,7 @@ public class CoachTimeSelectionRecyclerViewAdapter extends RecyclerView.Adapter<
             });
         }
 
-        private void GoToPlayerCheckoutActivity(Context context, CurrentAppointmentReceiptParcelable receipt) {
+        private void GoToPlayerCheckoutActivity(Context context, PlayerAppointmentReceiptParcelable receipt) {
             Intent intent = new Intent(context, PlayerCheckoutActivity.class);
             receipt.setCurrentAppointmentBeginTime(timeSlot.getText().toString());
             intent.putExtra(IntentTags.currentReceiptTAG, receipt);
