@@ -6,17 +6,17 @@ import java.util.List;
 
 public final class UpcomingEventsManager {
 
-    private static List<UpcomingEvent> upcomingEventsList = new ArrayList<>();
+    private static List<PlayerUpcomingEvent> playerUpcomingEventsList = new ArrayList<>();
 
-    public static void AddEventToList(UpcomingEvent event) {
-        upcomingEventsList.add(event);
+    public static void AddEventToList(PlayerUpcomingEvent event) {
+        playerUpcomingEventsList.add(event);
     }
 
-    public static void RemoveEventFromList(UpcomingEvent event) {
-        Iterator itr = upcomingEventsList.iterator();
+    public static void RemoveEventFromList(PlayerUpcomingEvent event) {
+        Iterator itr = playerUpcomingEventsList.iterator();
         while (itr.hasNext())
         {
-            UpcomingEvent x = (UpcomingEvent) itr.next();
+            PlayerUpcomingEvent x = (PlayerUpcomingEvent) itr.next();
             if (x == event) {
                 itr.remove();
             }
@@ -24,10 +24,10 @@ public final class UpcomingEventsManager {
     }
 
     public static void ClearUpcomingEventsList() {
-        upcomingEventsList.clear();
+        playerUpcomingEventsList.clear();
     }
 
-    public static List<UpcomingEvent> GetUpcomingEventsList() {
-        return upcomingEventsList;
+    public static List<PlayerUpcomingEvent> GetUpcomingEventsList() {
+        return playerUpcomingEventsList;
     }
 }

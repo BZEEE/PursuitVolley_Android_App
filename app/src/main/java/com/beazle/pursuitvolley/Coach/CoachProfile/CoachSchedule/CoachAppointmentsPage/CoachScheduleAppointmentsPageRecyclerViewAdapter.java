@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointments;
+package com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointmentsPage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointment;
-import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointments.CoachAppointment.CoachScheduleAppointmentPage;
+import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointmentsPage.CoachAppointmentPage.CoachScheduleAppointmentPage;
 import com.beazle.pursuitvolley.R;
 
 import java.util.List;

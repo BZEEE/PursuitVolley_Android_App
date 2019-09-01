@@ -46,6 +46,14 @@
     <string name="coach_sign_in_clickable_text">Don\'t have an Account</string>
     <string name="coach_sign_up_clickable_text">Already have an Account</string>
 
+    <!--Player Login Activity-->
+    <string name="player_email_address_text">enter email</string>
+    <string name="player_password_text">enter password</string>
+    <string name="player_sign_in_button_text">Sign In</string>
+    <string name="player_sign_up_button_text">Sign Up</string>
+    <string name="player_sign_in_clickable_text">Don\'t have an Account</string>
+    <string name="player_sign_up_clickable_text">Already have an Account</string>
+
     <!--Sign Out Pop Up Menu-->
     <string name="sign_out_yes">Yes</string>
     <string name="sign_out_no">No</string>

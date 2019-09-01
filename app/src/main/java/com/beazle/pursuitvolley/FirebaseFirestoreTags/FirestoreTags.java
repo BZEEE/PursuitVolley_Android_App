@@ -14,6 +14,8 @@ public final class FirestoreTags {
     public static String playerDocumentEmail = "email";
     public static String playerDocumentPhoneNumber = "phone_number";
     public static String playerDocumentTokens = "tokens";
+    public static String playerDocumentAppointments = "appointments";
+    public static String playerDocumentUpcomingEvents = "upcoming_events";
 
     // coaches
     public static String coachCollection = "coaches";

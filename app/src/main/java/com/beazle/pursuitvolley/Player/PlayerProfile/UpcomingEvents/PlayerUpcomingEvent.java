@@ -1,6 +1,6 @@
 package com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents;
 
-public class UpcomingEvent {
+public class PlayerUpcomingEvent {
     // represents all the data of a upcoming event instance for the player
     // which will then give them the option to sign up
     // such as location, time, age groups, etc
@@ -10,7 +10,7 @@ public class UpcomingEvent {
     private String eventEndTime;
     private String eventLocation;
 
-    public UpcomingEvent(String eventTitle, String eventDate, String eventBeginTime, String eventEndTime, String eventLocation) {
+    public PlayerUpcomingEvent(String eventTitle, String eventDate, String eventBeginTime, String eventEndTime, String eventLocation) {
         this.eventTitle = eventTitle;
         this.eventDate = eventDate;
         this.eventBeginTime = eventBeginTime;

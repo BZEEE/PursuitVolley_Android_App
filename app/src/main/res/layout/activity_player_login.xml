@@ -4,11 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:paddingRight="20dp"
     android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:background="@color/black"
     tools:context=".Player.PlayerAuthentication.PlayerLoginActivity">
 
+    <TextView
+        android:id="@+id/playerSignInSignUpTitle"
+        android:text="@string/player_sign_in_button_text"
+        android:textSize="54sp"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:layout_above="@id/playerPhoneNumberEntryBox"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/playerPhoneNumberEntryBox"
+        android:background="@drawable/circle_background"
+        android:hint="@string/player_email_address_text"
+        android:textColorHint="@color/aquaBlue"
+        android:layout_above="@id/playerPasswordEntryBox"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/playerPasswordEntryBox"
+        android:background="@drawable/circle_background"
+        android:hint="@string/player_password_text"
+        android:textColorHint="@color/aquaBlue"
+        android:textColor="@color/white"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/playerSignInSignUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/playerPasswordEntryBox"
+        android:textSize="24sp"
+        android:text="@string/player_sign_in_button_text"
+        android:background="@drawable/rounded_corners_blue_background"/>
+
+    <TextView
+        android:id="@+id/playerSignInSignUpClickableTextSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/playerSignInSignUpButton"
+        android:textSize="16sp"
+        android:gravity="right"
+        android:textColor="@color/white"
+        android:text="@string/player_sign_in_clickable_text"/>
 
 
 </RelativeLayout>

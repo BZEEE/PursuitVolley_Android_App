@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointments.CoachAppointment;
+package com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointmentsPage.CoachAppointmentPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 

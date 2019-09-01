@@ -227,7 +227,7 @@ public class CoachLoginActivity extends AppCompatActivity {
                             Log.d(DebugTags.DebugTAG, "createUserWithEmail:success");
                             // coach document is initialized using cloud functions
                             // add new coach to CoachManager class so that the recycler view knows which coaches to show to players
-                            AddCoachToFirestoreAfterSigningUp();
+                            // AddCoachToFirestoreAfterSigningUp();
                             AddCoachToRealtimeDatabaseAfterSigningUp();
                             // AddDefaultCoachDataToRealtimeDatabaseAfterSigningUp(coach);
                             GoToCoachInfoEntryActivity();
@@ -350,15 +350,15 @@ public class CoachLoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, CoachProfileActivity.class));
     }
 
-    private void AddCoachToFirestoreAfterSigningUp() {
-        // add intial data fields to firestore for coach specific document
-        Map<String, Object> data = new HashMap<>();
-        data.put(FirestoreTags.coachDocumentFullname, "");
-        data.put(FirestoreTags.coachDocumentAge, "");
-        data.put(FirestoreTags.coachDocumentLocation, "");
-        data.put(FirestoreTags.coachDocumentBio, "");
-        mFirestore.collection(FirestoreTags.coachCollection).document(currentCoach.getUid()).set(data);
-    }
+//    private void AddCoachToFirestoreAfterSigningUp() {
+//        // add intial data fields to firestore for coach specific document
+//        Map<String, Object> data = new HashMap<>();
+//        data.put(FirestoreTags.coachDocumentFullname, "");
+//        data.put(FirestoreTags.coachDocumentAge, "");
+//        data.put(FirestoreTags.coachDocumentLocation, "");
+//        data.put(FirestoreTags.coachDocumentBio, "");
+//        mFirestore.collection(FirestoreTags.coachCollection).document(currentCoach.getUid()).set(data);
+//    }
 
     private void AddCoachToRealtimeDatabaseAfterSigningUp() {
         // add intial data fields to firestore for coach specific document

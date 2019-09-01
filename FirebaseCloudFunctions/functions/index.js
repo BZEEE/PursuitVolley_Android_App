@@ -1,5 +1,8 @@
 const functions = require('firebase-functions');
-var braintree = require("braintree");
+var braintree = require('braintree');
+
+// unique id generator library
+const nanoid = require('nanoid')
 
 var gateway = braintree.connect({
   environment: braintree.Environment.Sandbox,
@@ -26,12 +29,23 @@ admin.initializeApp(functions.config().firebase);
   */
 
 // generate a custom authentication token for player sign-up
-exports.GeneratePlayerAuthenticationToken = functions.https.onCall((data, context) => {
-  
+exports.GenerateCustomPlayerAuthToken = functions.https.onCall((data, context) => {
+  // generate uid
+  const uid = nanoid();
+  admin.auth().createCustomToken(uid)
+    .then(function(customToken) {
+    // send custom auth token back to client to be able to sign up to firebase as a player
+    return { token : customToken }
+    })
+    .catch(function(error) {
+      // error creating custom auth token
+      // throw error back to the client to let them know that authentication failed
+      throw new functions.https.HttpsError('failed-player-auth-token-creation', "Failed to create custom auth token for player sign-in, failed in cloud function named {GenerateCustomPlayerAuthToken}")
+    })
 });
 
 // Generate a client token on the server and send the response back to the client
-exports.ReturnClientToken = functions.https.onCall((data, context) => {
+exports.ReturnPlayerPaymentGatewayClientToken = functions.https.onCall((data, context) => {
     gateway.clientToken.generate({
         customerId: aCustomerId
       }, function (err, response) {

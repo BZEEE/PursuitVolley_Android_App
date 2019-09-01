@@ -13,12 +13,9 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointments.CoachScheduleAppointmentsPage;
-import com.beazle.pursuitvolley.FirebaseFirestoreTags.FirestoreTags;
-import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.PlayerAppointment;
+import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointmentsPage.CoachScheduleAppointmentsPage;
 import com.beazle.pursuitvolley.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;

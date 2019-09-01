@@ -2,6 +2,12 @@ package com.beazle.pursuitvolley.Coach.CoachSelection;
 
 import android.graphics.Bitmap;
 
+import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.PlayerAppointment;
+import com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents.PlayerUpcomingEvent;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Coach {
 
     private String uniqueId;
@@ -10,6 +16,8 @@ public class Coach {
     private String locaton;
     private String bio;
     private Bitmap thumbnail;
+    private Map<String, PlayerAppointment> appointments;
+    private Map<String, PlayerUpcomingEvent> upcomingEvents;
 
     public Coach() {
         // Default constructor required for calls to DataSnapshot.getValue(Coach.class)
@@ -25,6 +33,8 @@ public class Coach {
         this.age = age;
         this.locaton = location;
         this.bio = bio;
+        this.appointments = new HashMap<String, PlayerAppointment>();
+        this.upcomingEvents = new HashMap<String, PlayerUpcomingEvent>();
     }
 
     public String GetUniqueId() { return this.uniqueId; }
@@ -49,6 +59,10 @@ public class Coach {
         return thumbnail;
     }
 
+    public Map GetAppointments() { return appointments; }
+
+    public Map GetUpcomingEvents() { return upcomingEvents; }
+
     public void SetUniqueId(String id) { this.uniqueId = id; }
 
     public void SetName(String name) {
@@ -70,4 +84,16 @@ public class Coach {
     public void SetThumbnail(Bitmap thumbnail) {
         this.thumbnail = thumbnail;
     }
+
+    public void AddAppointment(PLay) {}
+
+    public void RemoveAppointment() {}
+
+    public void ClearAppointments() {}
+
+    public void AddUpcomingEvent() {}
+
+    public void RemoveUpcomingEvent() {}
+
+    public void ClearUpcomingEvents() {}
 }

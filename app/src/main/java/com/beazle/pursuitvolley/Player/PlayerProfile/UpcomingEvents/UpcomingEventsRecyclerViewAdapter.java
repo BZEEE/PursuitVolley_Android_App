@@ -11,19 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.beazle.pursuitvolley.Coach.CoachSelection.Coach;
 import com.beazle.pursuitvolley.R;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
 public class UpcomingEventsRecyclerViewAdapter extends RecyclerView.Adapter<UpcomingEventsRecyclerViewAdapter.UpcomingEventViewHolder> {
 
     private Context context;
-    private List<UpcomingEvent> data;
+    private List<PlayerUpcomingEvent> data;
 
-    public UpcomingEventsRecyclerViewAdapter(Context context, List<UpcomingEvent> list) {
+    public UpcomingEventsRecyclerViewAdapter(Context context, List<PlayerUpcomingEvent> list) {
         this.context = context;
         this.data = list;
     }

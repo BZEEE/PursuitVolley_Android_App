@@ -47,7 +47,7 @@ public class PlayerUpcomingEventsFragment extends Fragment {
                                 // then show the upcoming event to the user
                                 // add it to the upcoming events manager
                                 Map data = document.getData();
-                                UpcomingEvent event = new UpcomingEvent(
+                                PlayerUpcomingEvent event = new PlayerUpcomingEvent(
                                         (String) data.get(FirestoreTags.upcomingEventTitle),
                                         (String) data.get(FirestoreTags.upcomingEventDate),
                                         (String) data.get(FirestoreTags.upcomingEventBeginTime),
@@ -63,10 +63,10 @@ public class PlayerUpcomingEventsFragment extends Fragment {
                     }
                 });
 
-        List<UpcomingEvent> upcomingEventsList = UpcomingEventsManager.GetUpcomingEventsList();
+        List<PlayerUpcomingEvent> playerUpcomingEventsList = UpcomingEventsManager.GetUpcomingEventsList();
 
         RecyclerView recyclerView = view.findViewById(R.id.playerProfileFragmentUpcomingEventsRecyclerView);
-        UpcomingEventsRecyclerViewAdapter adapter = new UpcomingEventsRecyclerViewAdapter(getContext(), upcomingEventsList);
+        UpcomingEventsRecyclerViewAdapter adapter = new UpcomingEventsRecyclerViewAdapter(getContext(), playerUpcomingEventsList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
