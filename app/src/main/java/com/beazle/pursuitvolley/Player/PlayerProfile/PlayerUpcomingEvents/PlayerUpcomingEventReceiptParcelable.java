@@ -1,9 +1,9 @@
-package com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents;
+package com.beazle.pursuitvolley.Player.PlayerProfile.PlayerUpcomingEvents;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class UpcomingEventReceiptParcelable implements Parcelable {
+public class PlayerUpcomingEventReceiptParcelable implements Parcelable {
 
     private String upcomingEventTitle;
     private double upcomingEventPrice;
@@ -11,7 +11,7 @@ public class UpcomingEventReceiptParcelable implements Parcelable {
     private String upcomingEventBeginTime;
     private String upcomingEventEndTime;
 
-    public UpcomingEventReceiptParcelable(String upcomingEventTitle, double upcomingEventPrice, String upcomingEventDate, String upcomingEventBeginTime, String upcomingEventEndTime) {
+    public PlayerUpcomingEventReceiptParcelable(String upcomingEventTitle, double upcomingEventPrice, String upcomingEventDate, String upcomingEventBeginTime, String upcomingEventEndTime) {
         this.upcomingEventTitle = upcomingEventTitle;
         this.upcomingEventPrice = upcomingEventPrice;
         this.upcomingEventDate = upcomingEventDate;
@@ -60,7 +60,7 @@ public class UpcomingEventReceiptParcelable implements Parcelable {
     }
 
     // Parcelling part
-    public UpcomingEventReceiptParcelable(Parcel in){
+    public PlayerUpcomingEventReceiptParcelable(Parcel in){
         this.upcomingEventTitle = in.readString();
         this.upcomingEventPrice = in.readDouble();
         this.upcomingEventDate =  in.readString();
@@ -69,12 +69,12 @@ public class UpcomingEventReceiptParcelable implements Parcelable {
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public UpcomingEventReceiptParcelable createFromParcel(Parcel in) {
-            return new UpcomingEventReceiptParcelable(in);
+        public PlayerUpcomingEventReceiptParcelable createFromParcel(Parcel in) {
+            return new PlayerUpcomingEventReceiptParcelable(in);
         }
 
-        public UpcomingEventReceiptParcelable[] newArray(int size) {
-            return new UpcomingEventReceiptParcelable[size];
+        public PlayerUpcomingEventReceiptParcelable[] newArray(int size) {
+            return new PlayerUpcomingEventReceiptParcelable[size];
         }
     };
 
@@ -95,7 +95,7 @@ public class UpcomingEventReceiptParcelable implements Parcelable {
 
     @Override
     public String toString() {
-        return "UpcomingEventReceiptParcelable{" +
+        return "PlayerUpcomingEventReceiptParcelable{" +
                 "event title='" + upcomingEventTitle + '\'' +
                 ", event price='" + Double.toString(upcomingEventPrice) + '\'' +
                 ", event date='" + upcomingEventDate + '\'' +

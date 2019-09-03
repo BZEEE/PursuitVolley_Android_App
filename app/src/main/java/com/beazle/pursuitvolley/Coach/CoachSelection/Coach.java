@@ -2,8 +2,8 @@ package com.beazle.pursuitvolley.Coach.CoachSelection;
 
 import android.graphics.Bitmap;
 
-import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.PlayerAppointment;
-import com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents.PlayerUpcomingEvent;
+import com.beazle.pursuitvolley.Player.PlayerProfile.PlayerCurrentAppointments.PlayerAppointment;
+import com.beazle.pursuitvolley.Player.PlayerProfile.PlayerUpcomingEvents.PlayerUpcomingEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -85,7 +85,7 @@ public class Coach {
         this.thumbnail = thumbnail;
     }
 
-    public void AddAppointment(PLay) {}
+    public void AddAppointment() {}
 
     public void RemoveAppointment() {}
 

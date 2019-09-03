@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.beazle.pursuitvolley.IntentTags.IntentTags;
 import com.beazle.pursuitvolley.Player.PlayerPaymentFlow.PlayerCheckoutActivity;
-import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.PlayerAppointmentReceiptParcelable;
+import com.beazle.pursuitvolley.Player.PlayerProfile.PlayerCurrentAppointments.PlayerAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 
 import java.util.List;

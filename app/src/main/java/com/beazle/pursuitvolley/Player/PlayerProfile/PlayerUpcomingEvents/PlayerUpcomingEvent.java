@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents;
+package com.beazle.pursuitvolley.Player.PlayerProfile.PlayerUpcomingEvents;
 
 public class PlayerUpcomingEvent {
     // represents all the data of a upcoming event instance for the player

@@ -1,10 +1,9 @@
-package com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments;
+package com.beazle.pursuitvolley.Player.PlayerProfile.PlayerCurrentAppointments;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.beazle.pursuitvolley.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerAppointmentsRecyclerViewAdapter extends RecyclerView.Adapter<PlayerAppointmentsRecyclerViewAdapter.CurrentAppointmentViewHolder> {
@@ -20,9 +20,13 @@ public class PlayerAppointmentsRecyclerViewAdapter extends RecyclerView.Adapter<
     private Context context;
     private List<PlayerAppointment> data;
 
-    public PlayerAppointmentsRecyclerViewAdapter(Context context, List<PlayerAppointment> list) {
+    public PlayerAppointmentsRecyclerViewAdapter(Context context) {
         this.context = context;
-        this.data = list;
+        this.data = new ArrayList<>();
+    }
+
+    public void SetPlayerAppointmentData(List<PlayerAppointment> playerAppointmentsList) {
+        this.data = playerAppointmentsList;
     }
 
     @NonNull
@@ -39,7 +43,6 @@ public class PlayerAppointmentsRecyclerViewAdapter extends RecyclerView.Adapter<
         holder.appointmentCoachName.setText(data.get(position).GetAppointmentCoachName());
         holder.appointmentDateAndTime.setText(data.get(position).GetAppointmentDate());
         holder.appointmentLocation.setText(data.get(position).GetAppointmentLocation());
-//        holder.appointmentPursuitVolleyLogo.setImageResource(); // set default logo from the resources/drawable folder
     }
 
     @Override
@@ -49,10 +52,7 @@ public class PlayerAppointmentsRecyclerViewAdapter extends RecyclerView.Adapter<
 
     public static class CurrentAppointmentViewHolder extends RecyclerView.ViewHolder {
 
-        public static final String currentAppointmentViewHolderTag = "CoachSelectionViewHolderTag";
-
         private LinearLayout appointmentLayoutListItem;
-        private ImageView appointmentPursuitVolleyLogo;
         private TextView appointmentCoachName;
         private TextView appointmentDateAndTime;
         private TextView appointmentLocation;
@@ -64,7 +64,6 @@ public class PlayerAppointmentsRecyclerViewAdapter extends RecyclerView.Adapter<
             appointmentCoachName = itemView.findViewById(R.id.currentAppointmentCoachName);
             appointmentDateAndTime = itemView.findViewById(R.id.currentAppointmentDateAndTime);
             appointmentLocation = itemView.findViewById(R.id.currentAppointmentLocation);
-
 
             appointmentLayoutListItem.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -2,12 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@color/black">
+android:background="@color/black" >
 
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_above="@+id/coachBioFragmentEditInfoLayout"
+    android:layout_marginTop="30dp"
+    android:layout_above="@+id/playerBioFragmentEditInfoLayout"
     android:background="@color/black">
 
     <LinearLayout
@@ -20,61 +21,25 @@ android:background="@color/black">
             android:layout_height="wrap_content"
             android:weightSum="3"
             android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/bioFragmentCoachProfilePicImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="180dp"
-                    android:src="@drawable/default_profile_pic"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="3"
-            android:orientation="horizontal">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2">
                 <TextView
-                    android:id="@+id/coachNameText"
+                    android:id="@+id/playerNameText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="26sp"
                     android:gravity="right"
-                    android:text="@string/coachNameHeader" />
+                    android:text="@string/playerNameHeader" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
                 <TextView
-                    android:id="@+id/coachNameValue"
+                    android:id="@+id/playerNameValue"
                     android:textColor="@color/white"
                     android:textSize="26sp"
                     android:gravity="left"
@@ -93,20 +58,20 @@ android:background="@color/black">
                 android:layout_height="wrap_content"
                 android:layout_weight="2">
                 <TextView
-                    android:id="@+id/coachAgeText"
+                    android:id="@+id/playerAgeText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="26sp"
                     android:gravity="right"
-                    android:text="@string/coachAgeHeader" />
+                    android:text="@string/playerAgeHeader" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
                 <TextView
-                    android:id="@+id/coachAgeValue"
+                    android:id="@+id/playerAgeValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -125,20 +90,20 @@ android:background="@color/black">
                 android:layout_height="wrap_content"
                 android:layout_weight="2">
                 <TextView
-                    android:id="@+id/coachLocationText"
+                    android:id="@+id/playerLocationText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="26sp"
                     android:gravity="right"
-                    android:text="@string/coachLocationHeader" />
+                    android:text="@string/playerLocationHeader" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
                 <TextView
-                    android:id="@+id/coachLocationValue"
+                    android:id="@+id/playerLocationValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -158,13 +123,13 @@ android:background="@color/black">
                 android:layout_height="wrap_content"
                 android:layout_weight="2">
                 <TextView
-                    android:id="@+id/coachBioText"
+                    android:id="@+id/playerPhoneNumberText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="26sp"
                     android:gravity="right"
-                    android:text="@string/coachBioHeader" />
+                    android:text="@string/playerPhoneNumberHeader" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -172,7 +137,42 @@ android:background="@color/black">
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
                 <TextView
-                    android:id="@+id/coachBioValue"
+                    android:id="@+id/playerPhoneNumberValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:gravity="left"
+                    android:textSize="26sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2">
+                <TextView
+                    android:id="@+id/playerEmailText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:gravity="right"
+                    android:text="@string/playerEmailHeader" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/playerEmailValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -187,7 +187,7 @@ android:background="@color/black">
 </ScrollView>
 
 <LinearLayout
-    android:id="@+id/coachBioFragmentEditInfoLayout"
+    android:id="@+id/playerBioFragmentEditInfoLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
@@ -196,7 +196,7 @@ android:background="@color/black">
     android:paddingLeft="20dp" >
 
     <Button
-        android:id="@+id/coachBioFragmentEditInfoButton"
+        android:id="@+id/playerBioFragmentEditInfoButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/circle_background"

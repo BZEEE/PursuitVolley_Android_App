@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments;
+package com.beazle.pursuitvolley.Player.PlayerProfile.PlayerCurrentAppointments;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -130,7 +130,7 @@ public class PlayerAppointmentReceiptParcelable implements Parcelable {
 
     @Override
     public String toString() {
-        return "UpcomingEventReceiptParcelable{" +
+        return "PlayerUpcomingEventReceiptParcelable{" +
                 "appointment title='" + this.currentAppointmentCoachName + '\'' +
                 ", appointment price='" + Double.toString(this.currentAppointmentPrice) + '\'' +
                 ", appointment date='" + Long.toString(this.currentAppointmentDate) + '\'' +

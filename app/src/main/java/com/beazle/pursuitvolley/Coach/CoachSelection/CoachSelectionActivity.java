@@ -30,7 +30,8 @@ public class CoachSelectionActivity extends AppCompatActivity {
 
         RelativeLayout coachSelectionActivityRelativeLayout = findViewById(R.id.coachSelectionActivityRelativeLayout);
 
-        // initialize progress bar for loading coaches
+        // initialize progress bar fo
+        // r loading coaches
         ProgressBar progressBar = new ProgressBar(this,null,android.R.attr.progressBarStyleLarge);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100,100);
         params.addRule(RelativeLayout.CENTER_IN_PARENT);

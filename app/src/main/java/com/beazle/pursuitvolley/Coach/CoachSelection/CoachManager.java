@@ -3,7 +3,6 @@ package com.beazle.pursuitvolley.Coach.CoachSelection;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Debug;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -23,7 +22,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -87,7 +85,7 @@ public class CoachManager extends ViewModel {
                                     @Override
                                     public void onFailure(@NonNull Exception exception) {
                                         // set default picture as profile pic
-                                        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.default_coach_profile_pic);
+                                        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.default_profile_pic);
                                         coach.SetThumbnail(bitmap);
                                         Log.d(DebugTags.DebugTAG, "failed to thumbnail from cloud storage, setting coach thumbnailas default pic");
                                         // Handle any errors

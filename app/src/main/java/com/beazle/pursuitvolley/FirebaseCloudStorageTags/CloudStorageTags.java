@@ -5,5 +5,5 @@ public final class CloudStorageTags {
     // coach folder
     public static String coachesFolder = "coaches";
     public static  String coachThumbnailTAG = "profile_thumbnail";
-    public static String defaultCoachProfilePicFolder = "default_coach_profile_pic";
+    public static String defaultCoachProfilePicFolder = "default_profile_pic";
 }

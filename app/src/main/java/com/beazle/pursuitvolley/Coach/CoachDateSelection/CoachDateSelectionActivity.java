@@ -9,7 +9,7 @@ import android.widget.CalendarView;
 
 import com.beazle.pursuitvolley.Coach.CoachTimeSelection.CoachTimeSelectionActivity;
 import com.beazle.pursuitvolley.IntentTags.IntentTags;
-import com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments.PlayerAppointmentReceiptParcelable;
+import com.beazle.pursuitvolley.Player.PlayerProfile.PlayerCurrentAppointments.PlayerAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 
 import java.util.Calendar;

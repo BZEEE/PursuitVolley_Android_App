@@ -102,6 +102,12 @@
     <string name="player_profile_book_an_appointment_button_text">book a new playerAppointment</string>
     <string name="player_current_appointments_tab_text">Current Appointments</string>
     <string name="player_upcoming_events_tab_text">Upcoming Events</string>
+    <string name="player_info_tab_text">Info</string>
+    <string name="playerNameHeader">Name: </string>
+    <string name="playerAgeHeader">Age: </string>
+    <string name="playerLocationHeader">Location: </string>
+    <string name="playerPhoneNumberHeader">Phone Number: </string>
+    <string name="playerEmailHeader">Email: </string>
 
     <!--Player Credit Card Payment Activity-->
     <string name="make_payment_button_text">Make Payment</string>
@@ -114,6 +120,11 @@
     <string name="lbl_take_camera_picture">Take a picture</string>
     <string name="lbl_choose_from_gallery">Choose from gallery</string>
     <string name="toast_image_intent_null">Image picker option is missing!</string>
+
+    <!--Upcoming Event Details Activity-->
+    <string name="upcoming_event_name">Event: </string>
+    <string name="upcoming_event_date">Date: </string>
+    <string name="upcoming_event_location">Location: </string>
 
     <!--font families (resources)-->
     <string name="font_family_light">sans-serif-light</string>

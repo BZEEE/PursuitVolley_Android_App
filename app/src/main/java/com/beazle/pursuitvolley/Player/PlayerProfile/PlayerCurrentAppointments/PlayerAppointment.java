@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley.Player.PlayerProfile.CurrentAppointments;
+package com.beazle.pursuitvolley.Player.PlayerProfile.PlayerCurrentAppointments;
 
 public class PlayerAppointment {
 

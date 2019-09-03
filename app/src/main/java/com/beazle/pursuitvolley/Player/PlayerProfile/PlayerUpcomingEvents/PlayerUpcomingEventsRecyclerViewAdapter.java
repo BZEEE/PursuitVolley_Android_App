@@ -1,6 +1,7 @@
-package com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents;
+package com.beazle.pursuitvolley.Player.PlayerProfile.PlayerUpcomingEvents;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,29 +14,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.beazle.pursuitvolley.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class UpcomingEventsRecyclerViewAdapter extends RecyclerView.Adapter<UpcomingEventsRecyclerViewAdapter.UpcomingEventViewHolder> {
+public class PlayerUpcomingEventsRecyclerViewAdapter extends RecyclerView.Adapter<PlayerUpcomingEventsRecyclerViewAdapter.UpcomingEventViewHolder> {
 
     private Context context;
     private List<PlayerUpcomingEvent> data;
 
-    public UpcomingEventsRecyclerViewAdapter(Context context, List<PlayerUpcomingEvent> list) {
+    public PlayerUpcomingEventsRecyclerViewAdapter(Context context) {
         this.context = context;
-        this.data = list;
+        this.data = new ArrayList<>();
+    }
+
+    public void SetPlayerUpcomingEventsData(List<PlayerUpcomingEvent> playerUpcomingEventsList) {
+        this.data = playerUpcomingEventsList;
     }
 
     @NonNull
     @Override
-    public UpcomingEventsRecyclerViewAdapter.UpcomingEventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PlayerUpcomingEventsRecyclerViewAdapter.UpcomingEventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater inflater = LayoutInflater.from(context);
         view = inflater.inflate(R.layout.list_item_upcoming_event, parent, false);
-        return new UpcomingEventsRecyclerViewAdapter.UpcomingEventViewHolder(this.context, view);
+        return new PlayerUpcomingEventsRecyclerViewAdapter.UpcomingEventViewHolder(this.context, view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UpcomingEventsRecyclerViewAdapter.UpcomingEventViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PlayerUpcomingEventsRecyclerViewAdapter.UpcomingEventViewHolder holder, int position) {
         holder.upcomingEventTitle.setText(data.get(position).GetEventTitle());
         holder.upcomingEventDate.setText(data.get(position).GetEventDate());
         holder.upcomingEventLocation.setText(data.get(position).GetEventLocation());
@@ -76,8 +82,11 @@ public class UpcomingEventsRecyclerViewAdapter extends RecyclerView.Adapter<Upco
         }
 
         private void ViewDetailsOfUpcomingEvent(Context context) {
-//            Intent intent = new Intent(context, UpcomingEventDetails.class);
-//            context.startActivity(intent);
+            Intent intent = new Intent(context, UpcomingEventDetailsActivity.class);
+            intent.putExtra("upcomingEventTitle", upcomingEventTitle.getText().toString());
+            intent.putExtra("upcomingEventDate", upcomingEventDate.getText().toString());
+            intent.putExtra("upcomingEventLocation", upcomingEventLocation.getText().toString());
+            context.startActivity(intent);
         }
 
     }

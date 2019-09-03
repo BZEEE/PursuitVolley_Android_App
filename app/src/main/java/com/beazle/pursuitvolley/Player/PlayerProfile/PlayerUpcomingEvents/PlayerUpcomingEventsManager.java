@@ -1,10 +1,10 @@
-package com.beazle.pursuitvolley.Player.PlayerProfile.UpcomingEvents;
+package com.beazle.pursuitvolley.Player.PlayerProfile.PlayerUpcomingEvents;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public final class UpcomingEventsManager {
+public final class PlayerUpcomingEventsManager {
 
     private static List<PlayerUpcomingEvent> playerUpcomingEventsList = new ArrayList<>();
 

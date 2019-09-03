@@ -30,7 +30,6 @@ import com.google.firebase.storage.FirebaseStorage;
 public class PlayerInfoEntryActivity extends AppCompatActivity {
 
     private FirebaseFirestore mFirestore;
-    private FirebaseDatabase mRealtimeDatabase;
     private FirebaseAuth mAuth;
 
     private FirebaseUser currentUser;
@@ -49,7 +48,6 @@ public class PlayerInfoEntryActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
-        mRealtimeDatabase = FirebaseDatabase.getInstance();
 
         currentUser = mAuth.getCurrentUser();
 
@@ -64,7 +62,7 @@ public class PlayerInfoEntryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UpdatePlayerInfoInFirestore();
-                UpdatePlayerInfoInRealtimeDatabase();
+                // UpdatePlayerInfoInRealtimeDatabase();
                 GoToPlayerUserProfile();
                 // end the activity once we've finished the info entry
                 finish();
@@ -194,108 +192,108 @@ public class PlayerInfoEntryActivity extends AppCompatActivity {
 
     }
 
-    private void UpdatePlayerInfoInRealtimeDatabase() {
-        String fullname = fullnameEditText.getText().toString();
-        String age = ageEditText.getText().toString();
-        String location = locationEditText.getText().toString();
-        String phoneNumber = phoneNumberEditText.getText().toString();
-        String email = emailEditText.getText().toString();
-
-        String coachUniqueId = mAuth.getCurrentUser().getUid();
-
-        DatabaseReference playerRef = mRealtimeDatabase.getReference().child(RealtimeDatabaseTags.playersCollecion).child(coachUniqueId);
-
-        if (!TextUtils.isEmpty(fullname)) {
-            playerRef.child(RealtimeDatabaseTags.coachDataFullname).setValue(fullname)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // Write was successful!
-                            Log.d(DebugTags.DebugTAG, "Successfully updated player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataFullname);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Write failed
-                            Log.d(DebugTags.DebugTAG, "Failed to update player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataFullname);
-                        }
-                    });
-        }
-
-        if (!TextUtils.isEmpty(age)) {
-            playerRef.child(RealtimeDatabaseTags.playerDataAge).setValue(age)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // Write was successful!
-                            Log.d(DebugTags.DebugTAG, "Successfully updated player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataAge);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Write failed
-                            Log.d(DebugTags.DebugTAG, "Failed to update player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataAge);
-                        }
-                    });
-        }
-
-        if (!TextUtils.isEmpty(location)) {
-            playerRef.child(RealtimeDatabaseTags.playerDataLocation).setValue(location)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // Write was successful!
-                            Log.d(DebugTags.DebugTAG, "Successfully updated player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataLocation);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Write failed
-                            Log.d(DebugTags.DebugTAG, "Failed to update player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataLocation);
-                        }
-                    });
-        }
-
-        if (!TextUtils.isEmpty(phoneNumber)) {
-            playerRef.child(RealtimeDatabaseTags.playerDataPhoneNumber).setValue(phoneNumber)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // Write was successful
-                            Log.d(DebugTags.DebugTAG, "Successfully updated player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataPhoneNumber);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Write failed
-                            Log.d(DebugTags.DebugTAG, "Failed to update player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataPhoneNumber);
-                        }
-                    });
-        }
-
-        if (!TextUtils.isEmpty(email)) {
-            playerRef.child(RealtimeDatabaseTags.playerDataEmail).setValue(email)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // Write was successful
-                            Log.d(DebugTags.DebugTAG, "Successfully updated player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataEmail);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Write failed
-                            Log.d(DebugTags.DebugTAG, "Failed to update player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataEmail);
-                        }
-                    });
-        }
-
-    }
+//    private void UpdatePlayerInfoInRealtimeDatabase() {
+//        String fullname = fullnameEditText.getText().toString();
+//        String age = ageEditText.getText().toString();
+//        String location = locationEditText.getText().toString();
+//        String phoneNumber = phoneNumberEditText.getText().toString();
+//        String email = emailEditText.getText().toString();
+//
+//        String coachUniqueId = mAuth.getCurrentUser().getUid();
+//
+//        DatabaseReference playerRef = mRealtimeDatabase.getReference().child(RealtimeDatabaseTags.playersCollecion).child(coachUniqueId);
+//
+//        if (!TextUtils.isEmpty(fullname)) {
+//            playerRef.child(RealtimeDatabaseTags.coachDataFullname).setValue(fullname)
+//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            // Write was successful!
+//                            Log.d(DebugTags.DebugTAG, "Successfully updated player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataFullname);
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            // Write failed
+//                            Log.d(DebugTags.DebugTAG, "Failed to update player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataFullname);
+//                        }
+//                    });
+//        }
+//
+//        if (!TextUtils.isEmpty(age)) {
+//            playerRef.child(RealtimeDatabaseTags.playerDataAge).setValue(age)
+//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            // Write was successful!
+//                            Log.d(DebugTags.DebugTAG, "Successfully updated player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataAge);
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            // Write failed
+//                            Log.d(DebugTags.DebugTAG, "Failed to update player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataAge);
+//                        }
+//                    });
+//        }
+//
+//        if (!TextUtils.isEmpty(location)) {
+//            playerRef.child(RealtimeDatabaseTags.playerDataLocation).setValue(location)
+//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            // Write was successful!
+//                            Log.d(DebugTags.DebugTAG, "Successfully updated player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataLocation);
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            // Write failed
+//                            Log.d(DebugTags.DebugTAG, "Failed to update player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataLocation);
+//                        }
+//                    });
+//        }
+//
+//        if (!TextUtils.isEmpty(phoneNumber)) {
+//            playerRef.child(RealtimeDatabaseTags.playerDataPhoneNumber).setValue(phoneNumber)
+//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            // Write was successful
+//                            Log.d(DebugTags.DebugTAG, "Successfully updated player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataPhoneNumber);
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            // Write failed
+//                            Log.d(DebugTags.DebugTAG, "Failed to update player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataPhoneNumber);
+//                        }
+//                    });
+//        }
+//
+//        if (!TextUtils.isEmpty(email)) {
+//            playerRef.child(RealtimeDatabaseTags.playerDataEmail).setValue(email)
+//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            // Write was successful
+//                            Log.d(DebugTags.DebugTAG, "Successfully updated player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataEmail);
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            // Write failed
+//                            Log.d(DebugTags.DebugTAG, "Failed to update player data in realtime database with field name, " + RealtimeDatabaseTags.playerDataEmail);
+//                        }
+//                    });
+//        }
+//
+//    }
 
 
 }

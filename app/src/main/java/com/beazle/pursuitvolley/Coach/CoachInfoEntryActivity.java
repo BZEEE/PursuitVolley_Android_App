@@ -51,7 +51,7 @@ import java.util.List;
 
 public class CoachInfoEntryActivity extends AppCompatActivity {
 
-    private FirebaseFirestore mFirestore;
+    // private FirebaseFirestore mFirestore;
     private FirebaseDatabase mRealtimeDatabase;
     private FirebaseAuth mAuth;
     private FirebaseStorage mCloudStorage;
@@ -74,7 +74,7 @@ public class CoachInfoEntryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_coach_info_entry);
 
         mAuth = FirebaseAuth.getInstance();
-        mFirestore = FirebaseFirestore.getInstance();
+        // mFirestore = FirebaseFirestore.getInstance();
         mRealtimeDatabase = FirebaseDatabase.getInstance();
         mCloudStorage = FirebaseStorage.getInstance();
 
@@ -99,7 +99,7 @@ public class CoachInfoEntryActivity extends AppCompatActivity {
         enterCoachInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UpdateCoachInfoInFirestore();
+                // UpdateCoachInfoInFirestore();
                 UpdateCoachInfoInRealtimeDatabase();
                 GoToCoachUserProfile();
                 // end the activity once we've finished the info entry
@@ -112,102 +112,102 @@ public class CoachInfoEntryActivity extends AppCompatActivity {
         startActivity(new Intent(this, CoachProfileActivity.class));
     }
 
-    private void UpdateCoachInfoInFirestore() {
-        String fullname = fullnameEditText.getText().toString();
-        String age = ageEditText.getText().toString();
-        String location = locationEditText.getText().toString();
-        String bio = bioEditText.getText().toString();
-
-        String coachUniqueId = mAuth.getCurrentUser().getUid();
-
-        DocumentReference coachesRef = mFirestore.collection(FirestoreTags.coachCollection).document(coachUniqueId);
-        // handle exception and edge cases
-        // write data to all fields of the coach's firestore document
-
-        if (!TextUtils.isEmpty(fullname)) {
-            coachesRef
-                    .update(FirestoreTags.coachDocumentFullname, fullname)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // document successfully update
-                            // so also update Coach object for the Recycler view to reference as well
-                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name, " + FirestoreTags.coachDocumentFullname);
-
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // document not successfully updated
-                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name, " + FirestoreTags.coachDocumentFullname);
-                        }
-                    });
-        }
-
-        if (!TextUtils.isEmpty(age)) {
-            coachesRef
-                    .update(FirestoreTags.coachDocumentAge, age)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // document successfully update
-                            // so also update Coach object for the Recycler view to reference as well
-                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name, " + FirestoreTags.coachDocumentAge);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // document not successfully updated
-                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name, " + FirestoreTags.coachDocumentAge);
-                        }
-                    });
-        }
-
-        if (!TextUtils.isEmpty(location)) {
-            coachesRef
-                    .update(FirestoreTags.coachDocumentLocation, location)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // document successfully update
-                            // so also update Coach object for the Recycler view to reference as well
-                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name, " + FirestoreTags.coachDocumentLocation);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // document not successfully updated
-                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name, " + FirestoreTags.coachDocumentLocation);
-                        }
-                    });
-        }
-
-
-
-        if (!TextUtils.isEmpty(bio)) {
-            coachesRef
-                    .update(FirestoreTags.coachDocumentBio, bio)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // document successfully update
-                            // so also update Coach object for the Recycler view to reference as well
-                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name, " + FirestoreTags.coachDocumentBio);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // document not successfully updated
-                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name, " + FirestoreTags.coachDocumentBio);
-                        }
-                    });
-        }
-
-    }
+//    private void UpdateCoachInfoInFirestore() {
+//        String fullname = fullnameEditText.getText().toString();
+//        String age = ageEditText.getText().toString();
+//        String location = locationEditText.getText().toString();
+//        String bio = bioEditText.getText().toString();
+//
+//        String coachUniqueId = mAuth.getCurrentUser().getUid();
+//
+//        DocumentReference coachesRef = mFirestore.collection(FirestoreTags.coachCollection).document(coachUniqueId);
+//        // handle exception and edge cases
+//        // write data to all fields of the coach's firestore document
+//
+//        if (!TextUtils.isEmpty(fullname)) {
+//            coachesRef
+//                    .update(FirestoreTags.coachDocumentFullname, fullname)
+//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            // document successfully update
+//                            // so also update Coach object for the Recycler view to reference as well
+//                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name, " + FirestoreTags.coachDocumentFullname);
+//
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            // document not successfully updated
+//                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name, " + FirestoreTags.coachDocumentFullname);
+//                        }
+//                    });
+//        }
+//
+//        if (!TextUtils.isEmpty(age)) {
+//            coachesRef
+//                    .update(FirestoreTags.coachDocumentAge, age)
+//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            // document successfully update
+//                            // so also update Coach object for the Recycler view to reference as well
+//                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name, " + FirestoreTags.coachDocumentAge);
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            // document not successfully updated
+//                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name, " + FirestoreTags.coachDocumentAge);
+//                        }
+//                    });
+//        }
+//
+//        if (!TextUtils.isEmpty(location)) {
+//            coachesRef
+//                    .update(FirestoreTags.coachDocumentLocation, location)
+//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            // document successfully update
+//                            // so also update Coach object for the Recycler view to reference as well
+//                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name, " + FirestoreTags.coachDocumentLocation);
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            // document not successfully updated
+//                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name, " + FirestoreTags.coachDocumentLocation);
+//                        }
+//                    });
+//        }
+//
+//
+//
+//        if (!TextUtils.isEmpty(bio)) {
+//            coachesRef
+//                    .update(FirestoreTags.coachDocumentBio, bio)
+//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            // document successfully update
+//                            // so also update Coach object for the Recycler view to reference as well
+//                            Log.d(DebugTags.DebugTAG, "successfully updated document in (coach) collection with field name, " + FirestoreTags.coachDocumentBio);
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            // document not successfully updated
+//                            Log.d(DebugTags.DebugTAG, "Failed to update document in (coach) collection with field name, " + FirestoreTags.coachDocumentBio);
+//                        }
+//                    });
+//        }
+//
+//    }
 
     private void UpdateCoachInfoInRealtimeDatabase() {
         String fullname = fullnameEditText.getText().toString();
@@ -223,6 +223,7 @@ public class CoachInfoEntryActivity extends AppCompatActivity {
             coacesRef.child(RealtimeDatabaseTags.coachDataFullname).setValue(fullname)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
+
                         public void onSuccess(Void aVoid) {
                             // Write was successful!
                             Log.d(DebugTags.DebugTAG, "Successfully updated coach data in realtime database with field name, " + RealtimeDatabaseTags.coachDataFullname);

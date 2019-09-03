@@ -3,6 +3,7 @@ package com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,11 +12,18 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointmentsPage.CoachScheduleAppointmentsPage;
+import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.R;
+import com.beazle.pursuitvolley.RealtimeDatabaseTags.RealtimeDatabaseTags;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -27,12 +35,12 @@ import java.util.Locale;
 
 public class CoachScheduleView extends LinearLayout {
     private FirebaseAuth mAuth;
-    private FirebaseFirestore mFirestore;
+    private FirebaseDatabase mRealtimeDatabase;
 
     ImageButton previousButton, nextButton;
     TextView currentDate;
     GridView scheduleGridView;
-    private static final int MAX_CALENDER_DAYS = 42;
+    private static final int MAX_CALENDER_DAYS = 35;
     Calendar calender = Calendar.getInstance(Locale.ENGLISH);
     Context context;
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
@@ -53,7 +61,7 @@ public class CoachScheduleView extends LinearLayout {
         this.context = context;
 
         mAuth = FirebaseAuth.getInstance();
-        mFirestore = FirebaseFirestore.getInstance();
+        mRealtimeDatabase = FirebaseDatabase.getInstance();
         InitializeLayout();
         SetUpCalender();
 
@@ -121,6 +129,28 @@ public class CoachScheduleView extends LinearLayout {
         // get coach appointment data from cloud firestore
         // the appointment date is the document ID
         coachAppointments.clear();
+
+        String coachUniqueId = mAuth.getCurrentUser().getUid();
+
+        DatabaseReference coacesRef = mRealtimeDatabase.getReference().child(RealtimeDatabaseTags.coachesCollecion).child(coachUniqueId);
+
+        coacesRef.ge
+
+        coacesRef.child(RealtimeDatabaseTags.coachDataFullname).setValue(fullname)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Write was successful!
+                        Log.d(DebugTags.DebugTAG, "Successfully updated coach data in realtime database with field name, " + RealtimeDatabaseTags.coachDataFullname);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        Log.d(DebugTags.DebugTAG, "Failed to update coach data in realtime database with field name, " + RealtimeDatabaseTags.coachDataFullname);
+                    }
+                });
 
 
 
