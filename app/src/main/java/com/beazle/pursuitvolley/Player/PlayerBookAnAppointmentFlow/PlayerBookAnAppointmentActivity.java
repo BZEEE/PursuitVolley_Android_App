@@ -9,7 +9,7 @@ import android.os.Bundle;
 import com.beazle.pursuitvolley.Player.PlayerBookAnAppointmentFlow.CoachSelection.CoachSelectionFragment;
 import com.beazle.pursuitvolley.R;
 
-public class BookAnAppointmentActivity extends AppCompatActivity {
+public class PlayerBookAnAppointmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.beazle.pursuitvolley.Player.PlayerBookAnAppointmentFlow.PlayerBookAnAppointmentActivity;
 import com.beazle.pursuitvolley.R;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -58,6 +59,6 @@ public class PlayerAppointmentsFragment extends Fragment {
     }
 
     private void GoToCoachSelectionActivity() {
-        startActivity(new Intent(getActivity(), CoachSelectionActivity.class));
+        startActivity(new Intent(getActivity(), PlayerBookAnAppointmentActivity.class));
     }
 }

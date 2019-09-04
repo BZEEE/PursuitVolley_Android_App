@@ -15,7 +15,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/MainAppTheme">
-        <activity android:name=".Player.PlayerBookAnAppointmentFlow.BookAnAppointmentActivity"></activity>
+        <activity android:name=".Player.PlayerBookAnAppointmentFlow.PlayerBookAnAppointmentActivity"></activity>
         <activity android:name=".Player.PlayerProfile.PlayerUpcomingEvents.UpcomingEventDetailsActivity" />
         <activity android:name=".Coach.CoachProfile.CoachSchedule.CoachAppointmentsPage.CoachAppointmentPage.CoachScheduleAppointmentPage" />
         <activity android:name=".Player.PlayerInfoEntryActivity" />
