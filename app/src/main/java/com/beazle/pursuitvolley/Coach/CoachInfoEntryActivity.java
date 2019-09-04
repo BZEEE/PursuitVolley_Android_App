@@ -8,8 +8,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,14 +16,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.beazle.pursuitvolley.Coach.CoachSelection.Coach;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachProfileActivity;
-import com.beazle.pursuitvolley.Coach.CoachSelection.CoachManager;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.FirebaseCloudStorageTags.CloudStorageTags;
-import com.beazle.pursuitvolley.FirebaseFirestoreTags.FirestoreTags;
 import com.beazle.pursuitvolley.R;
 import com.beazle.pursuitvolley.RealtimeDatabaseTags.RealtimeDatabaseTags;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,8 +28,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.karumi.dexter.Dexter;
@@ -46,7 +38,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.net.URI;
 import java.util.List;
 
 public class CoachInfoEntryActivity extends AppCompatActivity {

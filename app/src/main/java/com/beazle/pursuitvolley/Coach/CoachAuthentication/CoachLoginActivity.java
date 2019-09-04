@@ -226,7 +226,7 @@ public class CoachLoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(DebugTags.DebugTAG, "createUserWithEmail:success");
                             // coach document is initialized using cloud functions
-                            // add new coach to CoachManager class so that the recycler view knows which coaches to show to players
+                            // add new coach to CoachSelectionViewModel class so that the recycler view knows which coaches to show to players
                             // AddCoachToFirestoreAfterSigningUp();
                             AddCoachToRealtimeDatabaseAfterSigningUp();
                             // AddDefaultCoachDataToRealtimeDatabaseAfterSigningUp(coach);

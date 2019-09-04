@@ -25,6 +25,8 @@ public class PlayerBioViewModel extends ViewModel {
 
     private MutableLiveData<Map<String, Object>> playerBioData;
 
+
+
     public LiveData<Map<String, Object>> GetData() {
         if (playerBioData == null) {
             playerBioData = new MutableLiveData<Map<String, Object>>();

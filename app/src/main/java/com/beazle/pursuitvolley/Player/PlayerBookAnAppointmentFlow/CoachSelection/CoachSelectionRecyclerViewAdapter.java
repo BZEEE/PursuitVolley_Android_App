@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley.Coach.CoachSelection;
+package com.beazle.pursuitvolley.Player.PlayerBookAnAppointmentFlow.CoachSelection;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,10 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
+import com.beazle.pursuitvolley.Coach.CoachSelection.Coach;
 import com.beazle.pursuitvolley.IntentTags.IntentTags;
 import com.beazle.pursuitvolley.Player.PlayerProfile.PlayerCurrentAppointments.PlayerAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<CoachSelectionRecyclerViewAdapter.CoachCardViewHolder> {
@@ -24,9 +26,13 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
     private Context context;
     private List<Coach> data;
 
-    public CoachSelectionRecyclerViewAdapter(Context context, List<Coach> list) {
+    public CoachSelectionRecyclerViewAdapter(Context context) {
         this.context = context;
-        this.data = list;
+        this.data = new ArrayList<>();
+    }
+
+    public void SetCoachesData(List<Coach> coachesList) {
+        this.data = coachesList;
     }
 
     @NonNull
