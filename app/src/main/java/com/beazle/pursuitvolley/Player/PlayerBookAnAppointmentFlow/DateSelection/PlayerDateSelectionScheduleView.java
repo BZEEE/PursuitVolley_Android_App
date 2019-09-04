@@ -1,4 +1,4 @@
-package com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule;
+package com.beazle.pursuitvolley.Player.PlayerBookAnAppointmentFlow.DateSelection;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointment;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointmentsPage.CoachScheduleAppointmentsPage;
+import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachScheduleGridViewAdapter;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.R;
 import com.beazle.pursuitvolley.RealtimeDatabaseTags.RealtimeDatabaseTags;
@@ -24,7 +26,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,7 +34,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class CoachScheduleView extends LinearLayout {
+public class PlayerDateSelectionScheduleView extends LinearLayout {
+
     private FirebaseAuth mAuth;
     private FirebaseDatabase mRealtimeDatabase;
 
@@ -47,21 +49,26 @@ public class CoachScheduleView extends LinearLayout {
     SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", Locale.ENGLISH);
     SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.ENGLISH);
 
-    CoachScheduleGridViewAdapter coachScheduleGridViewAdapter;
+    PlayerDateSelectionScheduleViewAdapter playerDateSelectionScheduleViewAdapter;
     List<Date> dates = new ArrayList<>();
-    List<CoachAppointment> coachAppointments = new ArrayList<>();
+    List<Integer> availableSlots = new ArrayList<Integer>();
 
-    public CoachScheduleView(Context context, Context context1) {
+    public PlayerDateSelectionScheduleView(Context context) {
         super(context);
-        this.context = context1;
+        this.context = context;
     }
 
-    public CoachScheduleView(Context context, @Nullable AttributeSet attrs) {
+    public PlayerDateSelectionScheduleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
 
         mAuth = FirebaseAuth.getInstance();
         mRealtimeDatabase = FirebaseDatabase.getInstance();
+
+        previousButton = findViewById(R.id);
+        nextButton = findViewById(R.id);
+        scheduleGridView = findViewById(R.id);
+
         InitializeLayout();
         SetUpCalender();
 
@@ -84,23 +91,22 @@ public class CoachScheduleView extends LinearLayout {
         scheduleGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // get all the events for that specific day, display in a new activity with a recycler view
-                context.startActivity(new Intent(context, CoachScheduleAppointmentsPage.class));
+                // player has selected a date now we retrieve available time slots for that date and that coach
             }
         });
     }
 
-    public CoachScheduleView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public PlayerDateSelectionScheduleView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     private void InitializeLayout() {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.coach_schedule_layout, this);
-        nextButton = view.findViewById(R.id.coachScheduleViewNextButton);
-        previousButton = view.findViewById(R.id.coachScheduleViewPreviousButton);
-        currentDate = view.findViewById(R.id.coachScheduleViewCurrentDate);
-        scheduleGridView = view.findViewById(R.id.coachScheduleGridView);
+        nextButton = view.findViewById(R.id.playerDateSelectionScheduleViewNextButton);
+        previousButton = view.findViewById(R.id.playerDateSelectionScheduleViewPreviousButton);
+        currentDate = view.findViewById(R.id.playerDateSelectionScheduleCurrentDate);
+        scheduleGridView = view.findViewById(R.id.playerDateSelectionScheduleGridView);
     }
 
     private void SetUpCalender() {
@@ -118,8 +124,8 @@ public class CoachScheduleView extends LinearLayout {
             monthCalender.add(Calendar.MONTH, 1);
         }
 
-        coachScheduleGridViewAdapter = new CoachScheduleGridViewAdapter(context, dates, calender, coachAppointments);
-        scheduleGridView.setAdapter(coachScheduleGridViewAdapter);
+        playerDateSelectionScheduleViewAdapter = new PlayerDateSelectionScheduleViewAdapter(context, dates, calender, availableSlots);
+        scheduleGridView.setAdapter(playerDateSelectionScheduleViewAdapterr);
 
         // refersh calender data from database ()
         RefreshSchedule();
