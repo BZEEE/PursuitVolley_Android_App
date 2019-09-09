@@ -15,16 +15,36 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/MainAppTheme">
-        <activity android:name=".Player.PlayerBookAnAppointmentFlow.PlayerBookAnAppointmentActivity"></activity>
-        <activity android:name=".Player.PlayerProfile.PlayerUpcomingEvents.UpcomingEventDetailsActivity" />
-        <activity android:name=".Coach.CoachProfile.CoachSchedule.CoachAppointmentsPage.CoachAppointmentPage.CoachScheduleAppointmentPage" />
-        <activity android:name=".Player.PlayerInfoEntryActivity" />
-        <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentBrainTreeActivity" />
-        <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentGooglePayActivity" />
-        <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentResultActivity" />
-        <activity android:name=".Player.PlayerPaymentFlow.PlayerPaymentAdyenAcivity" />
-        <activity android:name=".Player.PlayerProfile.PlayerProfileActivity" />
-        <activity android:name=".Player.PlayerPaymentFlow.PlayerCheckoutActivity">
+        <activity
+            android:name=".Player.PlayerBookAnAppointmentFlow.PlayerBookAnAppointmentActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Player.PlayerProfile.PlayerUpcomingEvents.UpcomingEventDetailsActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Coach.CoachProfile.CoachSchedule.CoachAppointmentsPage.CoachAppointmentPage.CoachScheduleAppointmentPage"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Player.PlayerInfoEntryActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Player.PlayerPaymentFlow.PlayerPaymentBrainTreeActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Player.PlayerPaymentFlow.PlayerPaymentGooglePayActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Player.PlayerPaymentFlow.PlayerPaymentResultActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Player.PlayerPaymentFlow.PlayerPaymentAdyenAcivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Player.PlayerProfile.PlayerProfileActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Player.PlayerPaymentFlow.PlayerCheckoutActivity"
+            android:configChanges="orientation|screenSize">
 
             <!-- Email Intent Filter -->
             <intent-filter>
@@ -45,13 +65,27 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Coach.CoachInfoEntryActivity" />
-        <activity android:name=".Coach.CoachProfile.CoachProfileActivity" />
-        <activity android:name=".Player.PlayerAuthentication.PlayerLoginActivity" />
-        <activity android:name=".Coach.CoachAuthentication.CoachLoginActivity" />
-        <activity android:name=".Coach.CoachTimeSelection.CoachTimeSelectionActivity" />
-        <activity android:name=".Coach.CoachDateSelection.CoachDateSelectionActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".Coach.CoachInfoEntryActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Coach.CoachProfile.CoachProfileActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Player.PlayerAuthentication.PlayerLoginActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Coach.CoachAuthentication.CoachLoginActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Coach.CoachTimeSelection.CoachTimeSelectionActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Coach.CoachDateSelection.CoachDateSelectionActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

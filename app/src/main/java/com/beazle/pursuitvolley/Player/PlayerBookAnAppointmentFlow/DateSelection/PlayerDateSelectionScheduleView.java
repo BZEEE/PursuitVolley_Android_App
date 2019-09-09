@@ -19,6 +19,8 @@ import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointmen
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointmentsPage.CoachScheduleAppointmentsPage;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachScheduleGridViewAdapter;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
+import com.beazle.pursuitvolley.Player.PlayerBookAnAppointmentFlow.PlayerBookAnAppointmentActivity;
+import com.beazle.pursuitvolley.Player.PlayerBookAnAppointmentFlow.PlayerBookAnAppointmentViewModel;
 import com.beazle.pursuitvolley.R;
 import com.beazle.pursuitvolley.RealtimeDatabaseTags.RealtimeDatabaseTags;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -92,6 +94,8 @@ public class PlayerDateSelectionScheduleView extends LinearLayout {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // player has selected a date now we retrieve available time slots for that date and that coach
+                Date date = dates.get(position);
+                PlayerDateSelectionFragment.GoToPlayerTimeSelectionFragment(date);
             }
         });
     }
@@ -125,18 +129,17 @@ public class PlayerDateSelectionScheduleView extends LinearLayout {
         }
 
         playerDateSelectionScheduleViewAdapter = new PlayerDateSelectionScheduleViewAdapter(context, dates, calender, availableSlots);
-        scheduleGridView.setAdapter(playerDateSelectionScheduleViewAdapterr);
+        scheduleGridView.setAdapter(playerDateSelectionScheduleViewAdapter);
 
-        // refersh calender data from database ()
-        RefreshSchedule();
     }
 
     private void RefreshSchedule() {
         // get coach appointment data from cloud firestore
         // the appointment date is the document ID
+        // refersh calender data from database ()
         coachAppointments.clear();
 
-        String coachUniqueId = mAuth.getCurrentUser().getUid();
+        String coachUniqueId =
 
         DatabaseReference coacesRef = mRealtimeDatabase.getReference().child(RealtimeDatabaseTags.coachesCollecion).child(coachUniqueId);
 
@@ -159,6 +162,10 @@ public class PlayerDateSelectionScheduleView extends LinearLayout {
                 });
 
 
+
+    }
+
+    public void RefreshSchedule() {
 
     }
 }

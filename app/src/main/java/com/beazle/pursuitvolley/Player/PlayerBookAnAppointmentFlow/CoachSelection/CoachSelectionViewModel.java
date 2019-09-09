@@ -40,12 +40,12 @@ public class CoachSelectionViewModel extends ViewModel {
         if (coaches == null) {
             coaches = new MutableLiveData<List<Coach>>();
             this.context = context;
-            loadCoaches();
+            LoadCoaches();
         }
         return coaches;
     }
 
-    private void loadCoaches() {
+    private void LoadCoaches() {
         mFirestore = FirebaseFirestore.getInstance();
         mCloudStorage = FirebaseStorage.getInstance();
         // Fetch Coaches from Firestore

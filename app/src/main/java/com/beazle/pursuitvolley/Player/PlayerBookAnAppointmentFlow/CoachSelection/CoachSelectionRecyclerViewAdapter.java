@@ -10,11 +10,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.beazle.pursuitvolley.Coach.CoachDateSelection.CoachDateSelectionActivity;
 import com.beazle.pursuitvolley.Coach.CoachSelection.Coach;
 import com.beazle.pursuitvolley.IntentTags.IntentTags;
+import com.beazle.pursuitvolley.Player.PlayerBookAnAppointmentFlow.DateSelection.PlayerDateSelectionFragment;
 import com.beazle.pursuitvolley.Player.PlayerProfile.PlayerCurrentAppointments.PlayerAppointmentReceiptParcelable;
 import com.beazle.pursuitvolley.R;
 
@@ -41,11 +45,12 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
         View view;
         LayoutInflater inflater = LayoutInflater.from(context);
         view = inflater.inflate(R.layout.cardview_item_coach, parent, false);
-        return new CoachCardViewHolder(this.context, view);
+        return new CoachCardViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CoachCardViewHolder holder, int position) {
+        holder.coach = data.get(position);
         holder.coachName.setText(data.get(position).GetName());
         holder.coachImg.setImageBitmap(data.get(position).GetThumbnail());
         holder.coachLocation.setText(data.get(position).GetLocation());
@@ -59,13 +64,15 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
 
     public static class CoachCardViewHolder extends RecyclerView.ViewHolder {
 
+        Coach coach;
         LinearLayout coachCardLayout;
         ImageView coachImg;
         TextView coachName;
         TextView coachLocation;
         String coachUniqueId;
 
-        public CoachCardViewHolder(final Context context, View itemView) {
+        public CoachCardViewHolder(
+                View itemView) {
             super(itemView);
 
             coachImg = itemView.findViewById(R.id.cardCoachImage);
@@ -77,20 +84,9 @@ public class CoachSelectionRecyclerViewAdapter extends RecyclerView.Adapter<Coac
             coachCardLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    GoToCoachCalenderSelectionActivity(context);
+                    CoachSelectionFragment.GoToPlayerDateSelectionFragment(coach);
                 }
             });
         }
-
-        private void GoToCoachCalenderSelectionActivity(Context context) {
-            Intent intent = new Intent(context, CoachDateSelectionActivity.class);
-            PlayerAppointmentReceiptParcelable receipt = new PlayerAppointmentReceiptParcelable();
-            receipt.setCurrentAppointmentCoachName(coachName.getText().toString());
-            receipt.setCurrentAppointmentCoachUid(coachUniqueId);
-            receipt.setCurrentAppointmentLocation(coachLocation.getText().toString());
-            intent.putExtra(IntentTags.currentReceiptTAG, receipt);
-            context.startActivity(intent);
-        }
-
     }
 }
