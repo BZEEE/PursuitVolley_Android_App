@@ -36,20 +36,18 @@ public class PlayerDateSelectionFragment extends Fragment {
         playerDateSelectionScheduleViewModel = ViewModelProviders.of(this).get(PlayerDateSelectionScheduleViewModel.class);
         playerBookAnAppointmentViewModel = PlayerBookAnAppointmentActivity.GetPlayerBookAnAppointmentViewModel();
 
-         PlayerDateSelectionScheduleViewAdapter playerDateSelectionScheduleViewAdapter = new PlayerDateSelectionScheduleViewAdapter(context, dates, calender, availableSlots);
-        scheduleGridView.setAdapter(playerDateSelectionScheduleViewAdapter);
+        // PlayerDateSelectionScheduleViewAdapter playerDateSelectionScheduleViewAdapter = new PlayerDateSelectionScheduleViewAdapter(context, dates, calender, availableSlots);
+        // scheduleGridView.setAdapter(playerDateSelectionScheduleViewAdapter);
 
         // Get access to date schedule view model
         Coach selectedCoach = playerBookAnAppointmentViewModel.GetAppointmentCoachInformation();
         // load coach available dates data in schedule view
-        playerDateSelectionScheduleViewModel.
-        availableDatesSchedule.LoadSelectedCoachData();
-
-
+        playerDateSelectionScheduleViewModel.GetAvailableAppointmentData(selectedCoach).observe(this, dates -> {
+            availableDatesSchedule.SyncAvailableAppointmentDates(dates);
+        });
 
         // populate grid vew with selected coach available dates data
         // have schedule view observe the model
-        playerDateSelectionScheduleViewModel.
 
         return view;
     }

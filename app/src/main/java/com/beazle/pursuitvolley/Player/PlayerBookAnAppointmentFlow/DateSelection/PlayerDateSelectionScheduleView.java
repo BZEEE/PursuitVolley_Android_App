@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointment;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachAppointmentsPage.CoachScheduleAppointmentsPage;
 import com.beazle.pursuitvolley.Coach.CoachProfile.CoachSchedule.CoachScheduleGridViewAdapter;
+import com.beazle.pursuitvolley.DateFormatter.DateFormatter;
 import com.beazle.pursuitvolley.DebugTags.DebugTags;
 import com.beazle.pursuitvolley.Player.PlayerBookAnAppointmentFlow.PlayerBookAnAppointmentActivity;
 import com.beazle.pursuitvolley.Player.PlayerBookAnAppointmentFlow.PlayerBookAnAppointmentViewModel;
@@ -33,13 +34,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class PlayerDateSelectionScheduleView extends LinearLayout {
-
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase mRealtimeDatabase;
 
     ImageButton previousButton, nextButton;
     TextView currentDate;
@@ -47,13 +47,11 @@ public class PlayerDateSelectionScheduleView extends LinearLayout {
     private static final int MAX_CALENDER_DAYS = 35;
     Calendar calender = Calendar.getInstance(Locale.ENGLISH);
     Context context;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
-    SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", Locale.ENGLISH);
-    SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.ENGLISH);
 
     PlayerDateSelectionScheduleViewAdapter playerDateSelectionScheduleViewAdapter;
     List<Date> dates = new ArrayList<>();
-    List<Integer> availableSlots = new ArrayList<Integer>();
+    List<Integer> appointmentDatesCountForCurrentMonth = new ArrayList<>();
+    Map<String, Object> allAvailableAppointmentDates = new HashMap<>();
 
     public PlayerDateSelectionScheduleView(Context context) {
         super(context);
@@ -63,13 +61,6 @@ public class PlayerDateSelectionScheduleView extends LinearLayout {
     public PlayerDateSelectionScheduleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-
-        mAuth = FirebaseAuth.getInstance();
-        mRealtimeDatabase = FirebaseDatabase.getInstance();
-
-        previousButton = findViewById(R.id);
-        nextButton = findViewById(R.id);
-        scheduleGridView = findViewById(R.id);
 
         InitializeLayout();
         SetUpCalender();
@@ -106,15 +97,16 @@ public class PlayerDateSelectionScheduleView extends LinearLayout {
 
     private void InitializeLayout() {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.coach_schedule_layout, this);
-        nextButton = view.findViewById(R.id.playerDateSelectionScheduleViewNextButton);
-        previousButton = view.findViewById(R.id.playerDateSelectionScheduleViewPreviousButton);
+        View view = inflater.inflate(R.layout.player_date_selection_schedule_layout, this);
+        previousButton = view.findViewById(R.id.playerDateSelectionSchedulePreviousButton);
+        nextButton = view.findViewById(R.id.playerDateSelectionScheduleNextButton);
         currentDate = view.findViewById(R.id.playerDateSelectionScheduleCurrentDate);
         scheduleGridView = view.findViewById(R.id.playerDateSelectionScheduleGridView);
     }
 
     private void SetUpCalender() {
-        String date = dateFormat.format(calender.getTime());
+        // sync schedule data to calender from view model: PlayerDateSelectionViewModel
+        String date = DateFormatter.playerScheduleSelectionDateFormat.format(calender.getTime());
         currentDate.setText(date);
 
         dates.clear();
@@ -124,48 +116,32 @@ public class PlayerDateSelectionScheduleView extends LinearLayout {
         monthCalender.add(Calendar.DAY_OF_MONTH, -firstDayOfMonth);
 
         while (dates.size() < MAX_CALENDER_DAYS) {
-            dates.add(monthCalender.getTime());
+            Date day = monthCalender.getTime();
+            dates.add(day);
+            // sync appointment data to calender dates
+            // decide whether key (Date) is in String format
+            // get appointment time slots for current day of month
+            Map appointmentsForCurrentDay = (Map) allAvailableAppointmentDates.get(day);
+            int appointmentCountForCurrentDay = 0;
+            for (Object value : appointmentsForCurrentDay.values()) {
+                Map appointmentData = (Map) value;
+                if (appointmentData.get("booked") == "false") {
+                    appointmentCountForCurrentDay += 1;
+                }
+            }
+            appointmentDatesCountForCurrentMonth.add(appointmentCountForCurrentDay);
             monthCalender.add(Calendar.MONTH, 1);
         }
 
-        playerDateSelectionScheduleViewAdapter = new PlayerDateSelectionScheduleViewAdapter(context, dates, calender, availableSlots);
+        playerDateSelectionScheduleViewAdapter = new PlayerDateSelectionScheduleViewAdapter(context, calender, dates, appointmentDatesCountForCurrentMonth);
         scheduleGridView.setAdapter(playerDateSelectionScheduleViewAdapter);
-
     }
 
-    private void RefreshSchedule() {
-        // get coach appointment data from cloud firestore
-        // the appointment date is the document ID
-        // refersh calender data from database ()
-        coachAppointments.clear();
+    // (1) adapter needs to sync data to current month when data changes in real-time database
+    // just pass data from view model
+    // (2) dont need second case
 
-        String coachUniqueId =
-
-        DatabaseReference coacesRef = mRealtimeDatabase.getReference().child(RealtimeDatabaseTags.coachesCollecion).child(coachUniqueId);
-
-        coacesRef.ge
-
-        coacesRef.child(RealtimeDatabaseTags.coachDataFullname).setValue(fullname)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // Write was successful!
-                        Log.d(DebugTags.DebugTAG, "Successfully updated coach data in realtime database with field name, " + RealtimeDatabaseTags.coachDataFullname);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Write failed
-                        Log.d(DebugTags.DebugTAG, "Failed to update coach data in realtime database with field name, " + RealtimeDatabaseTags.coachDataFullname);
-                    }
-                });
-
-
-
-    }
-
-    public void RefreshSchedule() {
-
+    public void SyncAvailableAppointmentDates(Map<String, Object> availableAppointments) {
+        allAvailableAppointmentDates = availableAppointments;
     }
 }

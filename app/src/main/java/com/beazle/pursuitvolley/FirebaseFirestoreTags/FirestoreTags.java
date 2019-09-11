@@ -8,22 +8,14 @@ public final class FirestoreTags {
 
     // players
     public static String playerCollection = "players";
+    public static String playerDocumentAppointments = "appointments";
+    public static String playerDocumentUpcomingEvents = "upcoming_events";
     public static String playerDocumentFullname = "full_name";
     public static String playerDocumentAge = "age";
     public static String playerDocumentLocation = "location";
     public static String playerDocumentEmail = "email";
     public static String playerDocumentPhoneNumber = "phone_number";
     public static String playerDocumentTokens = "tokens";
-    public static String playerDocumentAppointments = "appointments";
-    public static String playerDocumentUpcomingEvents = "upcoming_events";
-
-    // coaches
-    public static String coachCollection = "coaches";
-    public static String coachAppointmentsCollection = "appointments";
-    public static String coachDocumentFullname = "full_name";
-    public static String coachDocumentAge = "age";
-    public static String coachDocumentBio = "bio";
-    public static String coachDocumentLocation = "location";
 
     // admin codes
     public static String adminCodesCollection = "admin_codes";

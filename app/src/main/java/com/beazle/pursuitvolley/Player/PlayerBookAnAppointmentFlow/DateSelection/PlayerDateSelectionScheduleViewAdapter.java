@@ -25,16 +25,17 @@ public class PlayerDateSelectionScheduleViewAdapter extends ArrayAdapter {
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
 
-    List<Date> dates;
-    Calendar currentDate;
-    List<Integer> availableSlots;
-    LayoutInflater inflater;
+    private List<Date> dates;
+    private Calendar currentDate;
+    private List<Integer> availableSlots;
+    private LayoutInflater inflater;
 
 
-    public PlayerDateSelectionScheduleViewAdapter(@NonNull Context context,
-                                        List<Date> dates,
-                                        Calendar currentDate,
-                                        List<Integer> availableSlots) {
+    public PlayerDateSelectionScheduleViewAdapter(
+            @NonNull Context context,
+            Calendar currentDate,
+            List<Date> dates,
+            List<Integer> availableSlots) {
         super(context, R.layout.player_date_selection_schedule_single_cell);
 
         mAuth = FirebaseAuth.getInstance();
@@ -52,6 +53,7 @@ public class PlayerDateSelectionScheduleViewAdapter extends ArrayAdapter {
 
         Date monthDate = dates.get(position);
         Calendar dateCalendar = Calendar.getInstance();
+        int availableSlotsCount = availableSlots.get(position);
         int dayNo = dateCalendar.get(Calendar.DAY_OF_MONTH);
         int displayMonth = dateCalendar.get(Calendar.MONTH) + 1;
         int displayYear = dateCalendar.get(Calendar.YEAR);
@@ -63,26 +65,27 @@ public class PlayerDateSelectionScheduleViewAdapter extends ArrayAdapter {
             view = inflater.inflate(R.layout.player_date_selection_schedule_single_cell, parent, false);
         }
 
-        if (displayMonth == currentMonth && displayYear == currentYear) {
-            // make these cells clickable in the grid view
-            view.setBackgroundColor(getContext().getResources().getColor(R.color.appointmentsAvailableCellIndicatorColor, null));
-        } else {
-            // make these cells not clickablein the grid view
-            view.setBackgroundColor(getContext().getResources().getColor(R.color.appointmentsNotAvailableCellIndicatorColor, null));
-        }
-
         TextView dayNumber = view.findViewById(R.id.playerDateSelectionScheduleSingleCellCalenderDay);
         dayNumber.setText(String.valueOf(dayNo));
 
-        TextView availableSlotsCount = view.findViewById(R.id.playerDateSelectionScheduleSingleCellAvailableSlotsCount);
-        DocumentReference docRef = mFirestore.collection(FirestoreTags.coachCollection).document(mAuth.getCurrentUser().getUid())
-                .collection(FirestoreTags.coachAppointmentsCollection).document(currentDate);
+        TextView availableAppointments = view.findViewById(R.id.playerDateSelectionScheduleSingleCellAvailableSlotsCount);
 
-        docRef.get().
-
+        if (displayMonth == currentMonth && displayYear == currentYear && availableSlotsCount != 0) {
+            // make these cells clickable in the grid view
+            view.setBackgroundColor(getContext().getResources().getColor(R.color.appointmentsAvailableCellIndicatorColor, null));
+            availableAppointments.setText(String.valueOf(availableSlotsCount));
+        } else {
+            // make these cells not clickablein the grid view
+            view.setBackgroundColor(getContext().getResources().getColor(R.color.appointmentsNotAvailableCellIndicatorColor, null));
+            availableAppointments.setText("");
+        }
 
         // if there are no appointments for a certain date then set background color to grey
         // otherwise set background color to some indicator color
+
+        // loading should not occur in the adapter
+        // (1) loading/ async task taken care of by the view model
+        // (2) schedule and adapter observe the view model in order to update the UI
 
         return view;
     }
